@@ -12,7 +12,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>WEB-INF/jsf2-*.xml</param-value>
+		<param-value>WEB-INF/scenomania-*.xml</param-value>
 	</context-param>
 
 	<listener>
