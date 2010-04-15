@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class HelloWorldBean {
 
 	public String getMessage() {
-		return "Hello World!";
+		return java.util.ResourceBundle.getBundle("com/scenomania/messages").getString("HELLO WORLD!");
 	}
 	
 }
