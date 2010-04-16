@@ -11,8 +11,10 @@
                 </property>
             </activation>
             <properties>
-                <netbeans.deployment.server.id>[/home/eugene/sges-v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id>
+                <netbeans.deployment.server.id>tomcat60:home=/opt/tomcat</netbeans.deployment.server.id>
             </properties>
         </profile>
     </profiles>
 </profilesXml>
+
+
