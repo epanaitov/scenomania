@@ -14,10 +14,7 @@ public class LanguageBean {
   }
 
   public String m(String key) {
-
-    ResourceClassLoader loader = new ResourceClassLoader();
-
-    ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault(), loader);
+    ResourceBundle bundle = ResourceBundle.getBundle("messages.messages", Locale.getDefault());
     return bundle.getString(key);
   }
 }
