@@ -5,6 +5,11 @@
 
 	<display-name>JSF2 and Spring 3.0 tutorial</display-name>
 
+  <context-param>
+    <param-name>com.sun.faces.expressionFactory</param-name>
+    <param-value>com.sun.el.ExpressionFactoryImpl</param-value>
+  </context-param>
+
 	<context-param>
 		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
 		<param-value>.xhtml</param-value>
