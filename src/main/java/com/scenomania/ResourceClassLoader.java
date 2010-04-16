@@ -16,7 +16,15 @@ import java.net.URL;
 public class ResourceClassLoader extends ClassLoader{
 
   protected URL findResource(String name) {
-    File f = new File("/home/eugene/www/bundles/"+name);
+
+    //String classPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+
+    //File f = new File("/home/eugene/www/bundles/" + name);
+
+    File f = new File(name);
+
+    File ttt = new File("..");
+    File[] ddd = ttt.listFiles();
 
     try
     {
