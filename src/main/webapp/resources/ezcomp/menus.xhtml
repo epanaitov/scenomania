@@ -2,6 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       >
 
   <!-- INTERFACE -->
@@ -11,9 +13,11 @@
   <!-- IMPLEMENTATION -->
   <composite:implementation>
     <div id="menus">
-      <a href="/">#{lng.m("menus.home")}</a>
-      <a href="/team.html">#{lng.m("menus.team")}</a>
-      <a href="/contacts.html">#{lng.m("menus.contacts")}</a>
+     <h:link outcome="index" value="#{lng.m('menus.home')}" />
+     <h:link outcome="team" value="#{lng.m('menus.team')}" >
+               <f:param name="getvar" value="getarg"/>
+     </h:link>
+     <h:link outcome="contatcs" value="#{lng.m('menus.contacts')}" />
     </div>
   </composite:implementation>
 </html>
