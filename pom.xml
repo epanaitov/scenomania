@@ -115,7 +115,7 @@
 	  <artifactId>mysql-connector-java</artifactId>
 	  <version>5.1.6</version>
 	 </dependency>
-   <!--
+   
    <dependency>
     <groupId>javax.el</groupId>
     <artifactId>el-api</artifactId>
@@ -128,7 +128,7 @@
       <version>2.2</version>
       <scope>runtime</scope>
   </dependency>
-  -->
+  
 	</dependencies>
     <properties>
         <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
