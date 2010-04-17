@@ -36,15 +36,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>tomcat-maven-plugin</artifactId>
-        <configuration>
-          <url>http://java.panaitov.net/manager/html</url>
-          <server>mytomcat</server>
-          <path>/scenomania</path>
-        </configuration>
-      </plugin>
+      
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -131,10 +123,68 @@
   
 	</dependencies>
     <properties>
-        <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
-        <!--netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server-->
+        
     </properties>
+
+    <profiles>
+
+        <profile>
+            <id>dev-eugene</id>
+            <activation>
+            </activation>
+            <properties>
+              <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+              <netbeans.deployment.server.id>[/home/eugene/sges-v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>dev-kedo</id>
+            <activation>
+            </activation>
+
+            <build>
+              <plugins>
+                <plugin>
+                  <groupId>org.codehaus.mojo</groupId>
+                  <artifactId>tomcat-maven-plugin</artifactId>
+                  <configuration>
+                    <url>http://localhost:8080/manager/html</url>
+                    <server>mytomcat</server>
+                    <path>/scenomania</path>
+                  </configuration>
+                </plugin>
+              </plugins>
+            </build>
+
+            <properties>
+              <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
+              <netbeans.deployment.server.id>tomcat60:home=/opt/tomcat</netbeans.deployment.server.id>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>dev-server</id>
+            <build>
+            <plugins>
+              <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                  <url>http://java.panaitov.net/manager/html</url>
+                  <server>mytomcat</server>
+                  <path>/scenomania</path>
+                </configuration>
+              </plugin>
+            </plugins>
+            </build>
+            <properties>
+            </properties>
+        </profile>
+
+    </profiles>
 </project>
+
 
 
 
