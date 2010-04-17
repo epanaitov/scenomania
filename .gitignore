@@ -1,3 +1,4 @@
 hibernate.cfg.xml
 target*
 pom.xml
+profiles.xml
