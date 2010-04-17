@@ -40,7 +40,7 @@
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>tomcat-maven-plugin</artifactId>
         <configuration>
-          <url>http://127.0.0.1/manager/html</url>
+          <url>http://java.panaitov.net/manager/html</url>
           <server>mytomcat</server>
           <path>/scenomania</path>
         </configuration>
