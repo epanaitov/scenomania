@@ -4,38 +4,38 @@
 	<groupId>com.tourageous</groupId>
 	<artifactId>scenomania</artifactId>
 	<packaging>war</packaging>
-	<version>0.2.0-STAGING</version>
+	<version>0.2.1-STAGING</version>
 	<name>scenomania</name>
 	<url>http://maven.apache.org</url>
 
 	<build>
 		<plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>2.4.2</version>
-        <configuration>
-          <encoding>UTF-8</encoding>
-        </configuration>
-        <executions>
-          <execution>
-            <id>copy-resources</id>
-            <!-- here the phase you need -->
-            <phase>validate</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${basedir}/target/classes</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>src/main/resources</directory>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+		  <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<version>2.4.2</version>
+			<configuration>
+			  <encoding>UTF-8</encoding>
+			</configuration>
+			<executions>
+			  <execution>
+				<id>copy-resources</id>
+				<!-- here the phase you need -->
+				<phase>validate</phase>
+				<goals>
+				  <goal>copy-resources</goal>
+				</goals>
+				<configuration>
+				  <outputDirectory>${basedir}/target/classes</outputDirectory>
+				  <resources>
+					<resource>
+					  <directory>src/main/resources</directory>
+					</resource>
+				  </resources>
+				</configuration>
+			  </execution>
+			</executions>
+		  </plugin>
       
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -45,6 +45,33 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.carbonfive.db-support</groupId>
+				<artifactId>db-migration-maven-plugin</artifactId>
+				<version>0.9.9-m2</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>migrate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<url>jdbc:mysql://${db.host}/${db.name}</url>
+					<username>${db.username}</username>
+					<password>${db.password}</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.6</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -70,6 +97,13 @@
 			<url>http://repository.springsource.com/maven/bundles/snapshot</url>
 		</repository>		
   </repositories>
+
+	<pluginRepositories>
+	  <pluginRepository>
+		<id>c5-public-repository</id>
+		<url>http://mvn.carbonfive.com/public</url>
+	  </pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
@@ -242,6 +276,10 @@
             <properties>
               <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
               <netbeans.deployment.server.id>[/home/eugene/sges-v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id>
+			  <db.host>localhost</db.host>
+			  <db.name>scenomania</db.name>
+			  <db.username>root</db.username>
+			  <db.password>root</db.password>
             </properties>
         </profile>
 
