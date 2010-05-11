@@ -324,6 +324,10 @@
             </plugins>
             </build>
             <properties>
+				<db.host>localhost</db.host>
+				<db.name>scenomania</db.name>
+				<db.username>smania</db.username>
+				<db.password>t4rm2n</db.password>
             </properties>
         </profile>
 
