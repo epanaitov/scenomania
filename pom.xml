@@ -87,6 +87,10 @@
 			<url>http://repository.springsource.com/maven/bundles/release</url>
 		</repository>
 		<repository>
+            <id>springsource-milestone</id>
+            <url>http://repository.springsource.com/maven/bundles/milestone</url>
+        </repository>
+		<repository>
 			<id>com.springsource.repository.bundles.external</id>
 			<name>SpringSource Enterprise Bundle Repository - External Releases</name>
 			<url>http://repository.springsource.com/maven/bundles/external</url>
@@ -95,7 +99,38 @@
 			<id>com.springsource.repository.bundles.snapshot</id>
 			<name>SpringSource Enterprise Bundle Repository - Snapshot Releases</name>
 			<url>http://repository.springsource.com/maven/bundles/snapshot</url>
-		</repository>		
+		</repository>
+
+
+		<repository>
+			<id>JBoss</id>
+			<name>JBoss Repsitory</name>
+			<layout>default</layout>
+			<url>http://repository.jboss.org/maven2</url>
+		</repository>
+
+				<repository>
+                    <id>jboss</id>
+                    <url>http://repository.jboss.com/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </repository>
+                <repository>
+                    <id>jboss-snapshot</id>
+                    <url>http://snapshots.jboss.org/maven2</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+
   </repositories>
 
 	<pluginRepositories>
@@ -103,6 +138,30 @@
 		<id>c5-public-repository</id>
 		<url>http://mvn.carbonfive.com/public</url>
 	  </pluginRepository>
+
+
+				<pluginRepository>
+                    <id>jboss-plugins</id>
+                    <url>http://repository.jboss.com/maven2</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+                <pluginRepository>
+                    <id>jboss-snapshot-plugins</id>
+                    <url>http://snapshots.jboss.org/maven2</url>
+                    <releases>
+                        <enabled>false</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                        <updatePolicy>never</updatePolicy>
+                    </snapshots>
+                </pluginRepository>
+
 	</pluginRepositories>
 
 	<dependencies>
@@ -214,14 +273,35 @@
 
 	 <dependency>
 	  <groupId>org.hibernate</groupId>
-	  <artifactId>hibernate</artifactId>
-	  <version>3.2.5.ga</version>
+	  <artifactId>hibernate-core</artifactId>
+	  <version>3.3.2.GA</version>
 	 </dependency>
+
+
 	 <dependency>
 	  <groupId>org.hibernate</groupId>
 	  <artifactId>hibernate-entitymanager</artifactId>
-	  <version>3.3.2.GA</version>
+	  <version>3.4.0.GA</version>
 	 </dependency>
+
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>ejb3-persistence</artifactId>
+		<version>3.3.2.Beta1</version>
+	</dependency>
+
+	 <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-annotations</artifactId>
+      <version>3.4.0.GA</version>
+    </dependency>
+
+	<dependency>
+       <groupId>org.hibernate</groupId>
+       <artifactId>hibernate-commons-annotations</artifactId>
+       <version>3.3.0.ga</version>
+    </dependency>
+
 	 <dependency>
 	  <groupId>javax.sql</groupId>
 	  <artifactId>jdbc-stdext</artifactId>
@@ -232,11 +312,7 @@
 	  <artifactId>jta</artifactId>
 	  <version>1.0.1B</version>
 	 </dependency>
-	 <dependency>
-	  <groupId>org.hibernate</groupId>
-	  <artifactId>ejb3-persistence</artifactId>
-	  <version>1.0.1.GA</version>
-	 </dependency>
+	 
 	 <dependency>
 	  <groupId>mysql</groupId>
 	  <artifactId>mysql-connector-java</artifactId>
@@ -261,6 +337,60 @@
 			<artifactId>com.springsource.com.sun.facelets</artifactId>
 			<version>1.1.14</version>
 		</dependency>
+
+		<dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+            <scope>runtime</scope>
+        </dependency>
+
+		<dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.6.8</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <exclusions>
+               <exclusion>
+                  <groupId>javax.jms</groupId>
+                  <artifactId>jms</artifactId>
+               </exclusion>
+               <exclusion>
+                  <groupId>com.sun.jdmk</groupId>
+                  <artifactId>jmxtools</artifactId>
+               </exclusion>
+               <exclusion>
+                  <groupId>com.sun.jmx</groupId>
+                  <artifactId>jmxri</artifactId>
+               </exclusion>
+               <exclusion>
+                  <groupId>javax.mail</groupId>
+                  <artifactId>mail</artifactId>
+               </exclusion>
+            </exclusions>
+        </dependency>
+
+		<dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.8</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>jboss</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.7.ga</version>
+            <scope>runtime</scope>
+        </dependency>
 
 	</dependencies>
     <properties>
