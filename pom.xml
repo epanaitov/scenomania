@@ -4,7 +4,7 @@
 	<groupId>com.tourageous</groupId>
 	<artifactId>scenomania</artifactId>
 	<packaging>war</packaging>
-	<version>0.2.1-STAGING</version>
+	<version>0.3.0-STAGING</version>
 	<name>scenomania</name>
 	<url>http://maven.apache.org</url>
 
