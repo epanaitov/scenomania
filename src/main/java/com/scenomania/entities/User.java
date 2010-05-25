@@ -35,7 +35,7 @@ public class User extends EntityBase {
 	}
 
 	@Column
-	@Temporal(TemporalType.DATE)
+	//@Temporal(TemporalType.DATE)
 	public Date getLast_login() {
 		return last_login;
 	}
