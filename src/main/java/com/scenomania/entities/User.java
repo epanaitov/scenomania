@@ -1,11 +1,10 @@
 package com.scenomania.entities;
 
 import java.util.Date;
+import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="users")
@@ -13,7 +12,9 @@ public class User extends EntityBase {
 	
     private String nickname;
 	private String password;
+
 	private String salt;
+	private String email;
 	private Date last_login;
 
 	@Column
@@ -51,5 +52,14 @@ public class User extends EntityBase {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	@Column
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
