@@ -13,7 +13,7 @@
 		<form method="post">
 			<h:panelGrid columns="3" rowClasses="row1, row2">
 
-			   <h:outputLabel for="nickname"><h:outputText value="#{lng.m('register.index.nickname')}"/></h:outputLabel>
+			   <h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel>
 			   <h:inputText  id="nickname" value="#{user.nickname}" required="true"/>
 			   <h:message for="nickname" />
 
@@ -28,7 +28,7 @@
 
 			</h:panelGrid>
 
-			<h:commandButton id="proceed" value="#{lng.m('register.index.submit')}" />
+			<h:commandButton id="proceed" value="#{msg['register.index.submit']}" />
 
 			<script type="text/javascript">
 			 Spring.addDecoration(
