@@ -379,7 +379,7 @@
             </exclusions> 
         </dependency> 
  
-		<dependency>
+		<!--dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>4.0.2.GA</version>
@@ -388,7 +388,8 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>1.0.0.GA</version>
-		</dependency>
+		</dependency-->
+		
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>com.springsource.slf4j.log4j</artifactId>
