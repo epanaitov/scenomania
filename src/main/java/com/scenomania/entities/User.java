@@ -11,12 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="users")
-public class User {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
+public class User extends EntityBase {
 
 	@NotNull
 	@Column
@@ -32,15 +27,6 @@ public class User {
 
 	
 	private Date last_login;
-
-	
-	public Integer getId() {
-        return id;
-    }
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	
     public String getNickname() {
