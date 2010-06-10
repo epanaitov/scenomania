@@ -14,6 +14,10 @@
 		<to>/styles/$1</to>
 	</rule>
 	<rule>
+		<from>/resources/**</from>
+		<to>/resources/$1</to>
+	</rule>
+	<rule>
 		<from>/**</from>
 		<to>/spring/$1</to>
 	</rule>

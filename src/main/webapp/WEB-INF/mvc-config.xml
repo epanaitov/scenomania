@@ -31,7 +31,16 @@
 
 	<!-- Enables annotated @Controllers; responsible for invoking an annotated POJO @Controller when one is mapped. -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		<property name="webBindingInitializer">
+			<!-- Configures Spring MVC DataBinder instances -->
+			<bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+				<property name="validator" ref="validator" />
+			</bean>
+		</property>
 	</bean>
+
+	<!-- Creates the JSR-303 Validator -->
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
 
 	<!-- Maps logical view names to Facelet templates in /WEB-INF (e.g. 'search' to '/WEB-INF/search.xhtml' -->

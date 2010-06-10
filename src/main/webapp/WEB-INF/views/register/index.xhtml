@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+                template="/WEB-INF/layouts/landing.xhtml">
+
+    <ui:define name="top">
+        top
+    </ui:define>
+
+    <ui:define name="content">
+		<form method="post">
+			<h:panelGrid columns="3" rowClasses="row1, row2">
+
+			   <h:outputLabel for="nickname"><h:outputText value="#{lng.m('register.index.nickname')}"/></h:outputLabel>
+			   <h:inputText  id="nickname" value="#{user.nickname}" required="true"/>
+			   <h:message for="nickname" />
+
+			   <script type="text/javascript">
+				 Spring.addDecoration(new Spring.ElementDecoration({
+				 elementId : "nickname",
+				 widgetType : "dijit.form.ValidationTextBox",
+				 widgetAttrs : {
+				 promptMessage: "Enter Nickname",
+				 required : true}}));
+				</script>
+
+			</h:panelGrid>
+
+			<h:commandButton id="proceed" value="#{lng.m('register.index.submit')}" />
+
+			<script type="text/javascript">
+			 Spring.addDecoration(
+			 new Spring.ValidateAllDecoration({
+			 elementId:'proceed',
+			 event:'onclick'}));
+			</script>
+
+		</form>
+		<h:link outcome="/xyu">xyu</h:link>
+    </ui:define>
+
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>

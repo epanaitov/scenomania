@@ -1,23 +1,48 @@
 package com.scenomania.entities;
 
 import java.util.Date;
-import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="users")
-public class User extends EntityBase {
-	
+public class User {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@NotNull
+	@Column
     private String nickname;
+
+	//@NotNull
 	private String password;
 
 	private String salt;
+
+	//@NotNull
 	private String email;
+
+	
 	private Date last_login;
 
-	@Column
+	
+	public Integer getId() {
+        return id;
+    }
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	
     public String getNickname() {
         return nickname;
     }

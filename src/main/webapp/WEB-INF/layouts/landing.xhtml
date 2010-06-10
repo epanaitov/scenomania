@@ -7,12 +7,26 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+		<style type="text/css" media="screen">
+		 @import url("#{facesContext.externalContext.requestContextPath}/resources/dojo/resources/dojo.css");
+		 @import url("#{facesContext.externalContext.requestContextPath}/resources/dijit/themes/tundra/tundra.css");
+		</style>
+
+		<script djconfig="parseOnLoad: true"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/dojo/dojo.js" type="text/javascript"></script>
+		<script type="text/javascript"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring.js"> </script>
+		<script type="text/javascript"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring-Dojo.js"></script>
+		<script type="text/javascript">dojo.require("dojo.parser");</script>
+
         <h:outputStylesheet library="css" name="default.css" />
         <h:outputStylesheet library="css" name="cssLayout.css" />
         <title>Facelets Template</title>
     </h:head>
     
-    <h:body>
+    <h:body styleClass="tundra">
 
         <div id="top">
 			<div id="menus">

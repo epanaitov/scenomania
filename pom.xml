@@ -36,7 +36,14 @@
 			  </execution>
 			</executions>
 		  </plugin>
-      
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.0.2</version>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -44,6 +51,53 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.2</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.3</version>
+				<configuration>
+					<junitArtifactName>org.junit:com.springsource.org.junit</junitArtifactName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.0.4</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.2</version>
 			</plugin>
 
 			<plugin>
@@ -231,11 +285,11 @@
 			<artifactId>org.springframework.js</artifactId>
 			<version>2.0.9.RELEASE</version>
 		</dependency>
-		<dependency>
+		<!--dependency>
 			<groupId>org.springframework.webflow</groupId>
 			<artifactId>org.springframework.webflow</artifactId>
 			<version>2.0.9.RELEASE</version>
-		</dependency>
+		</dependency-->
 		<!--dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>com.springsource.javax.faces</artifactId>
@@ -245,13 +299,13 @@
 			<groupId>com.sun.faces</groupId>
 			<artifactId>com.springsource.com.sun.faces</artifactId>
 			<version>2.0.2</version>
-		</dependency-->
+		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.el</groupId>
 			<artifactId>com.springsource.org.jboss.el</artifactId>
 			<version>2.0.0.GA</version>
-		</dependency>
+		</dependency-->
 
 		<dependency>
             <groupId>com.sun.faces</groupId>
@@ -271,36 +325,85 @@
 			<version>3.1.0</version>
 		</dependency>
 
-	 <dependency>
+	 <!--dependency>
 	  <groupId>org.hibernate</groupId>
 	  <artifactId>hibernate-core</artifactId>
 	  <version>3.3.2.GA</version>
-	 </dependency>
-
+	 </dependency-->
 
 	 <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>3.3.1.GA</version>
+    </dependency>
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-annotations</artifactId>
+        <version>3.4.0.GA</version>
+    </dependency>
+
+     <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.5.6</version>
+    </dependency>
+    <!-- concrete Log4J Implementation for SLF4J API-->
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-log4j12</artifactId>
+        <version>1.5.6</version>
+    </dependency>
+
+
+	 <!--dependency>
 	  <groupId>org.hibernate</groupId>
 	  <artifactId>hibernate-entitymanager</artifactId>
 	  <version>3.4.0.GA</version>
-	 </dependency>
-
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>ejb3-persistence</artifactId>
-		<version>3.3.2.Beta1</version>
-	</dependency>
+	 </dependency-->
 
 	 <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-annotations</artifactId>
-      <version>3.4.0.GA</version>
-    </dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>com.springsource.javax.persistence</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>com.springsource.org.hibernate.ejb</artifactId>
+			<version>3.3.2.GA</version>
+		</dependency>
+
+	 <!--dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>com.springsource.javax.annotation</artifactId>
+			<version>1.0.0</version>
+		</dependency-->
+
+	<!--dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>com.springsource.org.hibernate.annotations</artifactId>
+			<version>3.4.0.GA</version>
+		
+		</dependency-->
 
 	<dependency>
        <groupId>org.hibernate</groupId>
        <artifactId>hibernate-commons-annotations</artifactId>
        <version>3.3.0.ga</version>
     </dependency>
+
+	<!--  JSR 303 with Hibernate Validator -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<!--version>1.0.0.GA</version-->
+			<version>1.0.CR1</version>
+		</dependency>
+		<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>4.0.2.GA</version>
+			</dependency>
 
 	 <dependency>
 	  <groupId>javax.sql</groupId>
@@ -355,10 +458,11 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.6.8</version>
         </dependency>
+		
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
+            <version>1.2.15</version>
             <exclusions>
                <exclusion>
                   <groupId>javax.jms</groupId>
@@ -379,12 +483,19 @@
             </exclusions>
         </dependency>
 
-		<dependency>
+		<!--dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.8</version>
+            <version>1.5.6</version>
             <scope>runtime</scope>
         </dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.6</version>
+		</dependency-->
+
         <dependency>
             <groupId>jboss</groupId>
             <artifactId>javassist</artifactId>
@@ -403,9 +514,36 @@
             <id>dev-eugene</id>
             <activation>
             </activation>
+			<build>
+            <plugins>
+              <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                  <url>http://localhost:8080/manager</url>
+                  <server>mytomcat</server>
+                  <path>/scenomania</path>
+                </configuration>
+              </plugin>
+            </plugins>
+            </build>
+            <properties>
+              <!--netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
+              <netbeans.deployment.server.id>[/home/eugene/glassfish/v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id-->
+			  <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
+              <netbeans.deployment.server.id>tomcat60:home=/home/eugene/apache-tomcat-6.0.20</netbeans.deployment.server.id>
+			  <db.host>localhost</db.host>
+			  <db.name>scenomania</db.name>
+			  <db.username>root</db.username>
+			  <db.password>root</db.password>
+            </properties>
+        </profile>
+
+		<profile>
+            <id>dev-glassfish</id>
             <properties>
               <netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
-              <netbeans.deployment.server.id>[/home/eugene/sges-v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id>
+              <netbeans.deployment.server.id>[/home/eugene/glassfish/v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id>
 			  <db.host>localhost</db.host>
 			  <db.name>scenomania</db.name>
 			  <db.username>root</db.username>
