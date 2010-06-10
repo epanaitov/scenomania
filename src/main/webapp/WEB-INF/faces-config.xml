@@ -13,10 +13,13 @@
 
 		<locale-config>
 			<default-locale>ru</default-locale>
-			<supported-locale>ru</supported-locale>
 			<supported-locale>en</supported-locale>
 			<supported-locale>en_US</supported-locale>
 		</locale-config>
+		<resource-bundle>
+            <base-name>messages.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
 	</application>
 	
 </faces-config>
