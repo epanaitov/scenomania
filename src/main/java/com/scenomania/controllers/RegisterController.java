@@ -38,12 +38,6 @@ public class RegisterController {
 
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public String postRegister(@ModelAttribute("user") @Valid User user, BindingResult result) {
-		/*
-		Assert.notNull(user, "User must be provided.");
-		for (ConstraintViolation<User> constraint : validator.validate(user)) {
-			result.rejectValue(constraint.getPropertyPath(), null, constraint.getMessage());
-		}
-		*/
 		
 		if (result.hasErrors()) {
 			return "register/index";
@@ -51,6 +45,6 @@ public class RegisterController {
 		
 		// create user here
 		
-		return "redirect:/register";
+		return "redirect:/";
 	}
 }
