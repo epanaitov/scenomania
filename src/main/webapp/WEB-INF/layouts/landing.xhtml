@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ez="http://java.sun.com/jsf/composite/ezcomp">
+      xmlns:ez="http://java.sun.com/jsf/composite/ezcomp"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -13,9 +14,9 @@
     </h:head>
     
     <h:body>
-
+	<f:view>
         <div id="top">
-			<div id="menus">
+			<div id="menus">a
 			 <h:link outcome="index" value="#{lng.m('menus.home')}" />
 			 <h:link outcome="team" value="#{lng.m('menus.team')}" />
 			 <h:link outcome="contacts" value="#{lng.m('menus.contacts')}" />
@@ -31,7 +32,7 @@
         <div id="bottom">
             <ui:insert name="bottom">Bottom</ui:insert>
         </div>
-
+	</f:view>
     </h:body>
  
 </html>

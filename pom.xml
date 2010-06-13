@@ -301,7 +301,14 @@
        <artifactId>hibernate-commons-annotations</artifactId>
        <version>3.3.0.ga</version>
     </dependency>
-
+    
+    <dependency>
+	<groupId>org.glassfish</groupId>
+	  <artifactId>bean-validator</artifactId>
+	  <version>3.0-JBoss-4.0.0.Beta1-b01</version>
+	  <scope>provided</scope>
+	</dependency>	
+	 
 	 <dependency>
 	  <groupId>javax.sql</groupId>
 	  <artifactId>jdbc-stdext</artifactId>
@@ -313,6 +320,12 @@
 	  <version>1.0.1B</version>
 	 </dependency>
 	 
+	<dependency>
+		<groupId>javax.validation</groupId>
+		<artifactId>validation-api</artifactId>
+		<version>1.0.CR5</version>
+	</dependency>
+
 	 <dependency>
 	  <groupId>mysql</groupId>
 	  <artifactId>mysql-connector-java</artifactId>
@@ -431,10 +444,13 @@
                 </plugin>
               </plugins>
             </build>
-
             <properties>
               <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
               <netbeans.deployment.server.id>tomcat60:home=/opt/tomcat</netbeans.deployment.server.id>
+              <db.host>localhost</db.host>
+				<db.name>scenomania</db.name>
+				<db.username>java</db.username>
+				<db.password>java</db.password>
             </properties>
         </profile>
 
