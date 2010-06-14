@@ -4,6 +4,8 @@ import com.scenomania.entities.User;
 import com.scenomania.services.UserService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.binding.message.DefaultMessageContext;
+import org.springframework.binding.message.MessageBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,7 +29,7 @@ public class RegisterController {
 	
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public String getRegister(Model model) {
+	public String index(Model model) {
 
 		//User user = new User();
 		User user = userService.retrieveUser(1);
@@ -37,9 +39,11 @@ public class RegisterController {
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String postRegister(@ModelAttribute("user") @Valid User user, BindingResult result) {
-		
+	public String index(@ModelAttribute("user") @Valid User user, BindingResult result, DefaultMessageContext context) {
+
 		if (result.hasErrors()) {
+			MessageBuilder messageBuilder = new MessageBuilder();
+			context.addMessage(messageBuilder.error().source("user:nickname").code("menus.home").defaultText("azhazha").build());
 			return "register/index";
 		}
 		
