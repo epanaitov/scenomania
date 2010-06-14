@@ -10,12 +10,12 @@
     </ui:define>
 
     <ui:define name="content">
-		<form method="post">
+		<h:form id="user" action="/register/">
 			<h:panelGrid columns="3" rowClasses="row1, row2">
 
 			   <h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel>
 			   <h:inputText  id="nickname" value="#{user.nickname}" required="true"/>
-			   <h:message for="nickname" />
+			   <h:messages for="nickname" />
 
 			   <script type="text/javascript">
 				 Spring.addDecoration(new Spring.ElementDecoration({
@@ -28,7 +28,7 @@
 
 			</h:panelGrid>
 
-			<h:commandButton id="proceed" value="#{msg['register.index.submit']}" />
+			<h:commandButton id="proceed" value="#{msg['register.index.submit']}" action="/register/" />
 
 			<script type="text/javascript">
 			 Spring.addDecoration(
@@ -37,7 +37,7 @@
 			 event:'onclick'}));
 			</script>
 
-		</form>
+		</h:form>
 		<h:link outcome="/xyu">xyu</h:link>
     </ui:define>
 

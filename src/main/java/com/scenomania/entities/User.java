@@ -4,8 +4,9 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="users")
@@ -13,7 +14,8 @@ public class User extends EntityBase {
 
 	@NotNull
 	@Column
-	@Length(min=1,max=250)
+	@Min(value=2, message="Too short")
+	@Max(250)
     private String nickname;
 
 	//@NotNull
