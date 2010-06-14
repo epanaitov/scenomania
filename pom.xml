@@ -471,7 +471,7 @@
             <properties> 
               <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server> 
               <netbeans.deployment.server.id>tomcat60:home=/opt/tomcat</netbeans.deployment.server.id> 
-              <db.host>localhost</db.host>
+             	<db.host>localhost</db.host>
 				<db.name>scenomania</db.name>
 				<db.username>java</db.username>
 				<db.password>java</db.password>
