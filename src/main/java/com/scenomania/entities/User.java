@@ -1,23 +1,33 @@
 package com.scenomania.entities;
 
 import java.util.Date;
-import javax.faces.bean.ManagedBean;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="users")
 public class User extends EntityBase {
-	
+
+	@NotNull
+	@Column
+	@Length(min=1,max=250)
     private String nickname;
+
+	//@NotNull
 	private String password;
 
 	private String salt;
+
+	//@NotNull
 	private String email;
+
+	
 	private Date last_login;
 
-	@Column
+	
     public String getNickname() {
         return nickname;
     }

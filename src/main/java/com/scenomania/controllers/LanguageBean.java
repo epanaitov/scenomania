@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 
 public class LanguageBean {
 
-  public LanguageBean() {
-  }
-
   public String m(String key) {
     ResourceBundle bundle = ResourceBundle.getBundle("messages.messages", Locale.getDefault());
     return bundle.getString(key);
