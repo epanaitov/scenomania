@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.scenomania.dao.impl;
 
 import com.scenomania.dao.UserDao;
@@ -26,6 +21,13 @@ public class HibernateUserDao implements UserDao {
 
 	public User persistOrMerge(User user) {
 		return (User) this.sessionFactory.getCurrentSession().merge(user);
+	}
+
+
+	public User findByEmail(String email) {
+		Query q = this.sessionFactory.getCurrentSession().createQuery("from User users where users.email = ?").setParameter(0, email);
+		User user = (User) q.uniqueResult();
+		return user;
 	}
 
 }

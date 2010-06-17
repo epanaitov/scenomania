@@ -402,6 +402,11 @@
             <scope>runtime</scope> 
         </dependency> 
  
+        <dependency>
+        	<groupId>javax.servlet</groupId>
+        	<artifactId>servlet-api</artifactId>
+        	<version>2.5</version>
+        </dependency>
 	</dependencies> 
     <properties> 
         
@@ -446,7 +451,11 @@
  
             <properties> 
               <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server> 
-              <netbeans.deployment.server.id>tomcat60:home=/opt/tomcat</netbeans.deployment.server.id> 
+              <netbeans.deployment.server.id>tomcat60:home=/opt/tomcat</netbeans.deployment.server.id>
+              	<db.host>127.0.0.1</db.host> 
+				<db.name>scenomania</db.name> 
+				<db.username>java</db.username> 
+				<db.password>java</db.password>  
             </properties> 
         </profile> 
  

@@ -12,39 +12,69 @@
     </ui:define>
 
     <ui:define name="content">
-		<form id="user" action="" method="post">
-			<h:panelGrid columns="3" rowClasses="row1, row2">
-
-			   <h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel>
-			   <h:inputText  id="nickname" value="#{user.nickname}" required="true"/>
-			   <div>
-					<ui:repeat value="#{userErrors['nickname']}" var="err">
-					   <h:outputText value="#{msg[err]}" />
+    	
+	    <script type="text/javascript">
+	    	function addRequireDecor(id, prompt){
+	    		Spring.addDecoration(new Spring.ElementDecoration({
+					 elementId : id,
+					 widgetType : "dijit.form.ValidationTextBox",
+					 widgetAttrs : {
+					 promptMessage: prompt,
+					 required : true}}));
+	    	}
+	    	function addProceedDecor(id){
+	    		Spring.addDecoration(
+						 new Spring.ValidateAllDecoration({
+						 elementId: id,
+						 event:'onclick'}));
+	    	}
+			function addDecors(){
+				addRequireDecor("nickname", "Enter Nickname");
+				addRequireDecor("email", "Enter Email");
+				addRequireDecor("password", "Password is required");
+				addRequireDecor("password_confirm", "Confirm the password");
+				addProceedDecor("proceed");
+			}
+			dojo.addOnLoad(addDecors);
+		</script>
+			
+		<form id="user" action="#{url.get['register.html']}" method="post">
+		<table>
+			<tr>
+				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel></td>
+				<td><h:inputText  id="nickname" value="#{user.nickname}" required="true"/></td>
+				<td><ui:repeat value="#{userErrors['nickname']}" var="err">
+						<h:outputText value="#{msg[err]}" />
 					</ui:repeat>
-			   </div>
-
-			   <script type="text/javascript">
-				 Spring.addDecoration(new Spring.ElementDecoration({
-				 elementId : "nickname",
-				 widgetType : "dijit.form.ValidationTextBox",
-				 widgetAttrs : {
-				 promptMessage: "Enter Nickname",
-				 required : true}}));
-				</script>
-
-			</h:panelGrid>
-
-			<h:commandButton id="proceed" value="#{msg['register.index.submit']}" action="/register/" />
-
-			<script type="text/javascript">
-			 Spring.addDecoration(
-			 new Spring.ValidateAllDecoration({
-			 elementId:'proceed',
-			 event:'onclick'}));
-			</script>
-
+				</td>
+			</tr>
+			<tr>
+				<td><h:outputLabel for="email"><h:outputText value="#{msg['register.index.email']}"/></h:outputLabel></td>
+				<td><h:inputText  id="email" value="#{user.email}" required="true"/></td>
+				<td><ui:repeat value="#{userErrors['email']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+				</td>
+			</tr>
+			<tr>
+				<td><h:outputLabel for="password"><h:outputText value="#{msg['register.index.password']}"/></h:outputLabel></td>
+				<td><h:inputSecret redisplay="false" id="password" value="#{user.password}" required="true"/></td>
+				<td><ui:repeat value="#{userErrors['password']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+				</td>
+			</tr>
+			<tr>
+				<td><h:outputLabel for="password_confirm"><h:outputText value="#{msg['register.index.password_confirm']}"/></h:outputLabel></td>
+				<td><h:inputSecret redisplay="false" id="password_confirm" value="" required="true"/></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td colspan="3"><h:commandButton id="proceed" value="#{msg['register.index.submit']}" /></td>
+			</tr>
+		</table>
 		</form>
-		<h:link outcome="/xyu">xyu</h:link>
+
     </ui:define>
 
     <ui:define name="bottom">

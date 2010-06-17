@@ -1,14 +1,20 @@
 package com.scenomania.entities;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Column;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="users")
+@Table(name="users",
+		uniqueConstraints = { @UniqueConstraint(columnNames={"email"}) }
+)
+
 public class User extends EntityBase {
 
 	@NotNull
@@ -16,12 +22,14 @@ public class User extends EntityBase {
 	@Size.List( { @Size(min=2, message="user.nickname.short"), @Size(max=250, message="user.nickname.long") } )
     private String nickname;
 
-	//@NotNull
+	@NotNull
 	private String password;
 
 	private String salt;
 
-	//@NotNull
+	@NotNull
+	@Pattern(regexp="(?i)[A-Z0-9._%+-]+@(?i)[A-Z0-9.-]+\\.(?i)[A-Z]{2,4}", message="user.email.invalid")
+	@Column(name="email", nullable=false, length=20, unique=true)
 	private String email;
 
 	

@@ -3,7 +3,7 @@ package com.scenomania.jsf;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 public class SimpleUrlBasedViewResolver extends UrlBasedViewResolver {
-	private String extension = ".html";
+	private String extension = "";
 	
 	public SimpleUrlBasedViewResolver() {
 		super();

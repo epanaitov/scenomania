@@ -11,5 +11,6 @@ public interface UserService {
 
 	public User retrieveUser(Integer id);
 	public User createUser(User user);
-
+	public User getUserByEmail(String email);
+	
 }
