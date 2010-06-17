@@ -4,7 +4,7 @@
 	<groupId>com.tourageous</groupId> 
 	<artifactId>scenomania</artifactId> 
 	<packaging>war</packaging> 
-	<version>0.3.0-STAGING</version> 
+	<version>0.3.2-STAGING</version>
 	<name>scenomania</name> 
 	<url>http://maven.apache.org</url> 
  
@@ -224,7 +224,7 @@
 		<dependency> 
 			<groupId>org.springframework.webflow</groupId> 
 			<artifactId>org.springframework.faces</artifactId> 
-			<version>2.0.9.RELEASE</version>
+			<version>2.0.9.RELEASE</version> 
 		</dependency> 
 		<dependency> 
 			<groupId>org.springframework.webflow</groupId> 
@@ -256,12 +256,12 @@
 		<dependency> 
             <groupId>com.sun.faces</groupId> 
             <artifactId>jsf-api</artifactId> 
-            <version>2.0.3-SNAPSHOT</version>
+            <version>2.0.2</version> 
         </dependency> 
         <dependency> 
             <groupId>com.sun.faces</groupId> 
             <artifactId>jsf-impl</artifactId> 
-            <version>2.0.3-SNAPSHOT</version>
+            <version>2.0.2</version> 
         </dependency> 
  
 		<!--  URL Rewrite --> 
@@ -281,13 +281,7 @@
 	 <dependency> 
 	  <groupId>org.hibernate</groupId> 
 	  <artifactId>hibernate-entitymanager</artifactId> 
-	  <version>3.4.0.GA</version>
-	  <exclusions>
-            <exclusion>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-            </exclusion>
-        </exclusions>
+	  <version>3.4.0.GA</version> 
 	 </dependency> 
  
 	<dependency> 
@@ -299,13 +293,7 @@
 	 <dependency> 
       <groupId>org.hibernate</groupId> 
       <artifactId>hibernate-annotations</artifactId> 
-      <version>3.4.0.GA</version>
-	  <exclusions>
-            <exclusion>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-            </exclusion>
-        </exclusions>
+      <version>3.4.0.GA</version> 
     </dependency> 
  
 	<dependency> 
@@ -315,13 +303,6 @@
     </dependency> 
  
 	 <dependency> 
-	<groupId>org.glassfish</groupId>
-	  <artifactId>bean-validator</artifactId>
-	  <version>3.0-JBoss-4.0.0.Beta1-b01</version>
-	  <scope>provided</scope>
-	</dependency>	
-	 
-	 <dependency>
 	  <groupId>javax.sql</groupId> 
 	  <artifactId>jdbc-stdext</artifactId> 
 	  <version>2.0</version> 
@@ -333,12 +314,6 @@
 	 </dependency> 
 	 
 	 <dependency> 
-		<groupId>javax.validation</groupId>
-		<artifactId>validation-api</artifactId>
-		<version>1.0.CR5</version>
-	</dependency>
-
-	 <dependency>
 	  <groupId>mysql</groupId> 
 	  <artifactId>mysql-connector-java</artifactId> 
 	  <version>5.1.6</version> 
@@ -380,10 +355,10 @@
             <artifactId>aspectjweaver</artifactId> 
             <version>1.6.8</version> 
         </dependency> 
-        <!--dependency>
+        <dependency> 
             <groupId>log4j</groupId> 
             <artifactId>log4j</artifactId> 
-            <version>1.2.15</version>
+            <version>1.2.16</version> 
             <exclusions> 
                <exclusion> 
                   <groupId>javax.jms</groupId> 
@@ -402,7 +377,7 @@
                   <artifactId>mail</artifactId> 
                </exclusion> 
             </exclusions> 
-        </dependency-->
+        </dependency> 
  
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -439,9 +414,9 @@
             <activation> 
             </activation> 
             <properties> 
-              <!--netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server>
-              <netbeans.deployment.server.id>[/home/eugene/sges-v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id-->
-			  <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
+              <!--netbeans.hint.deploy.server>gfv3ee6</netbeans.hint.deploy.server> 
+              <netbeans.deployment.server.id>[/home/eugene/sges-v3/glassfish]deployer:gfv3ee6:localhost:4848</netbeans.deployment.server.id--> 
+              <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>
               <netbeans.deployment.server.id>tomcat60:home=/usr/local/tomcat</netbeans.deployment.server.id>
 			  <db.host>localhost</db.host> 
 			  <db.name>scenomania</db.name> 
@@ -468,13 +443,10 @@
                 </plugin> 
               </plugins> 
             </build> 
+ 
             <properties> 
               <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server> 
               <netbeans.deployment.server.id>tomcat60:home=/opt/tomcat</netbeans.deployment.server.id> 
-             	<db.host>localhost</db.host>
-				<db.name>scenomania</db.name>
-				<db.username>java</db.username>
-				<db.password>java</db.password>
             </properties> 
         </profile> 
  

@@ -2,13 +2,16 @@ package com.scenomania.controllers;
 
 import com.scenomania.entities.User;
 import com.scenomania.services.UserService;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.binding.message.DefaultMessageContext;
-import org.springframework.binding.message.MessageBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
  */
 
 @Controller
-public class RegisterController {
+public class RegisterController extends ControllerBase {
 	@Autowired(required=true)
 	private UserService userService;
 
@@ -39,11 +42,11 @@ public class RegisterController {
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String index(@ModelAttribute("user") @Valid User user, BindingResult result, DefaultMessageContext context) {
+	public String index(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			MessageBuilder messageBuilder = new MessageBuilder();
-			context.addMessage(messageBuilder.error().source("user:nickname").code("menus.home").defaultText("azhazha").build());
+			model.addAttribute("user", user);
+			model.addAttribute("userErrors", hashErrors(result.getFieldErrors()));
 			return "register/index";
 		}
 		

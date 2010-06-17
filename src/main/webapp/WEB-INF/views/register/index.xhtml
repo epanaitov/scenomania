@@ -3,19 +3,25 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 				xmlns:h="http://java.sun.com/jsf/html"
 				xmlns:f="http://java.sun.com/jsf/core"
-                template="/WEB-INF/layouts/landing.xhtml">
+				xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/layouts/landing.xhtml"
+				>
 
     <ui:define name="top">
         top
     </ui:define>
 
     <ui:define name="content">
-		<h:form id="user" action="/register/">
+		<form id="user" action="" method="post">
 			<h:panelGrid columns="3" rowClasses="row1, row2">
 
 			   <h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel>
 			   <h:inputText  id="nickname" value="#{user.nickname}" required="true"/>
-			   <h:messages for="nickname" />
+			   <div>
+					<ui:repeat value="#{userErrors['nickname']}" var="err">
+					   <h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+			   </div>
 
 			   <script type="text/javascript">
 				 Spring.addDecoration(new Spring.ElementDecoration({
@@ -37,7 +43,7 @@
 			 event:'onclick'}));
 			</script>
 
-		</h:form>
+		</form>
 		<h:link outcome="/xyu">xyu</h:link>
     </ui:define>
 
