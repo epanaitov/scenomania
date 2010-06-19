@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/layouts/landing.xhtml"
+				>
+    <ui:define name="top">
+        top
+    </ui:define>
+
+    <ui:define name="content">
+    	
+	    <script type="text/javascript">
+	    	function addRequireDecor(id, prompt){
+	    		Spring.addDecoration(new Spring.ElementDecoration({
+					 elementId : id,
+					 widgetType : "dijit.form.ValidationTextBox",
+					 widgetAttrs : {
+					 promptMessage: prompt,
+					 required : true}}));
+	    	}
+	    	
+	    	function addProceedDecor(id){
+	    		Spring.addDecoration(
+						 new Spring.ValidateAllDecoration({
+						 elementId: id,
+						 event:'onclick'}));
+	    	}
+	    	<h:panelGroup rendered="#{empty success}">
+			function addDecors(){
+				addRequireDecor("email", "Enter Email");
+				addProceedDecor("proceed");
+			}
+			dojo.addOnLoad(addDecors);
+			</h:panelGroup>
+		</script>
+		
+		<h:panelGroup rendered="#{empty success}">
+			
+		<form id="user" action="#{url.get['feedback.html']}" method="post">
+		<table>
+			<tr>
+				<td><h:outputLabel for="email"><h:outputText value="#{msg['email']}"/></h:outputLabel></td>
+				<td><h:inputText  id="email" value="#{feedbackMail.email}" required="true"/></td>
+				<td><ui:repeat value="#{mailErrors['email']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+				</td>
+			</tr>
+			<tr>
+				<td><h:outputLabel for="text"><h:outputText value="#{msg['text']}"/></h:outputLabel></td>
+				<td><h:inputTextarea id="text" cols="50" rows="7" value="#{feedbackMail.text}" required="true"/></td>
+				<td><ui:repeat value="#{mailErrors['text']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3"><h:commandButton id="proceed" value="#{msg['send']}" /></td>
+			</tr>
+		</table>
+		</form>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{success}"><h:outputText value="#{msg['feedback.email.sent']}"/></h:panelGroup>
+    </ui:define>
+    
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>

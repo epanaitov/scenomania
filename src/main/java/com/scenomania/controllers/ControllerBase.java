@@ -28,7 +28,7 @@ public class ControllerBase {
 
 			if (errorsHash.containsKey(error.getField())) {
 				tmp = errorsHash.get(error.getField());
-			}
+			} 
 
 			tmp.add(error.getDefaultMessage());
 			errorsHash.put(error.getField(), tmp);
