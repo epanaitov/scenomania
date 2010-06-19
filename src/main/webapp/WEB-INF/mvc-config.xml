@@ -60,5 +60,26 @@
 
 	<!-- Dispatches requests mapped to org.springframework.web.servlet.mvc.Controller implementations -->
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
-
+	
+	
+	
+	
+	<!-- Mail -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	  <property name="host" value="localhost"/>
+	  <property name="port" value="25"/>
+	  <property name="defaultEncoding" value="utf-8" />
+	</bean>
+	
+	<!-- this is a template feedback message -->
+	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+	  <property name="subject" value="Scenomania Feedback"/>
+	  <property name="to" value="admin@localhost"/>
+	</bean>
+	
+	<bean id="feedbackService" class="com.scenomania.services.impl.FeedbackServiceImpl">
+	  <property name="mailSender" ref="mailSender"/>
+	  <property name="templateMessage" ref="templateMessage"/>
+	</bean>
+	
 </beans>
