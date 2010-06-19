@@ -29,7 +29,7 @@ public class User extends EntityBase {
 
 	@NotNull
 	@Pattern(regexp="(?i)[A-Z0-9._%+-]+@(?i)[A-Z0-9.-]+\\.(?i)[A-Z]{2,4}", message="user.email.invalid")
-	@Column(name="email", nullable=false, length=20, unique=true)
+	@Column(name="email", nullable=false, length=200, unique=true)
 	private String email;
 
 	

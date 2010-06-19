@@ -52,7 +52,7 @@
 				<td><h:outputLabel for="email"><h:outputText value="#{msg['register.index.email']}"/></h:outputLabel></td>
 				<td><h:inputText  id="email" value="#{user.email}" required="true"/></td>
 				<td><ui:repeat value="#{userErrors['email']}" var="err">
-						<h:outputText value="#{msg[err]}" />
+						<h:outputFormat value="#{msg[err]}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
 					</ui:repeat>
 				</td>
 			</tr>

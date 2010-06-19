@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,11 +48,8 @@ public class RegisterController extends ControllerBase {
 			result.rejectValue("password", "password.confirm_error", "user.password.confirm_error");
 		}
 		
-		if (! result.hasErrors()){
-			Boolean userExists = (userService.getUserByEmail(user.getEmail()) != null);
-			if (userExists){
-				result.rejectValue("email", "email.user_exists", "user.email.user_exists");
-			}
+		if (userService.getUserByEmail(user.getEmail()) != null){
+			result.rejectValue("email", "email.user_exists", "user.email.user_exists");
 		}
 		
 		if (result.hasErrors()) {
