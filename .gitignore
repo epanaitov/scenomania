@@ -1,6 +1,6 @@
 database.properties
-target*
-bin*
+target/
+bin/
 build.xml
 .classpath
 .project
