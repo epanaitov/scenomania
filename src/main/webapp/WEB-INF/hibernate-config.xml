@@ -40,10 +40,13 @@
 		-->
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.hbm2ddl.auto">validate</prop>
 				<prop key="hibernate.connection.autoReconnect">true</prop>
                 <prop key="hibernate.dialect">${jdbc.hibernate.dialect}</prop>
+				<prop key="hibernate.connection.useUnicode">true</prop>
+				<prop key="hibernate.connection.characterEncoding">utf8</prop>
+				<prop key="hibernate.connection.characterSetResults">utf8</prop>
             </props>
         </property>
     </bean>

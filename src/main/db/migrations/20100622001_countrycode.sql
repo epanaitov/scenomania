@@ -1,0 +1,1 @@
+alter table countries MODIFY COLUMN `code` varchar(255);

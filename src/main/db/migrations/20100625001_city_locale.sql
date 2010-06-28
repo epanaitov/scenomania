@@ -1,0 +1,1 @@
+ALTER TABLE city_locale CONVERT TO CHARACTER SET utf8;

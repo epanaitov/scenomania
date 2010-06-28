@@ -1,0 +1,1 @@
+ALTER TABLE countries MODIFY COLUMN code CHAR(2);

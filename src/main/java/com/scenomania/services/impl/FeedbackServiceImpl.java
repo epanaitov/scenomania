@@ -1,7 +1,6 @@
 package com.scenomania.services.impl;
 
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.apache.log4j.Logger;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -25,7 +24,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 		try {
 			this.mailSender.send(msg);
 		} catch (MailException ex){
-			Logger.getLogger(FeedbackServiceImpl.class).error("MailException " + msg.getFrom(), ex);
+			//Logger.getLogger(FeedbackServiceImpl.class).error("MailException " + msg.getFrom(), ex);
 		}
 		
 	}

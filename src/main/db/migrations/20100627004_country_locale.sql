@@ -1,0 +1,1 @@
+ALTER TABLE country_locale CONVERT TO CHARACTER SET utf8;

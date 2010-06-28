@@ -1,0 +1,1 @@
+ALTER TABLE area_locale CONVERT TO CHARACTER SET utf8;
