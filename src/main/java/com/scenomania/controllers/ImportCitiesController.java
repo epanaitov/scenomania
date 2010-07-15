@@ -1,19 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.scenomania.controllers;
 
 import com.scenomania.entities.Area;
 import com.scenomania.entities.AreaLocale;
+import com.scenomania.entities.Band;
+import com.scenomania.entities.BandPosition;
 import com.scenomania.entities.City;
 import com.scenomania.entities.CityLocale;
 import com.scenomania.entities.Country;
 import com.scenomania.entities.CountryLocale;
+import com.scenomania.entities.User;
 import com.scenomania.services.AreaService;
+import com.scenomania.services.BandService;
 import com.scenomania.services.CityService;
 import com.scenomania.services.CountryService;
+import com.scenomania.services.UserService;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -45,6 +45,12 @@ public class ImportCitiesController {
 
 	@Autowired(required=true)
 	private CityService cityService;
+
+	@Autowired(required=true)
+	private UserService userService;
+
+	@Autowired(required=true)
+	private BandService bandService;
 
 	private void importCountries() {
 		try {
@@ -317,8 +323,43 @@ public class ImportCitiesController {
 		}
 
 	}
+
+	private void bandUser() {
+		User user = userService.retrieveUser(1);
+
+		Band band = new Band();
+		band.setName("fried cucumbers");
+		band.setHomecity(user.getHomecity());
+
+		band = bandService.save(band);
+
+		BandPosition position = new BandPosition();
+		position.setBand(band);
+		position.setUser(user);
+
+		user.getPositions().add(position);
+
+		userService.saveUser(user);
+	}
+
+	private void indexCities() {
+		List<City> cities = cityService.fetchAll();
+
+		Iterator<City> cit = cities.iterator();
+
+		while (cit.hasNext()) {
+			City city = cit.next();
+			Area area = areaService.getByCodes(city.getAreaCode(), city.getCountryCode());
+			try {
+				city.setAreaId(area.getId());
+				cityService.saveCity(city);
+			} catch (Exception e) {
+				System.out.print(e);
+			}
+		}
+	}
 	
-	//@RequestMapping("/cities")
+	@RequestMapping("/cities")
 	public String index() {
 
 		//importCities();
@@ -328,8 +369,21 @@ public class ImportCitiesController {
 		//translateCities();
 
 		//translateAreas();
-		translateCountries();
+		//translateCountries();
 
+		// bandUser();
+		//indexCities();
+
+		Iterator <Area> ait = areaService.fetchAll().iterator();
+
+		while (ait.hasNext()) {
+			Area area = ait.next();
+
+			Country country = countryService.getByCode(area.getCountryCode());
+			area.setCountryId(country.getId());
+			areaService.saveArea(area);
+
+		}
 
 		return "";
 	}

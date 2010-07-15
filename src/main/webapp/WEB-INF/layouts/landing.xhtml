@@ -34,13 +34,10 @@
     
     <h:body styleClass="tundra">
 
-        <div id="top">
-			<div id="menus">
-			<a href="#{url.get['']}">#{msg['menus.home']}</a>
-			<a href="#{url.get['team']}">#{msg['menus.team']}</a>
-			<a href="#{url.get['feedback']}">#{msg['menus.contacts']}</a>
-			</div>
+		<h:outputScript name="jsf.js" library="javax.faces" target="body"/>
 
+        <div id="top">
+			<ui:remove><ez:xyu /></ui:remove>
             <ui:insert name="top">Top</ui:insert>
         </div>
         

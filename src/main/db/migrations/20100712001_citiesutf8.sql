@@ -1,0 +1,1 @@
+alter table cities convert to character set utf8;

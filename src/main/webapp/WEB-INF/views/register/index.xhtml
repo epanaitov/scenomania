@@ -70,6 +70,56 @@
 				<td></td>
 			</tr>
 			<tr>
+				<td>
+					<h:outputLabel for="select_country">
+						<h:outputText value="#{msg['register.index.location']}" />
+					</h:outputLabel>
+				</td>
+				<td>
+
+					<script language="javascript">
+						function pick_country() {
+
+							var countrySelect = dojo.byId("country_select");
+							var code = countrySelect.options[countrySelect.selectedIndex].value;
+
+							dojo.xhrGet({
+								url:"#{facesContext.externalContext.requestContextPath}/ajax/countries/get_areas/?id="+code,
+								handleAs:"text",
+								load: function(data){
+									dojo.byId("area_select").innerHTML = data;
+								}
+							});
+						}
+
+						function pick_area() {
+
+							var areaSelect = dojo.byId("area_select");
+							var ac = areaSelect.options[areaSelect.selectedIndex].value;
+
+							dojo.xhrGet({
+								url:"#{facesContext.externalContext.requestContextPath}/ajax/countries/get_cities/?area="+ac,
+								load: function(data) {
+									dojo.byId("city_select").innerHTML = data;
+								}
+							});
+
+						}
+
+					</script>
+
+					<h:selectOneMenu id="country_select" value="" onchange="pick_country();">
+						<f:selectItems value="#{countries.all}"/>
+					</h:selectOneMenu>
+					<h:selectOneMenu id="area_select" value="" onchange="pick_area()"></h:selectOneMenu>
+					<h:selectOneMenu id="city_select" value=""></h:selectOneMenu>
+				</td>
+				<td><ui:repeat value="#{userErrors['homecity']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+				</td>
+			</tr>
+			<tr>
 				<td colspan="3"><h:commandButton id="proceed" value="#{msg['register.index.submit']}" /></td>
 			</tr>
 		</table>

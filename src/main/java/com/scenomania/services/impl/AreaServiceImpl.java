@@ -28,4 +28,19 @@ public class AreaServiceImpl implements AreaService {
 	public List<Area> fetchByCountryCode(String code) {
 		return this.areaDao.fetchByCountryCode(code);
 	}
+
+	@Transactional
+	public Area getByCodes(String areaCode, String countryCode) {
+		return this.areaDao.getByCodes(areaCode, countryCode);
+	}
+
+	@Transactional
+	public List<Area> fetchAll() {
+		return this.areaDao.fetchAll();
+	}
+
+	@Transactional
+	public Area getById(Integer id) {
+		return this.areaDao.getById(id);
+	}
 }

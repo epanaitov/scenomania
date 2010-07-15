@@ -13,5 +13,6 @@ public interface CountryDao {
 	public Country findById(Integer id);
 	public Country persistOrMerge(Country obj);
 	public List<Country> fetchAll();
+	public Country getByCode(String code);
 
 }

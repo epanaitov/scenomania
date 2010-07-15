@@ -1,0 +1,1 @@
+alter table bands_users add column id int unsigned not null auto_increment primary key;

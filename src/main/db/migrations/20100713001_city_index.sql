@@ -1,0 +1,1 @@
+create index city_area_idx using btree on cities (area_id);

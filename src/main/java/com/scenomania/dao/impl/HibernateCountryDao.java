@@ -34,4 +34,8 @@ public class HibernateCountryDao implements CountryDao {
 		Query q = this.sessionFactory.getCurrentSession().createQuery("from Country");
 		return q.list();
 	}
+
+	public Country getByCode(String code) {
+		return (Country) this.sessionFactory.getCurrentSession().createQuery("from Country countries where code = ?").setParameter(0, code).uniqueResult();
+	}
 }

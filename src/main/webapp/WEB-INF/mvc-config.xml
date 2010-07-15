@@ -28,7 +28,6 @@
 	</bean>
 
 	<!--bean id="messageBuilder" class="org.springframework.binding.message.MessageBuilder">
-		
 	</bean-->
 
 	<!-- Maps requests to @Controllers based on @RequestMapping("path") annotation values
@@ -50,6 +49,10 @@
 	<!-- Creates the JSR-303 Validator -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
+	<!-- Tiles. maybe later -->
+	<!--bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
+		<property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>
+	</bean-->
 
 	<!-- Maps logical view names to Facelet templates in /WEB-INF (e.g. 'search' to '/WEB-INF/search.xhtml' -->
 	<bean id="faceletsViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
