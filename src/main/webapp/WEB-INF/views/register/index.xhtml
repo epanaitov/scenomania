@@ -38,7 +38,7 @@
 			dojo.addOnLoad(addDecors);
 		</script>
 			
-		<form id="user" action="#{url.get['register.html']}" method="post">
+		<form id="user" action="#{facesContext.externalContext.requestContextPath}/register" method="post">
 		<table>
 			<tr>
 				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel></td>

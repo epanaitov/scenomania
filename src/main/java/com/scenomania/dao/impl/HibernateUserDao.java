@@ -31,4 +31,8 @@ public class HibernateUserDao implements UserDao {
 		return user;
 	}
 
+	public User refresh(User user) {
+		sessionFactory.getCurrentSession().refresh(user);
+		return user;
+	}
 }

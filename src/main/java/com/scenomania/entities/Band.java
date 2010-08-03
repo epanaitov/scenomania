@@ -1,8 +1,10 @@
 package com.scenomania.entities;
 
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -21,27 +23,7 @@ import javax.persistence.UniqueConstraint;
 )
 public class Band extends EntityBase {
 
-	/*
-	@ManyToMany(
-		targetEntity=User.class,
-		fetch=FetchType.EAGER,
-		cascade = CascadeType.ALL
-	)
-	@JoinTable(
-		name="bands_users",
-		joinColumns=@JoinColumn(name="band_id"),
-		inverseJoinColumns=@JoinColumn(name="user_id")
-	)
-	@AttributeOverrides({
-		//@AttributeOverride(name="bandId", column = @Column(name="band_id") ),
-        //@AttributeOverride(name="userId", column = @Column(name="user_id") ),
-		//@AttributeOverride(name="position", column = @Column(name="position") )
-	})
-	@MapKeyClass(BandPosition.class)
-	private Map<BandPosition, User> members = new HashMap<BandPosition, User>();
-	*/
-
-	@OneToMany(mappedBy="band")
+	@OneToMany(mappedBy="band", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private Set<BandPosition> members;
 
 	@ManyToOne

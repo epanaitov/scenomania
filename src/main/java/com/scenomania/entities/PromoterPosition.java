@@ -12,15 +12,15 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="bands_users")
-public class BandPosition extends EntityBase {
+@Table(name="promoters_users")
+public class PromoterPosition extends EntityBase {
 
 	@Column
 	private String position;
 
 	@ManyToOne
-	@JoinColumn(name="band_id")
-	private Band band;
+	@JoinColumn(name="promoter_id")
+	private Promoter promoter;
 
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -34,12 +34,12 @@ public class BandPosition extends EntityBase {
 		this.position = position;
 	}
 
-	public Band getBand() {
-		return band;
+	public Promoter getPromoter() {
+		return promoter;
 	}
 
-	public void setBand(Band band) {
-		this.band = band;
+	public void setPromoter(Promoter promoter) {
+		this.promoter = promoter;
 	}
 
 	public User getUser() {
@@ -49,4 +49,5 @@ public class BandPosition extends EntityBase {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 }

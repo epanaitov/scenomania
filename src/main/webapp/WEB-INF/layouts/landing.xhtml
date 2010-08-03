@@ -37,7 +37,7 @@
 		<h:outputScript name="jsf.js" library="javax.faces" target="body"/>
 
         <div id="top">
-			<ui:remove><ez:xyu /></ui:remove>
+			<ez:menus />
             <ui:insert name="top">Top</ui:insert>
         </div>
         
@@ -47,6 +47,7 @@
         
         <div id="bottom">
             <ui:insert name="bottom">Bottom</ui:insert>
+			<ez:menus />
         </div>
 
     </h:body>

@@ -337,7 +337,7 @@ public class ImportCitiesController {
 		position.setBand(band);
 		position.setUser(user);
 
-		user.getPositions().add(position);
+		user.getPlayingIn().add(position);
 
 		userService.saveUser(user);
 	}

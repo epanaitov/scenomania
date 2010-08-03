@@ -6,9 +6,9 @@ import com.scenomania.entities.User;
 //public interface UserDao extends DaoBase<User> {
 public interface UserDao {
 
-	public User findById(Integer id);
+	public User findById(Integer id); // refactor to find(Integer id);
 	public User persistOrMerge(User obj);
 
-	public User findByEmail(String email);
-	
+	public User findByEmail(String email); // refactor to find(String email);
+	public User refresh(User user);
 }

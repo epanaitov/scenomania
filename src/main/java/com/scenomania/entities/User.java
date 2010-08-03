@@ -43,7 +43,10 @@ public class User extends EntityBase {
 	*/
 
 	@OneToMany(mappedBy="user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},  fetch=FetchType.EAGER)
-	private Set<BandPosition> positions;
+	private Set<BandPosition> playingIn;
+
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
+	private Set<PromoterPosition> promotingIn;
 
 	@ManyToOne
 	@JoinColumn(name="homecity_id")
@@ -138,12 +141,19 @@ public class User extends EntityBase {
 		this.homecity = homecity;
 	}
 
-	public Set<BandPosition> getPositions() {
-		return positions;
+	public Set<BandPosition> getPlayingIn() {
+		return playingIn;
 	}
 
-	public void setPositions(Set<BandPosition> positions) {
-		this.positions = positions;
+	public void setPlayingIn(Set<BandPosition> playingIn) {
+		this.playingIn = playingIn;
 	}
-	
+
+	public Set<PromoterPosition> getPromotingIn() {
+		return promotingIn;
+	}
+
+	public void setPromotingIn(Set<PromoterPosition> promotingIn) {
+		this.promotingIn = promotingIn;
+	}
 }
