@@ -1,0 +1,177 @@
+/* 
+    Document   : main
+    Created on : Aug 11, 2010, 1:21:27 PM
+    Author     : eugene
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+a {
+	border: 0;
+	text-decoration: none;
+	color: #f89616;
+}
+
+a:hover, a:active {
+	text-decoration: underline;
+}
+
+body {
+	background-color: #E5E5E6;
+	color: #999999;
+	font-family: Verdana, Tahoma;
+	background-image: url(images/body-back.png);
+	background-position: top left;
+	background-repeat: repeat-x;
+}
+
+#centered_container {
+	margin: 50px auto 0px;
+	background-image: url(images/centered.png);
+	background-position: left top;
+	background-repeat: repeat-y;
+	width: 843px;
+}
+
+#header {
+	background-image: url(images/header.png);
+	width: 843px;
+	background-position: top left;
+	background-repeat: no-repeat;
+	position: relative;
+	top: -20px;
+	height: 282px;
+}
+
+#header .menus {
+	top: 115px;
+	position: relative;
+}
+
+#header .menus a {
+	color: #666666;
+	font-size: 17px;
+	display: block;
+	padding-top: 9px;
+	height: 35px;
+	float: left;
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+#header .menus a:hover,
+#header .menus a:active
+{
+	color: white;
+	text-decoration: none;
+}
+
+#header .menus a.home {
+	margin-left: 37px;
+	width: 91px;
+	padding-left:35px;
+}
+
+#header .menus a.home:hover,
+#header .menus a.home:active
+{
+	background-image: url(images/menus-first.png);	
+}
+
+#header .menus a.register {
+	margin-left: 0px;
+	width: 135px;
+	padding-left:3px;
+}
+
+#header .menus a.register:hover,
+#header .menus a.register:active
+{
+	background-image: url(images/menus-second.png);
+}
+
+#header .menus a.team {
+	margin-left: 0px;
+	width: 124px;
+	padding-left:50px;
+}
+
+#header .menus a.team:hover,
+#header .menus a.team:active
+{
+	background-image: url(images/menus-third.png);
+}
+
+#header .menus a.contacts {
+	margin-left: 0px;
+	width: 125px;
+	padding-left:60px;
+}
+
+#header .menus a.contacts:hover,
+#header .menus a.contacts:active
+{
+	background-image: url(images/menus-forth.png);
+}
+
+a#logo {
+	width: 264px;
+	height: 113px;
+	display: block;
+	position: relative;
+	top: 35px;
+	left: 30px;
+}
+
+#footer {
+	background-image: url(images/footer2.png);
+	background-color: #E5E5E6;
+	height: 240px;
+	background-repeat: no-repeat;
+	background-position: 1px -70px;
+	width: 843px;
+}
+
+#footer .menus {
+	position: relative;
+	top: 75px;
+}
+
+#footer .menus a.home {
+	position: relative;
+	left: 230px;
+}
+
+#footer .menus a.register {
+	position: relative;
+	left: 250px;
+}
+
+#footer .menus a.team {
+	position: relative;
+	left: 310px;
+}
+
+#footer .menus a.contacts {
+	position: relative;
+	left: 380px;
+}
+
+#content {
+	padding: 0px 30px;
+}
+
+#copyright {
+	text-align: center;
+	position: relative;
+	top: 110px;
+}

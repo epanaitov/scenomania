@@ -9,11 +9,11 @@
 
   <!-- IMPLEMENTATION -->
   <cc:implementation>
-    <div id="menus">
-			<a href="#{url.get['']}">#{msg['menus.home']}</a>
-			<a href="#{url.get['register']}">#{msg['menus.register']}</a>
-			<a href="#{url.get['team']}">#{msg['menus.team']}</a>
-			<a href="#{url.get['feedback']}">#{msg['menus.contacts']}</a>
-			</div>
+    <div class="menus">
+			<a href="#{url.get['']}" class="home">#{msg['menus.home']}</a>
+			<a href="#{url.get['register']}" class="register">#{msg['menus.register']}</a>
+			<a href="#{url.get['team']}" class="team">#{msg['menus.team']}</a>
+			<a href="#{url.get['feedback']}" class="contacts">#{msg['menus.contacts']}</a>
+	</div>
   </cc:implementation>
 </html>

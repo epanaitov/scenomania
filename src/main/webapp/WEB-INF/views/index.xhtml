@@ -5,32 +5,36 @@
 				xmlns:f="http://java.sun.com/jsf/core"
 				xmlns:h="http://java.sun.com/jsf/html">
 
-    <ui:define name="top">
-        top
-    </ui:define>
-
     <ui:define name="content">
-        <img src="http://www.homestudiopro.be/SITE%20HTML/images/concert-live.jpg" alt="" />
 
-		<br />
+		<div align="center"><h:graphicImage name="images/splash2.jpg" /></div>
 
+		<br /><br />
+
+		<div align="center">
+			<a href="#{facesContext.externalContext.requestContextPath}/register">
+				<h:graphicImage name="images/register.png" />
+			</a>
+		</div>
+
+		<ui:remove>
 		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
 			<a href="#{facesContext.externalContext.requestContextPath}/register"><img src="http://www.up2date.co.nz/site/up2date/images/Graphic_Designer/up2date-register-button.gif" width="200" align="right" alt="" /></a>
 			Модуль регистрации<br />
 			<h:outputFormat value="#{msg['index.register.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
 			<div style="clear: both" />
 		</div>
+		</ui:remove>
 		<br />
 		<h:outputFormat value="#{msg['index.text']}" escape="false"></h:outputFormat>
-		<br />
+
+		<ui:remove>
 		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
 			Модуль новостей<br />
 			<h:outputFormat value="#{msg['index.news']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
 		</div>
-    </ui:define>
-
-    <ui:define name="bottom">
-        bottom
+		</ui:remove>
+		
     </ui:define>
 
 </ui:composition>
