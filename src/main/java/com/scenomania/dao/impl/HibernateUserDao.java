@@ -8,21 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
+// since spring 3.1
+//public class HibernateUserDao extends HibernateDaoBase<User> implements UserDao {
 public class HibernateUserDao implements UserDao {
 
 	@Autowired(required=true)
-	private SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 
 	public User findById(Integer id) {
-		Query q = this.sessionFactory.getCurrentSession().createQuery("from User users where users.id = ?").setParameter(0, id);
-		User user = (User) q.uniqueResult();
-		return user;
+		Query q = this.sessionFactory.getCurrentSession().createQuery("from User" + "  where id = ?").setParameter(0, id);
+		User row = (User) q.uniqueResult();
+		return row;
 	}
 
-	public User persistOrMerge(User user) {
-		return (User) this.sessionFactory.getCurrentSession().merge(user);
+	public User persistOrMerge(User obj) {
+		return (User) this.sessionFactory.getCurrentSession().merge(obj);
 	}
-
 
 	public User findByEmail(String email) {
 		Query q = this.sessionFactory.getCurrentSession().createQuery("from User users where users.email = ?").setParameter(0, email);

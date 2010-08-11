@@ -39,6 +39,7 @@
 		</script>
 			
 		<form id="user" action="#{url.get['register.html']}" method="post">
+		
 		<table>
 			<tr>
 				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel></td>
@@ -52,7 +53,7 @@
 				<td><h:outputLabel for="email"><h:outputText value="#{msg['register.index.email']}"/></h:outputLabel></td>
 				<td><h:inputText  id="email" value="#{user.email}" required="true"/></td>
 				<td><ui:repeat value="#{userErrors['email']}" var="err">
-						<h:outputText value="#{msg[err]}" />
+						<h:outputFormat value="#{msg[err]}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
 					</ui:repeat>
 				</td>
 			</tr>
@@ -68,6 +69,30 @@
 				<td><h:outputLabel for="password_confirm"><h:outputText value="#{msg['register.index.password_confirm']}"/></h:outputLabel></td>
 				<td><h:inputSecret redisplay="false" id="password_confirm" value="" required="true"/></td>
 				<td></td>
+			</tr>
+			<tr>
+				<td>Страна</td>
+				<td>
+				<h:selectOneMenu id="selectCountryList"
+					 value="#{register.country}">
+					  <f:selectItems  var="country"
+					   value="#{register.countries}"
+					   itemLabel="#{country.name}"
+					   itemValue="#{country.id}"
+					   />
+					  <f:ajax event="change" render="selectAreaList" listener="#{register.areasAjax}"/>
+					</h:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td>Регион</td>
+				<td>
+				<h:selectOneMenu id="selectAreaList">
+				<f:selectItems  var="area" value="#{register.areas}"
+					   itemLabel="#{area.name}"
+					   itemValue="#{area.id}"/>
+				</h:selectOneMenu>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="3"><h:commandButton id="proceed" value="#{msg['register.index.submit']}" /></td>

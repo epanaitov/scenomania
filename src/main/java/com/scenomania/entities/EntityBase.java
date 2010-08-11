@@ -1,6 +1,9 @@
 package com.scenomania.entities;
 
+import java.lang.reflect.Field;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 import javax.persistence.PrePersist;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -11,31 +14,40 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class EntityBase {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
-	private Date created_at;
-
-	public void setCreated_at(Date created_at) {
-		this.created_at = created_at;
-	}
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
     public Integer getId() {
         return id;
     }
 
-	@PrePersist
-	protected void onCreate() {
-		this.created_at = new Date();
-	}
+	public void setFromHash(Map dataHash) {
+		Iterator itr = dataHash.keySet().iterator();
 
-	@Column
-	public Date getCreated_at() {
-		return created_at;
+		Class clazz = this.getClass();
+
+		while (itr.hasNext()) {
+			String key = itr.next().toString();
+
+			try {
+
+				Field field = clazz.getDeclaredField(key);
+				field.setAccessible(true);
+				field.set(this, dataHash.get(key));
+
+			} catch (Exception e) {
+				//System.out.println(e);
+			}
+
+			
+
+		}
+		
 	}
 
 }

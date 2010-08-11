@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
@@ -11,11 +12,25 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="users",
-		uniqueConstraints = { @UniqueConstraint(columnNames={"email"}) }
-)
-
+@Table(name="users", uniqueConstraints = { @UniqueConstraint(columnNames={"email"}) })
 public class User extends EntityBase {
+
+	@Column
+	private Date created_at;
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	@PrePersist
+	protected void onCreate() {
+		this.created_at = new Date();
+	}
+
 
 	@NotNull
 	@Column
@@ -29,7 +44,7 @@ public class User extends EntityBase {
 
 	@NotNull
 	@Pattern(regexp="(?i)[A-Z0-9._%+-]+@(?i)[A-Z0-9.-]+\\.(?i)[A-Z]{2,4}", message="user.email.invalid")
-	@Column(name="email", nullable=false, length=20, unique=true)
+	@Column(name="email", nullable=false, length=200, unique=true)
 	private String email;
 
 	

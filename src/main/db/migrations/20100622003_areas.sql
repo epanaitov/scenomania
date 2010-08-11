@@ -1,0 +1,1 @@
+ALTER TABLE areas CHANGE COLUMN `number` `code` char(2) NOT NULL;

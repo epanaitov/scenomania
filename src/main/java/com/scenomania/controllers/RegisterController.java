@@ -48,11 +48,8 @@ public class RegisterController extends ControllerBase {
 			result.rejectValue("password", "password.confirm_error", "user.password.confirm_error");
 		}
 		
-		if (! result.hasErrors()){
-			Boolean userExists = (userService.getUserByEmail(user.getEmail()) != null);
-			if (userExists){
-				result.rejectValue("email", "email.user_exists", "user.email.user_exists");
-			}
+		if (userService.getUserByEmail(user.getEmail()) != null){
+			result.rejectValue("email", "email.user_exists", "user.email.user_exists");
 		}
 		
 		if (result.hasErrors()) {
