@@ -29,6 +29,7 @@ body {
 	background-color: #E5E5E6;
 	color: #999999;
 	font-family: Verdana, Tahoma;
+	font-size: 12px;
 	background-image: url(images/body-back.png);
 	background-position: top left;
 	background-repeat: repeat-x;
