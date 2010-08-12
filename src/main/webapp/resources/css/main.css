@@ -21,6 +21,10 @@ a {
 	color: #f89616;
 }
 
+.clear {
+	clear: both;
+}
+
 a:hover, a:active {
 	text-decoration: underline;
 }
@@ -67,6 +71,7 @@ body {
 	float: left;
 	background-position: top left;
 	background-repeat: no-repeat;
+	text-align: center;
 }
 
 #header .menus a:hover,
@@ -78,8 +83,7 @@ body {
 
 #header .menus a.home {
 	margin-left: 37px;
-	width: 91px;
-	padding-left:35px;
+	width: 126px;
 }
 
 #header .menus a.home:hover,
@@ -90,8 +94,7 @@ body {
 
 #header .menus a.register {
 	margin-left: 0px;
-	width: 135px;
-	padding-left:3px;
+	width: 138px;
 }
 
 #header .menus a.register:hover,
@@ -102,8 +105,7 @@ body {
 
 #header .menus a.team {
 	margin-left: 0px;
-	width: 124px;
-	padding-left:50px;
+	width: 174px;	
 }
 
 #header .menus a.team:hover,
@@ -114,8 +116,7 @@ body {
 
 #header .menus a.contacts {
 	margin-left: 0px;
-	width: 125px;
-	padding-left:60px;
+	width: 185px;	
 }
 
 #header .menus a.contacts:hover,
@@ -147,24 +148,27 @@ a#logo {
 	top: 75px;
 }
 
+#footer .menus a {
+	display: block;
+	float: left;
+	text-align: center;
+}
+
 #footer .menus a.home {
-	position: relative;
-	left: 230px;
+	margin-left: 180px;
+	width: 100px;
 }
 
 #footer .menus a.register {
-	position: relative;
-	left: 250px;
+	width: 120px;
 }
 
 #footer .menus a.team {
-	position: relative;
-	left: 310px;
+	width: 140px;
 }
 
 #footer .menus a.contacts {
-	position: relative;
-	left: 380px;
+	width: 140px;
 }
 
 #content {
