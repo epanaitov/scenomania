@@ -38,4 +38,19 @@ public class HibernateCityDao implements CityDao {
 		City row = (City) q.uniqueResult();
 		return row;
 	}
+
+	public List<City> fetchByCodes(String country, String area) {
+		List<City> cities = new ArrayList<City>();
+
+		Query q = this.sessionFactory.getCurrentSession().createQuery("from City cities" + "  where country_code = ? and area_code = ?").setParameter(0, country).setParameter(1, area);
+
+		cities = q.list();
+		return cities;
+	}
+
+	public List<City> fetchAll() {
+		Query q = this.sessionFactory.getCurrentSession().createQuery("from City where area_id is null");
+		q.setMaxResults(250000);
+		return (List<City>) q.list();
+	}
 }

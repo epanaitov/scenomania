@@ -33,6 +33,9 @@ public class Country extends EntityBase {
 	@Cascade(org.hibernate.annotations.CascadeType.REPLICATE)
 	private Set<CountryLocale> locales;
 
+	@OneToMany(mappedBy="country", fetch=FetchType.LAZY)
+	private Set<Area> areas;
+
 	public String getCode() {
 		return code;
 	}
@@ -56,5 +59,13 @@ public class Country extends EntityBase {
 	public void setLocales(Set<CountryLocale> locales) {
 		this.locales = locales;
 	}
-	
+
+	public Set<Area> getAreas() {
+		return areas;
+	}
+
+	public void setAreas(Set<Area> areas) {
+		this.areas = areas;
+	}
+
 }

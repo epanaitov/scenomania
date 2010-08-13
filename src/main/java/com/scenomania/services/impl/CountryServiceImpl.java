@@ -1,9 +1,11 @@
 package com.scenomania.services.impl;
 
 import com.scenomania.dao.CountryDao;
+import com.scenomania.entities.Area;
 import com.scenomania.entities.Country;
 import com.scenomania.services.CountryService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,18 +26,18 @@ public class CountryServiceImpl implements CountryService{
 		return this.countryDao.persistOrMerge(country);
 	}
 
-	/**
-	 * @todo add more code!
-	 * @param code
-	 * @return
-	 */
 	@Transactional
 	public Country getByCode(String code) {
-		return new Country();
+		return this.countryDao.getByCode(code);
 	}
 
 	@Transactional
 	public List<Country> fetchAll() {
 		return this.countryDao.fetchAll();
+	}
+
+	@Transactional
+	public Country getbyId(Integer id) {
+		return this.countryDao.findById(id);
 	}
 }

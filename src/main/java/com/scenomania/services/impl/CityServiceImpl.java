@@ -33,4 +33,14 @@ public class CityServiceImpl implements CityService {
 	public City getById(Integer id) {
 		return this.cityDao.getById(id);
 	}
+
+	@Transactional
+	public List<City> fetchByCodes(String country, String area) {
+		return this.cityDao.fetchByCodes(country, area);
+	}
+
+	@Transactional
+	public List<City> fetchAll() {
+		return this.cityDao.fetchAll();
+	}
 }

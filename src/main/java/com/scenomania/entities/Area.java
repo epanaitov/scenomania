@@ -5,6 +5,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
@@ -33,6 +35,13 @@ public class Area extends EntityBase {
 	@OneToMany(mappedBy="area", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	@Cascade(org.hibernate.annotations.CascadeType.REPLICATE)
 	private Set<AreaLocale> locales;
+
+	@ManyToOne
+	@JoinColumn(name="country_id", insertable=false, updatable=false)
+	private Country country;
+
+	@OneToMany(mappedBy="area", fetch=FetchType.LAZY)
+	private Set<City> cities;
 
 	public String getCode() {
 		return code;
@@ -73,6 +82,20 @@ public class Area extends EntityBase {
 	public void setLocales(Set<AreaLocale> locales) {
 		this.locales = locales;
 	}
-	
-	
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public Set<City> getCities() {
+		return cities;
+	}
+
+	public void setCities(Set<City> cities) {
+		this.cities = cities;
+	}
 }

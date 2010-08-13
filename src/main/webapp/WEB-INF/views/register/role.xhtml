@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:c="http://java.sun.com/jstl/core"
+	  xmlns:ezcomp="http://java.sun.com/jsf/composite/ezcomp">
+    
+    <body class="tundra">
+        
+        <ui:composition template="./../../layouts/landing.xhtml">
+            
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                <p>
+					<h:outputText value="#{msg['register.roles.user_registered']}"/>
+				</p>
+				<h:panelGroup rendered="#{message != null}">
+					<h:outputText value="#{msg[message]}"/>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{message == null}">
+				<script language="javascript">
+					dojo.require("dijit.Dialog");
+					var bandForm = '';
+
+					function popup_band() {
+						var dialog = new dijit.Dialog({ title: "Я играю в группе!", content: bandForm });
+						dialog.show();
+					}
+
+					function popup_promoter() {
+						var dialog = new dijit.Dialog({ title: "Я организую концерты", content: dojo.byId('promoter-form').innerHTML });
+						dialog.show();
+					}
+
+				</script>
+				<h:graphicImage name="images/btn1.jpg" onclick="popup_band();" />
+				<h:graphicImage name="images/btn2.jpg" onclick="popup_promoter();" />
+				<div id="band-form" style="display: none">
+					<form id="band" action="#{facesContext.externalContext.requestContextPath}/register/role" method="post">
+						<h:inputHidden	id="role" value="band" />
+					<h:panelGrid columns="2">
+						<h:outputLabel for="band-name"><h:outputText value="#{msg['band.name']}" /></h:outputLabel>
+
+						<h:panelGroup>
+
+							<script language="javascript">
+
+							function suggest_field(sender) {
+
+								
+
+								dojo.xhrGet({
+									url:"#{facesContext.externalContext.requestContextPath}/ajax/bands/suggest/?query="+sender.value,
+									load: function(data) {
+										//dojo.byId("band-name-suggest").innerHTML = data;
+										dojo.byId("band-name-suggest").innerHTML = 'xyu';
+										alert(dojo.byId("band-name-suggest").innerHTML);
+									}
+								});
+							}
+
+							</script>
+
+							<h:inputText autocomplete="off" id="band-name" onkeypress="suggest_field(this);" required="true" requiredMessage="#{msg['band.name.empty']}"/>
+							<div id="band-name-suggest">ffffffffff</div>
+						</h:panelGroup>
+
+						<h:outputLabel for="band-description"><h:outputText value="#{msg['band.description']}" /></h:outputLabel>
+						<h:inputTextarea id="band-description" required="true" requiredMessage="#{msg['band.description.empty']}"></h:inputTextarea>
+
+						<h:outputLabel for="band-position"><h:outputText value="#{msg['band.position']}" /></h:outputLabel>
+						<h:inputText id="band-position" />
+					</h:panelGrid>
+						<h:commandButton id="proceed" value="#{msg['band.save']}" />
+					</form>
+				</div>
+
+				<script language="javascript">
+					bandForm = dojo.byId('band-form').innerHTML;
+					dojo.byId('band-form').innerHTML = '';
+				</script>
+
+				<div id="promoter-form" style="display: none">
+					<form id="promoter" action="#{facesContext.externalContext.requestContextPath}/register/role" method="post">
+						<h:inputHidden	id="role" value="promoter" />
+					<h:panelGrid columns="2">
+						<h:outputLabel for="promoter-name"><h:outputText value="#{msg['promoter.name']}" /></h:outputLabel>
+
+						<h:panelGroup>
+
+							<script language="javascript">
+
+							function suggest_field(sender) {
+
+
+
+								dojo.xhrGet({
+									url:"#{facesContext.externalContext.requestContextPath}/ajax/promoters/suggest/?query="+sender.value,
+									load: function(data) {
+										dojo.byId("promoter-name-suggest").innerHTML = data;
+									}
+								});
+							}
+
+							</script>
+
+							<h:inputText autocomplete="off" id="promoter-name" onkeypress="suggest_field(this);" required="true" requiredMessage="#{msg['promoter.name.empty']}"/>
+							<div id="promoter-name-suggest"></div>
+						</h:panelGroup>
+
+						<h:outputLabel for="promoter-description"><h:outputText value="#{msg['promoter.description']}" /></h:outputLabel>
+						<h:inputTextarea id="promoter-description" required="true" requiredMessage="#{msg['promoter.description.empty']}"></h:inputTextarea>
+
+						<h:outputLabel for="promoter-position"><h:outputText value="#{msg['promoter.position']}" /></h:outputLabel>
+						<h:inputText id="promoter-position" />
+					</h:panelGrid>
+						<h:commandButton id="proceed" value="#{msg['promoter.save']}" />
+					</form>
+				</div>
+				</h:panelGroup>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+        
+    </body>
+</html>

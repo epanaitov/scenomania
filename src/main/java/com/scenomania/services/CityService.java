@@ -10,5 +10,7 @@ import java.util.List;
 public interface CityService {
 	public City saveCity(City city);
 	public List<City> fetchByCountryCode(String code);
+	public List<City> fetchByCodes(String country, String area);
 	public City getById(Integer id);
+	public List<City> fetchAll();
 }

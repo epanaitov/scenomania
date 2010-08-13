@@ -32,4 +32,16 @@ public class HibernateAreaDao implements AreaDao {
 		Query q = this.sessionFactory.getCurrentSession().createQuery("from Area areas" + "  where country_code = ?").setParameter(0, code);
 		return q.list();
 	}
+
+	public Area getByCodes(String areaCode, String countryCode) {
+		return (Area) this.sessionFactory.getCurrentSession().createQuery("from Area areas where code = ? and country_code = ?").setParameter(0, areaCode).setParameter(1, countryCode).uniqueResult();
+	}
+
+	public List<Area> fetchAll() {
+		return (List<Area>) this.sessionFactory.getCurrentSession().createQuery("from Area areas").list();
+	}
+
+	public Area getById(Integer id) {
+		return (Area) this.sessionFactory.getCurrentSession().createQuery("from Area area where id = ?").setParameter(0, id).uniqueResult();
+	}
 }

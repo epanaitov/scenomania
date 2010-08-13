@@ -10,4 +10,7 @@ import java.util.List;
 public interface AreaDao {
 	public Area persistOrMerge(Area obj);
 	public List<Area> fetchByCountryCode(String code);
+	public Area getByCodes(String areaCode, String countryCode);
+	public List<Area> fetchAll();
+	public Area getById(Integer id);
 }

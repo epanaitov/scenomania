@@ -1,18 +1,40 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/WEB-INF/layouts/landing.xhtml">
-
-    <ui:define name="top">
-        top
-    </ui:define>
+                template="/WEB-INF/layouts/landing.xhtml"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:h="http://java.sun.com/jsf/html">
 
     <ui:define name="content">
-        #{user.nickname}
-    </ui:define>
 
-    <ui:define name="bottom">
-        bottom
+		<div align="center"><h:graphicImage name="images/splash2.jpg" /></div>
+
+		<br /><br />
+
+		<div align="center">
+			<a href="#{facesContext.externalContext.requestContextPath}/register">
+				<h:graphicImage name="images/register.png" />
+			</a>
+		</div>
+
+		<ui:remove>
+		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
+			<a href="#{facesContext.externalContext.requestContextPath}/register"><img src="http://www.up2date.co.nz/site/up2date/images/Graphic_Designer/up2date-register-button.gif" width="200" align="right" alt="" /></a>
+			Модуль регистрации<br />
+			<h:outputFormat value="#{msg['index.register.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
+			<div style="clear: both" />
+		</div>
+		</ui:remove>
+		<br />
+		<h:outputFormat value="#{msg['index.text']}" escape="false"></h:outputFormat>
+
+		<ui:remove>
+		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
+			Модуль новостей<br />
+			<h:outputFormat value="#{msg['index.news']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
+		</div>
+		</ui:remove>
+		
     </ui:define>
 
 </ui:composition>

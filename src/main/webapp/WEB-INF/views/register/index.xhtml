@@ -7,10 +7,6 @@
                 template="/WEB-INF/layouts/landing.xhtml"
 				>
 
-    <ui:define name="top">
-        top
-    </ui:define>
-
     <ui:define name="content">
     	
 	    <script type="text/javascript">
@@ -38,8 +34,7 @@
 			dojo.addOnLoad(addDecors);
 		</script>
 			
-		<form id="user" action="#{url.get['register.html']}" method="post">
-		
+		<form id="user" action="#{facesContext.externalContext.requestContextPath}/register" method="post">
 		<table>
 			<tr>
 				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel></td>
@@ -71,27 +66,53 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td>Страна</td>
 				<td>
-				<h:selectOneMenu id="selectCountryList"
-					 value="#{register.country}">
-					  <f:selectItems  var="country"
-					   value="#{register.countries}"
-					   itemLabel="#{country.name}"
-					   itemValue="#{country.id}"
-					   />
-					  <f:ajax event="change" render="selectAreaList" listener="#{register.areasAjax}"/>
-					</h:selectOneMenu>
+					<h:outputLabel for="select_country">
+						<h:outputText value="#{msg['register.index.location']}" />
+					</h:outputLabel>
 				</td>
-			</tr>
-			<tr>
-				<td>Регион</td>
 				<td>
-				<h:selectOneMenu id="selectAreaList">
-				<f:selectItems  var="area" value="#{register.areas}"
-					   itemLabel="#{area.name}"
-					   itemValue="#{area.id}"/>
-				</h:selectOneMenu>
+
+					<script language="javascript">
+						function pick_country() {
+
+							var countrySelect = dojo.byId("country_select");
+							var code = countrySelect.options[countrySelect.selectedIndex].value;
+
+							dojo.xhrGet({
+								url:"#{facesContext.externalContext.requestContextPath}/ajax/countries/get_areas/?id="+code,
+								handleAs:"text",
+								load: function(data){
+									dojo.byId("area_select").innerHTML = data;
+								}
+							});
+						}
+
+						function pick_area() {
+
+							var areaSelect = dojo.byId("area_select");
+							var ac = areaSelect.options[areaSelect.selectedIndex].value;
+
+							dojo.xhrGet({
+								url:"#{facesContext.externalContext.requestContextPath}/ajax/countries/get_cities/?area="+ac,
+								load: function(data) {
+									dojo.byId("city_select").innerHTML = data;
+								}
+							});
+
+						}
+
+					</script>
+
+					<h:selectOneMenu id="country_select" value="" onchange="pick_country();">
+						<f:selectItems value="#{countries.all}"/>
+					</h:selectOneMenu>
+					<h:selectOneMenu id="area_select" value="" onchange="pick_area()"></h:selectOneMenu>
+					<h:selectOneMenu id="city_select" value=""></h:selectOneMenu>
+				</td>
+				<td><ui:repeat value="#{userErrors['homecity']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
 				</td>
 			</tr>
 			<tr>

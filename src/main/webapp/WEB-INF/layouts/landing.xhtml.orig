@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:c="http://java.sun.com/jstl/core"
+	  xmlns:sf="http://www.springframework.org/tags/faces"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ez="http://java.sun.com/jsf/composite/ezcomp"
+	  contentType="text/html" encoding="UTF-8">
+	
+<html>
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+		<style type="text/css" media="screen">
+		 @import url("#{facesContext.externalContext.requestContextPath}/resources/dojo/resources/dojo.css");
+		 @import url("#{facesContext.externalContext.requestContextPath}/resources/dijit/themes/tundra/tundra.css");
+		</style>
+
+		<script djconfig="parseOnLoad: true"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/dojo/dojo.js" type="text/javascript"></script>
+		<script type="text/javascript"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring.js"> </script>
+		<script type="text/javascript"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring-Dojo.js"></script>
+		<script type="text/javascript">dojo.require("dojo.parser");</script>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/layouts/landing.xhtml
+		<script type="text/javascript"
+			src="#{facesContext.externalContext.requestContextPath}/resources/resources/javax.faces/jsf.js"></script>
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="css" name="cssLayout.css" />
+=======
+
+        <h:outputStylesheet library="css" name="main.css" />
+>>>>>>> 0f3419a4a77035fa65607b5063540dc7d8927074:src/main/webapp/WEB-INF/layouts/landing.xhtml
+        <title>Facelets Template</title>
+    </h:head>
+    
+    <h:body styleClass="tundra">
+
+		<h:outputScript name="jsf.js" library="javax.faces" target="body"/>
+
+		<div id="centered_container">
+
+			<div id="header">
+				<a id="logo" href="#{facesContext.externalContext.requestContextPath}/"><h:graphicImage name="images/logo.png" /></a>
+				<ez:menus />
+			</div>
+
+			<div id="content" class="center_content">
+				<ui:insert name="content">Content</ui:insert>
+			</div>
+        
+			<div id="footer">
+				<ez:menus />
+				<div id="copyright"><h:outputText value="#{msg['copyright']}" escape="false" /></div>
+			</div>
+
+		</div>
+
+    </h:body>
+ 
+</html>
+</f:view>

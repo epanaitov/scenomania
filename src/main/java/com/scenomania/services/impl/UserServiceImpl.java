@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
 		return this.userDao.persistOrMerge(user);
 	}
 
+	@Transactional
+	public User saveUser(User user) {
+		return this.userDao.persistOrMerge(user);
+	}
+
 	@Transactional(readOnly=true)
 	public User retrieveUser(Integer id) {
 		return this.userDao.findById(id);

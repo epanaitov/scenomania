@@ -1,10 +1,13 @@
 package com.scenomania.entities;
 
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,7 +29,7 @@ public class City extends EntityBase {
 	@Column
 	private Integer population;
 
-	@Column(columnDefinition = "text")
+	@Column(columnDefinition = "mediumtext")
 	private String description;
 
 	@Column
@@ -44,8 +47,37 @@ public class City extends EntityBase {
 	@Column(name="area_code", columnDefinition = "char")
 	private String areaCode;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="city", fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="city", fetch=FetchType.LAZY)
 	private List<CityLocale> locales;
+
+	@OneToMany(mappedBy="homecity")
+	private Set<User> users;
+
+	@OneToMany(mappedBy="homecity")
+	private Set<Band> bands;
+
+	@OneToMany(mappedBy="homecity", fetch=FetchType.LAZY)
+	private Set<Promoter> promoters;
+
+	@ManyToOne
+	@JoinColumn(name="area_id", insertable=false, updatable=false)
+	private Area area;
+
+	public Set<Band> getBands() {
+		return bands;
+	}
+
+	public void setBands(Set<Band> bands) {
+		this.bands = bands;
+	}
+
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 
 	public String getAreaCode() {
 		return areaCode;
@@ -125,5 +157,13 @@ public class City extends EntityBase {
 
 	public void setLocales(List<CityLocale> locales) {
 		this.locales = locales;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
 	}
 }
