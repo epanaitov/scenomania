@@ -180,3 +180,45 @@ a#logo {
 	position: relative;
 	top: 110px;
 }
+
+/* team */
+.team1 {
+	width: 656px;
+	height: 204px;
+	background: url("images/team1.png") no-repeat;
+}
+.team1 img, .team2 img {
+	position: relative;
+	left: 25px;
+	top: 25px;
+}
+.team2 {
+	width: 656px;
+	height: 203px;
+	background: url("images/team2.png") no-repeat;
+}
+.team1, .team2 {
+	margin-bottom: 25px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.team_text {
+	position: relative;
+	left: 50px;
+	top: 25px;
+	width: 570px;
+	
+}
+*:first-child+html .team_text {
+	width: 400px;
+}
+.team_text h5, .team_text b{
+	margin: 0;
+}
+.team_text h5 {
+	display: block;
+	color: #f89616;
+	font-weight: bold;
+	position: relative;
+	left: 150px;
+}
