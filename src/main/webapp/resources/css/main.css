@@ -48,9 +48,10 @@ body {
 }
 
 #header {
-	background-image: url(images/header.png);
+	background-image: url(images/header2.png);
 	width: 843px;
-	background-position: top left;
+	/*background-position: top left;*/
+	background-position: 3px -5px ;
 	background-repeat: no-repeat;
 	position: relative;
 	top: -20px;
