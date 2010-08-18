@@ -48,7 +48,7 @@ public class City extends EntityBase {
 	private String areaCode;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="city", fetch=FetchType.LAZY)
-	private List<CityLocale> locales;
+	private Set<CityLocale> locales;
 
 	@OneToMany(mappedBy="homecity")
 	private Set<User> users;
@@ -151,11 +151,11 @@ public class City extends EntityBase {
 		this.reputation = reputation;
 	}
 
-	public List<CityLocale> getLocales() {
+	public Set<CityLocale> getLocales() {
 		return this.locales;
 	}
 
-	public void setLocales(List<CityLocale> locales) {
+	public void setLocales(Set<CityLocale> locales) {
 		this.locales = locales;
 	}
 

@@ -2,12 +2,15 @@ package com.scenomania.dao.impl;
 
 import com.scenomania.dao.CityDao;
 import com.scenomania.entities.City;
+import com.scenomania.entities.Country;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -52,5 +55,17 @@ public class HibernateCityDao implements CityDao {
 		Query q = this.sessionFactory.getCurrentSession().createQuery("from City where area_id is null");
 		q.setMaxResults(250000);
 		return (List<City>) q.list();
+	}
+	
+	@Transactional
+	public List<City> fetchAll(String locale){
+		Query q = this.sessionFactory.getCurrentSession().createQuery(
+				 " from City as c"
+				+ " left join fetch c.locales as l"
+				+ " where l.locale = ?"
+				)
+				.setParameter(0, locale)
+				;
+		return (List<City>)q.list();
 	}
 }

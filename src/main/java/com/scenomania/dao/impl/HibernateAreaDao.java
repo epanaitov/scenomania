@@ -7,11 +7,14 @@ package com.scenomania.dao.impl;
 
 import com.scenomania.dao.AreaDao;
 import com.scenomania.entities.Area;
+import com.scenomania.entities.Country;
+
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -39,6 +42,18 @@ public class HibernateAreaDao implements AreaDao {
 
 	public List<Area> fetchAll() {
 		return (List<Area>) this.sessionFactory.getCurrentSession().createQuery("from Area areas").list();
+	}
+	
+	@Transactional
+	public List<Area> fetchAll(String locale){
+		Query q = this.sessionFactory.getCurrentSession().createQuery(
+				 " from Country as c"
+				+ " left join fetch c.locales as l"
+				+ " where l.locale = ?"
+				)
+				.setParameter(0, locale)
+				;
+		return (List<Area>)q.list();
 	}
 
 	public Area getById(Integer id) {

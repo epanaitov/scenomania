@@ -13,4 +13,5 @@ public interface CityDao {
 	public List<City> fetchByCodes(String country, String area);
 	public City getById(Integer id);
 	public List<City> fetchAll();
+	public List<City> fetchAll(String locale);
 }

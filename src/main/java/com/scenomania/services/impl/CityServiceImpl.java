@@ -2,8 +2,15 @@ package com.scenomania.services.impl;
 
 import com.scenomania.dao.CityDao;
 import com.scenomania.entities.City;
+import com.scenomania.entities.CityLocale;
+import com.scenomania.entities.Country;
+import com.scenomania.entities.CountryLocale;
 import com.scenomania.services.CityService;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +49,25 @@ public class CityServiceImpl implements CityService {
 	@Transactional
 	public List<City> fetchAll() {
 		return this.cityDao.fetchAll();
+	}
+	
+	public List<City> fetchAll(String locale){
+		if (locale.equals("en")){
+			return this.cityDao.fetchAll();
+		} else {
+			List<City> cityList = this.cityDao.fetchAll(locale);
+			for (City c: cityList){
+				Set<CityLocale> cl      = c.getLocales();
+				Iterator<CityLocale> it = cl.iterator();
+				if (it.hasNext()){
+					String name = it.next().getName();
+					if (! name.isEmpty()){
+						c.setName( name );
+					}
+				}
+			}
+			return cityList;
+		}
+		
 	}
 }

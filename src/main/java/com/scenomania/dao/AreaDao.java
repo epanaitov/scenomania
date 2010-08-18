@@ -12,5 +12,6 @@ public interface AreaDao {
 	public List<Area> fetchByCountryCode(String code);
 	public Area getByCodes(String areaCode, String countryCode);
 	public List<Area> fetchAll();
+	public List<Area> fetchAll(String locale);
 	public Area getById(Integer id);
 }
