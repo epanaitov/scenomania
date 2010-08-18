@@ -212,23 +212,23 @@ a#logo {
 	
 }
 *:first-child+html .team_text {
-	width: 400px;
+	width: 420px;
 }
-.team_text h5, .team_text b{
-	margin: 0;
-}
+
 .team_text h5 {
 	display: block;
 	color: #f89616;
 	font-weight: bold;
 	margin-left: 155px;
 	text-align: center;
+	width: 420px;
 }
 
 .team_text h6 {
 	margin-left: 155px;
 	text-align: center;
 	margin-top: 15px;
+	width: 420px;
 }
 
 .team_text p {
