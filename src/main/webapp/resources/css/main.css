@@ -226,8 +226,11 @@ a#logo {
 
 *:first-child+html .team_text h5,
 *:first-child+html .team_text h6 {
-	margin-left: 0;
-	margin-top: 0;
+	margin-left: 0;	
+}
+
+*:first-child+html .team_text h5 {
+	margin-top: 0px;
 }
 
 .team_text h6 {
