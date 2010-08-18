@@ -13,5 +13,6 @@ public interface CountryService {
 	public Country saveCountry(Country country);
 	public Country getByCode(String code);
 	public List<Country> fetchAll();
+	public List<Country> fetchAll(String locale);
 	public Country getbyId(Integer id);
 }

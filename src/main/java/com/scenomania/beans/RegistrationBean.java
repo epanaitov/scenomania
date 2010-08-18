@@ -2,12 +2,15 @@ package com.scenomania.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.scenomania.entities.Area;
 import com.scenomania.entities.Country;
@@ -22,9 +25,14 @@ public class RegistrationBean {
 	private Country country;
 	private List<Area> areas = new ArrayList<Area>();
 	
+	@Autowired
+	private HttpServletRequest request;
+	
 	public List<Country> getCountries(){
-		return countryService.fetchAll();
+		Locale locale = RequestContextUtils.getLocale(request);		
+		return countryService.fetchAll(locale.getLanguage());
 	}
+	
 
 	public void areasAjax(AjaxBehaviorEvent event){
 		Area ar = new Area();

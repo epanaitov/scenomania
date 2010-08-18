@@ -2,12 +2,13 @@ package com.scenomania.dao.impl;
 
 import com.scenomania.dao.CountryDao;
 import com.scenomania.entities.Country;
+import com.scenomania.entities.CountryLocale;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.transaction.annotation.Transactional;
 /**
  *
  * @author eugene
@@ -34,8 +35,22 @@ public class HibernateCountryDao implements CountryDao {
 		Query q = this.sessionFactory.getCurrentSession().createQuery("from Country");
 		return q.list();
 	}
-
+	
+	@Transactional
+	public List<Country> fetchAll(String locale){
+		Query q = this.sessionFactory.getCurrentSession().createQuery(
+				 " from Country as c"
+				+ " left join fetch c.locales as l"
+				+ " where l.locale = ?"
+				)
+				.setParameter(0, locale)
+				;
+		return (List<Country>)q.list();
+	}
+	
 	public Country getByCode(String code) {
 		return (Country) this.sessionFactory.getCurrentSession().createQuery("from Country countries where code = ?").setParameter(0, code).uniqueResult();
 	}
+	
+
 }
