@@ -224,6 +224,11 @@ a#logo {
 	width: 420px;
 }
 
+*:first-child+html .team_text h5,
+*:first-child+html .team_text h6 {
+	margin-left: 0;
+}
+
 .team_text h6 {
 	margin-left: 155px;
 	text-align: center;
