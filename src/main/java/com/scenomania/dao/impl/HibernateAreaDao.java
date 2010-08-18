@@ -47,7 +47,7 @@ public class HibernateAreaDao implements AreaDao {
 	@Transactional
 	public List<Area> fetchAll(String locale){
 		Query q = this.sessionFactory.getCurrentSession().createQuery(
-				 " from Country as c"
+				 " from Area as a"
 				+ " left join fetch c.locales as l"
 				+ " where l.locale = ?"
 				)
