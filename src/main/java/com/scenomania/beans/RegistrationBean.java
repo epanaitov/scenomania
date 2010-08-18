@@ -22,7 +22,7 @@ public class RegistrationBean {
 	private Country country;
 	private List<Area> areas = new ArrayList<Area>();
 	
-	public List<Country>getCountries(){
+	public List<Country> getCountries(){
 		return countryService.fetchAll();
 	}
 

@@ -191,6 +191,8 @@ a#logo {
 	position: relative;
 	left: 25px;
 	top: 25px;
+	border: 1px solid #CCCCCC;
+	padding: 1px;
 }
 .team2 {
 	width: 656px;
@@ -219,6 +221,17 @@ a#logo {
 	display: block;
 	color: #f89616;
 	font-weight: bold;
-	position: relative;
-	left: 150px;
+	margin-left: 155px;
+	text-align: center;
+}
+
+.team_text h6 {
+	margin-left: 155px;
+	text-align: center;
+	margin-top: 15px;
+}
+
+.team_text p {
+	margin: 5px 0 0;
+	line-height: 115%;
 }
