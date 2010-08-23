@@ -248,7 +248,7 @@ public class ImportCitiesController {
 
 			name = backTranslit(name);
 
-			List<CityLocale> locales = city.getLocales();
+			Set<CityLocale> locales = city.getLocales();
 
 			CityLocale locale = new CityLocale();
 			locale.setCity(city);

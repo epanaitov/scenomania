@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author eugene
  */
 @Controller
-public class TeamController extends ControllerBase {
+public class AboutController extends ControllerBase {
 
-	//@RequestMapping(value="/team", method=RequestMethod.GET)
+	@RequestMapping(value="/about", method=RequestMethod.GET)
 	public String index() {
-		return "team";
+		return "about";
 	}
 
 }
