@@ -72,10 +72,9 @@ public class HibernateCityDao implements CityDao {
 	public List<City> fetchByArea(Integer areaId, String locale) {
 		Query q = this.sessionFactory.getCurrentSession().createSQLQuery(
 				"SELECT "
-				//+ "c.id, c.area_id, c.population, c.reputation, c.latitude, c.longitude, c.country_code, c.area_code, IFNULL(cl.name, c.name) as name, IFNULL(cl.description, c.description) as description FROM cities c "
 				+ "IFNULL(cl.name, c.name) as name, IFNULL(cl.description, c.description) as description, c.* FROM cities c "
 				+ "LEFT JOIN city_locale cl ON (c.id  = cl.city_id) AND (cl.locale = ?) "
-				+ "WHERE c.area_id = ? ORDER BY population"
+				+ "WHERE c.area_id = ? ORDER BY population DESC"
 				).addEntity(City.class)
 				.setString(0, locale)
 				.setInteger(1, areaId);
