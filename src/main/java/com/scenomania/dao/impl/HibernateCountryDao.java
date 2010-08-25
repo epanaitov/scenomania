@@ -38,6 +38,7 @@ public class HibernateCountryDao implements CountryDao {
 	
 	@Transactional
 	public List<Country> fetchAll(String locale){
+		/*
 		Query q = this.sessionFactory.getCurrentSession().createQuery(
 				 " from Country as c"
 				+ " left join fetch c.locales as l"
@@ -46,6 +47,15 @@ public class HibernateCountryDao implements CountryDao {
 				.setParameter(0, locale)
 				;
 		return (List<Country>)q.list();
+		*/
+
+		Query q = this.sessionFactory.getCurrentSession().createSQLQuery(
+				"SELECT "
+				+ "IFNULL(cl.name, c.name) as name, c.* FROM countries c "
+				+ "LEFT JOIN country_locale cl ON (c.id  = cl.country_id) AND (cl.locale = ?) ORDER BY name"
+				).addEntity(Country.class).setString(0, locale);
+
+		return (List<Country>) q.list();
 	}
 	
 	public Country getByCode(String code) {

@@ -44,6 +44,7 @@ public class CountryServiceImpl implements CountryService{
 		if (locale.equals("en")){
 			return this.countryDao.fetchAll();
 		} else {
+			/*
 			List<Country> countryList = this.countryDao.fetchAll(locale);
 			for (Country c: countryList){
 				Set<CountryLocale> cl      = c.getLocales();
@@ -56,6 +57,8 @@ public class CountryServiceImpl implements CountryService{
 				}
 			}
 			return countryList;
+			*/
+			return this.countryDao.fetchAll(locale);
 		}
 		
 	}

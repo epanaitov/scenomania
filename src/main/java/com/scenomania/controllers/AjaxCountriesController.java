@@ -2,18 +2,22 @@ package com.scenomania.controllers;
 
 import com.scenomania.entities.Area;
 import com.scenomania.entities.City;
-import com.scenomania.entities.Country;
 import com.scenomania.services.AreaService;
 import com.scenomania.services.CityService;
 import com.scenomania.services.CountryService;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
  *
@@ -33,32 +37,40 @@ public class AjaxCountriesController {
 	CountryService countryService;
 
 	@RequestMapping(value="/ajax/countries/get_areas/", method=RequestMethod.GET)
-	public @ResponseBody String getAareas(@RequestParam Integer id) {
+	public ResponseEntity<String> getAareas(@RequestParam Integer id, HttpServletRequest request) {
 		String html = "";
 		html+= "<option value=\"0\">--------------------</option>\r\n";
-		
-		Iterator<Area> ait = countryService.getbyId(id).getAreas().iterator();
+
+		Locale locale = RequestContextUtils.getLocale(request);		
+
+		Iterator<Area> ait = areaService.fetchByCountry(id, locale.getLanguage()).iterator();
 		while (ait.hasNext()) {
 			Area area = ait.next();
 			html+= "<option value=\""+area.getId()+"\">"+area.getName()+"</option>\r\n";
 		}
 
-		return html;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		return new ResponseEntity<String>(html, responseHeaders, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value="/ajax/countries/get_cities/", method=RequestMethod.GET)
-	public @ResponseBody String getCities(@RequestParam Integer area) {
+	public ResponseEntity<String> getCities(@RequestParam Integer area, HttpServletRequest request) {
 		String html = "";
 
 		html+= "<option value=\"0\">--------------------</option>\r\n";
 
-		Iterator<City> cit = areaService.getById(area).getCities().iterator();
+		Locale locale = RequestContextUtils.getLocale(request);		
+
+		Iterator<City> cit = cityService.fetchByArea(area, locale.getLanguage()).iterator();
 		while (cit.hasNext()) {
 			City city = cit.next();
 			html+= "<option value=\""+city.getId()+"\">"+city.getName()+"</option>\r\n";
 		}
 
-		return html;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		return new ResponseEntity<String>(html, responseHeaders, HttpStatus.CREATED);
 	}
 
 }

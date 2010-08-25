@@ -2,6 +2,7 @@ package com.scenomania.services;
 
 import com.scenomania.entities.Area;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -14,4 +15,5 @@ public interface AreaService {
 	public List<Area> fetchAll();
 	public List<Area> fetchAll(String locale);
 	public Area getById(Integer id);
+	public List<Area> fetchByCountry(Integer countryId, String locale);
 }

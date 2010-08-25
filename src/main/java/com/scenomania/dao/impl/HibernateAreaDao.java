@@ -59,4 +59,17 @@ public class HibernateAreaDao implements AreaDao {
 	public Area getById(Integer id) {
 		return (Area) this.sessionFactory.getCurrentSession().createQuery("from Area area where id = ?").setParameter(0, id).uniqueResult();
 	}
+
+	public List<Area> fetchByCountry(Integer countryId, String locale) {
+		Query q = this.sessionFactory.getCurrentSession().createSQLQuery(
+				"SELECT "
+				+ "IFNULL(al.name, a.name) as name, a.* FROM areas a "
+				+ "LEFT JOIN area_locale al ON (a.id  = al.area_id) AND (al.locale = ?) "
+				+ "WHERE a.country_id = ? ORDER BY name"
+				).addEntity(Area.class)
+				.setString(0, locale)
+				.setInteger(1, countryId);
+
+		return (List<Area>) q.list();
+	}
 }

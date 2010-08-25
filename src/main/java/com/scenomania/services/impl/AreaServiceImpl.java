@@ -3,9 +3,8 @@ package com.scenomania.services.impl;
 import com.scenomania.dao.AreaDao;
 import com.scenomania.entities.Area;
 import com.scenomania.entities.AreaLocale;
-import com.scenomania.entities.Country;
-import com.scenomania.entities.CountryLocale;
 import com.scenomania.services.AreaService;
+import com.scenomania.services.CountryService;
 
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +24,9 @@ public class AreaServiceImpl implements AreaService {
 
 	@Autowired(required=true)
 	private AreaDao areaDao;
+
+	@Autowired(required=true)
+	private CountryService countryService;
 
 	@Transactional
 	public Area saveArea(Area area) {
@@ -68,5 +70,13 @@ public class AreaServiceImpl implements AreaService {
 	@Transactional
 	public Area getById(Integer id) {
 		return this.areaDao.getById(id);
+	}
+
+	public List<Area> fetchByCountry(Integer countryId, String locale) {
+		if (locale.equals("en")){
+			return (List<Area>) this.countryService.getbyId(countryId).getAreas();
+		} else {
+			return this.areaDao.fetchByCountry(countryId, locale);
+		}
 	}
 }
