@@ -74,7 +74,7 @@ public class HibernateCityDao implements CityDao {
 				"SELECT "
 				+ "IFNULL(cl.name, c.name) as name, IFNULL(cl.description, c.description) as description, c.* FROM cities c "
 				+ "LEFT JOIN city_locale cl ON (c.id  = cl.city_id) AND (cl.locale = ?) "
-				+ "WHERE c.area_id = ? ORDER BY population DESC"
+				+ "WHERE (c.area_id = ?) AND (c.population > 0) ORDER BY population DESC"
 				).addEntity(City.class)
 				.setString(0, locale)
 				.setInteger(1, areaId);
