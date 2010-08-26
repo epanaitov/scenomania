@@ -5,6 +5,7 @@ import com.scenomania.entities.Area;
 import com.scenomania.entities.AreaLocale;
 import com.scenomania.services.AreaService;
 import com.scenomania.services.CountryService;
+import java.util.ArrayList;
 
 import java.util.Iterator;
 import java.util.List;
@@ -74,7 +75,7 @@ public class AreaServiceImpl implements AreaService {
 
 	public List<Area> fetchByCountry(Integer countryId, String locale) {
 		if (locale.equals("en")){
-			return (List<Area>) this.countryService.getbyId(countryId).getAreas();
+			return new ArrayList<Area> (this.countryService.getbyId(countryId).getAreas());
 		} else {
 			return this.areaDao.fetchByCountry(countryId, locale);
 		}

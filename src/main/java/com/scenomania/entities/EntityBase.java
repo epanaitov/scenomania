@@ -26,6 +26,11 @@ public abstract class EntityBase {
         return id;
     }
 
+
+	/**
+	 * what's the purpose of that routine?
+	 * @param dataHash
+	 */
 	public void setFromHash(Map dataHash) {
 		Iterator itr = dataHash.keySet().iterator();
 

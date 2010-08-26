@@ -12,6 +12,10 @@
  	<context:annotation-config/>
 	<context:component-scan base-package="com.scenomania"/>
 
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages.messages" />
+	</bean>
+
 	<import resource="hibernate-config.xml" />
 	<import resource="mvc-config.xml" />
 	
