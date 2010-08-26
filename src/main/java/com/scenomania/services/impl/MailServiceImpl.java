@@ -20,7 +20,7 @@ public class MailServiceImpl implements MailService {
 		JavaMailSenderImpl sender = new JavaMailSenderImpl();
 		sender.setHost("localhost");
 		sender.setPort(25);
-		sender.setDefaultEncoding("utf8");
+		sender.setDefaultEncoding("utf-8");
 
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -29,6 +29,7 @@ public class MailServiceImpl implements MailService {
 			helper.setTo(recipient);
 			helper.setText(text);
 			helper.setSubject(subject);
+			helper.setFrom("mailer@tourageo.us");
 			sender.send(message);
 		} catch (Exception ex) {
 			System.err.println(ex.getMessage());
