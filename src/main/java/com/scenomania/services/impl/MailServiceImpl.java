@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailServiceImpl implements MailService {
 
-	private void sendmail(String recipient, String subject, String text) {
+	private void sendmail(String recipient, String subject, String text, String from) {
 
 		JavaMailSenderImpl sender = new JavaMailSenderImpl();
 		sender.setHost("localhost");
@@ -29,7 +29,7 @@ public class MailServiceImpl implements MailService {
 			helper.setTo(recipient);
 			helper.setText(text);
 			helper.setSubject(subject);
-			helper.setFrom("mailer@tourageo.us");
+			helper.setFrom(from);
 			sender.send(message);
 		} catch (Exception ex) {
 			System.err.println(ex.getMessage());
@@ -38,6 +38,10 @@ public class MailServiceImpl implements MailService {
 
 	@Override
 	public void send(String recipient, String subject, String text) {
-		sendmail(recipient, subject, text);
+		sendmail(recipient, subject, text, "mailer@tourageo.us");
+	}
+
+	public void send(String recipient, String subject, String text, String from) {
+		sendmail(recipient, subject, text, from);
 	}
 }

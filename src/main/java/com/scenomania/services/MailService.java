@@ -6,4 +6,5 @@ package com.scenomania.services;
  */
 public interface MailService {
 	public void send(String recipient, String subject, String text);
+	public void send(String recipient, String subject, String text, String from);
 }
