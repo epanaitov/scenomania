@@ -81,4 +81,23 @@ public class HibernateCityDao implements CityDao {
 
 		return (List<City>) q.list();
 	}
+	
+	public List<City> fetchAll(String locale, Double startLat, Double endLat, Double startLng, Double endLng){
+		Query q = this.sessionFactory.getCurrentSession().createSQLQuery(
+				"SELECT "
+				+ "IFNULL(cl.name, c.name) as name, IFNULL(cl.description, c.description) as description, c.* FROM cities c "
+				+ "LEFT JOIN city_locale cl ON (c.id  = cl.city_id) AND (cl.locale = ?) "
+				+ "WHERE "
+				+ "latitude >= ? AND latitude <= ? AND longitude >= ? and longitude <= ?"
+				+ " AND (c.population > 0)"
+				+ "LIMIT 20"
+				).addEntity(City.class)
+				.setString(0, locale)
+				.setDouble(1, startLat)
+				.setDouble(2, endLat)
+				.setDouble(3, startLng)
+				.setDouble(4, endLng);
+
+		return (List<City>) q.list();
+	}
 }

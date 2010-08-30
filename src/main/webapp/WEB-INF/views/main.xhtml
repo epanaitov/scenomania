@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:f="http://java.sun.com/jsf/core"
+				xmlns:c="http://java.sun.com/jstl/core"
+                template="/WEB-INF/layouts/landing.xhtml"
+				>
+    <ui:define name="top">
+       
+	</ui:define>
+    <ui:define name="content">
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <h:outputScript name="ajax/maps.js" library="js" target="body"/>
+   
+		
+	    <script type="text/javascript">
+		    function initialize() {
+			    var latlng = new google.maps.LatLng(55.8536111, 38.4411111);
+			    var myOptions = {
+			      zoom: 9,
+			      center: latlng,
+			      mapTypeId: google.maps.MapTypeId.ROADMAP
+			    };
+				var map = new CitiesMap("map_canvas", myOptions);
+				map.ajaxURL = '#{facesContext.externalContext.requestContextPath}/ajax/map/cities/';
+				map.onCityClick = function (city, mouseEvent){
+					alert("Clicked at" + city.name + city.id);
+				};
+			}
+			dojo.addOnLoad(initialize);
+		</script>
+		<div id="map_canvas" style="width: 600px; height: 400px;"></div>
+		<div id="debug"></div>
+    </ui:define>
+    
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>

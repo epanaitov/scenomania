@@ -15,4 +15,5 @@ public interface CityDao {
 	public List<City> fetchAll();
 	public List<City> fetchAll(String locale);
 	public List<City> fetchByArea(Integer areaId, String locale);
+	public List<City> fetchAll(String locale, Double startLat, Double endLat, Double startLng, Double endLng);
 }
