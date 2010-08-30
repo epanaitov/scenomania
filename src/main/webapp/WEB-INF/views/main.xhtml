@@ -25,7 +25,7 @@
 				var map = new CitiesMap("map_canvas", myOptions);
 				map.ajaxURL = '#{facesContext.externalContext.requestContextPath}/ajax/map/cities/';
 				map.onCityClick = function (city, mouseEvent){
-					alert("Clicked at" + city.name + city.id);
+					alert("Clicked at " + city.name + " " + city.id);
 				};
 			}
 			dojo.addOnLoad(initialize);

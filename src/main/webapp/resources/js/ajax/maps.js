@@ -59,16 +59,11 @@ dojo.declare("CitiesMap", [GoogleMap], {
 		}
 		
 		this.cities.push(city);
-		var marker = new google.maps.Marker({
-			map: this.map,
-			position: new google.maps.LatLng(city.lat, city.lng),
-			draggable: false
-		});
 		var circle = new google.maps.Circle({
 			map: this.map,
-			radius: (1-Math.exp(-city.pop/2000000)*0.3)*5000
+			radius: (1-Math.exp(-city.pop/2000000)*0.3)*5000,
+			center: new google.maps.LatLng(city.lat, city.lng)
 		});
-		circle.bindTo('center', marker, 'position');
 		var _this = this;
 		google.maps.event.addListener(circle, 'click', function (mouseEvent){
 			_this.onCityClick(city, mouseEvent);
