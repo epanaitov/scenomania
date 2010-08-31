@@ -81,4 +81,7 @@ public class CityServiceImpl implements CityService {
 			return this.cityDao.fetchByArea(areaId, locale);
 		}
 	}
+	public List<City> fetchAll(String locale, Double startLat, Double endLat, Double startLng, Double endLng){
+		return this.cityDao.fetchAll(locale, startLat, endLat, startLng, endLng);
+	}
 }
