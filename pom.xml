@@ -129,7 +129,13 @@
                     <snapshots> 
                         <enabled>true</enabled> 
                     </snapshots> 
-                </repository> 
+                </repository>
+
+
+      <repository>
+        <id>xebia-france-googlecode-repository</id>
+        <url>http://xebia-france.googlecode.com/svn/repository/maven2/</url>
+      </repository>
  
   </repositories> 
  
@@ -473,6 +479,13 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>2.1.2</version>
 		</dependency-->
+
+		<dependency>
+         <groupId>fr.xebia.web.extras</groupId>
+         <artifactId>xebia-servlet-extras</artifactId>
+         <version>1.0.3</version>
+         <scope>runtime</scope>
+      </dependency>
 
 	</dependencies> 
     <properties> 
