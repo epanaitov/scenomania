@@ -33,10 +33,17 @@ dojo.declare("GoogleMap", null, {
 
 dojo.declare("CitiesMap", [GoogleMap], {
 	cities: null,
+	markerCluster: null,
+	emptyImage: new google.maps.MarkerImage('',  new google.maps.Size(0, 0)),
 	ajaxURL: '',
 	
 	constructor: function (divId, options){
 		this.cities = [];
+		this.markerCluster = new MarkerClusterer(this.map, [], {
+	          maxZoom: null,
+	          gridSize: null,
+	          styles: null
+	    });
 	},
 	
 	onCityClick: function (city, mouseEvent){},
@@ -59,15 +66,36 @@ dojo.declare("CitiesMap", [GoogleMap], {
 		}
 		
 		this.cities.push(city);
+		var _this = this;
+		
+		var marker = new google.maps.Marker({
+	           position: new google.maps.LatLng(city.lat, city.lng),
+	           draggable: false,
+	           icon: this.emptyImage	           
+	          });
+		
 		var circle = new google.maps.Circle({
-			map: this.map,
-			radius: (1-Math.exp(-city.pop/2000000)*0.3)*5000,
+			map: null,
+			radius: ((city.pop/10265307))*9000 + 1000*Math.exp(city.pop/10265307-.5),
 			center: new google.maps.LatLng(city.lat, city.lng)
 		});
-		var _this = this;
+		
+		
 		google.maps.event.addListener(circle, 'click', function (mouseEvent){
 			_this.onCityClick(city, mouseEvent);
 		});
+		
+		google.maps.event.addListener(marker, 'visible_changed', function (e){
+			if (marker.getVisible()){
+				circle.setMap(_this.map);
+			} else {
+				circle.setMap(null);
+			}
+		});
+		
+		
+		
+		this.markerCluster.addMarker(marker);
 	},
 
 	loadCities: function (){
@@ -96,6 +124,7 @@ dojo.declare("CitiesMap", [GoogleMap], {
 					alert('request died: '+error);
 				}
 		}; //xhrArgs
+		//alert(xhrArgs.url);
 		dojo.xhrGet(xhrArgs);
 		
 	}

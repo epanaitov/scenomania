@@ -90,7 +90,7 @@ public class HibernateCityDao implements CityDao {
 				+ "WHERE "
 				+ "latitude >= ? AND latitude <= ? AND longitude >= ? and longitude <= ?"
 				+ " AND (c.population > 0)"
-				+ "LIMIT 20"
+				+ "ORDER BY population DESC LIMIT 20"
 				).addEntity(City.class)
 				.setString(0, locale)
 				.setDouble(1, startLat)
