@@ -6,10 +6,6 @@
 				xmlns:c="http://java.sun.com/jstl/core"
                 template="/WEB-INF/layouts/landing.xhtml"
 				>
-    <ui:define name="top">
-        top
-    </ui:define>
-
     <ui:define name="content">
     	
 	    <script type="text/javascript">
@@ -39,7 +35,7 @@
 		
 		<h:panelGroup rendered="#{empty success}">
 			
-		<form id="user" action="#{url.get['feedback.html']}" method="post">
+		<form id="user" class="feedback" action="#{url.get['feedback.html']}" method="post">
 		<table>
 			<tr>
 				<td><h:outputLabel for="email"><h:outputText value="#{msg['email']}"/></h:outputLabel></td>
@@ -59,7 +55,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td colspan="2"><h:commandButton id="proceed" value="#{msg['send']}" /></td>
+				<td colspan="2"><h:commandButton id="proceed" image="/resources/resources/images/btn_send.png" value="#{msg['send']}" /></td>
 			</tr>
 		</table>
 		</form>
