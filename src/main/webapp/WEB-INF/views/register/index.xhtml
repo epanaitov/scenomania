@@ -34,7 +34,7 @@
 			dojo.addOnLoad(addDecors);
 		</script>
 			
-		<form id="user" action="#{facesContext.externalContext.requestContextPath}/register" method="post">
+		<form id="user" class="register" action="#{facesContext.externalContext.requestContextPath}/register" method="post">
 		<table>
 			<tr>
 				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel></td>
@@ -106,8 +106,8 @@
 
 					<h:selectOneMenu id="country_select" value="" onchange="pick_country();">
 						<f:selectItems value="#{countries.all}"/>
-					</h:selectOneMenu>
-					<h:selectOneMenu id="area_select" value="" onchange="pick_area()"></h:selectOneMenu>
+					</h:selectOneMenu><br />
+					<h:selectOneMenu id="area_select" value="" onchange="pick_area()"></h:selectOneMenu><br />
 					<h:selectOneMenu id="city_select" value=""></h:selectOneMenu>
 				</td>
 				<td><ui:repeat value="#{userErrors['homecity']}" var="err">
@@ -117,7 +117,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td colspan="2"><h:commandButton id="proceed" value="#{msg['register.index.submit']}" /></td>
+				<td colspan="2"><br /><h:commandButton id="proceed" value="#{msg['register.index.submit']}" image="/resources/resources/images/btn_send.png" /></td>
 			</tr>
 		</table>
 		</form>
