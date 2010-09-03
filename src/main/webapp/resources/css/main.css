@@ -298,3 +298,27 @@ form.register label {
 	text-align: right;
 	padding-right: 10px;
 }
+
+div.roles {
+	background-image: url(images/role_back.png);
+	background-position: left top;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	width: 490px;
+	padding: 20px;
+	height: 275px;
+}
+
+div.roles p {
+	text-align: center;
+}
+
+div.roles img {
+	float: left;
+	display: block;
+	padding: 40px 20px;
+}
+
+div.roles img.band {
+	margin: -2px 0px 0px 10px;
+}

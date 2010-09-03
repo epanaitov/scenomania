@@ -15,6 +15,7 @@
             </ui:define>
 
             <ui:define name="content">
+				<div class="roles">
                 <p>
 					<h:outputText value="#{msg['register.roles.user_registered']}"/>
 				</p>
@@ -37,8 +38,9 @@
 					}
 
 				</script>
-				<h:graphicImage name="images/btn1.jpg" onclick="popup_band();" />
-				<h:graphicImage name="images/btn2.jpg" onclick="popup_promoter();" />
+				<h:graphicImage styleClass="band" name="images/btn_band.png" onclick="popup_band();" />
+				<h:graphicImage styleClass="promoter" name="images/btn_promoter.png" onclick="popup_promoter();" />
+				<div class="clear"></div>
 				<div id="band-form" style="display: none">
 					<form id="band" action="#{facesContext.externalContext.requestContextPath}/register/role" method="post">
 						<h:inputHidden	id="role" value="band" />
@@ -122,6 +124,7 @@
 					</form>
 				</div>
 				</h:panelGroup>
+				</div>
             </ui:define>
 
             <ui:define name="bottom">

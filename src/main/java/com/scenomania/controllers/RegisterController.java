@@ -99,6 +99,7 @@ public class RegisterController extends ControllerBase {
 	public String role(Model model, HttpSession httpSession) {
 
 		User loggedin = (User) httpSession.getAttribute("loggedin");
+		
 		if (loggedin == null) return "redirect:/register";
 
 		loggedin = userDao.refresh(loggedin);
@@ -108,7 +109,7 @@ public class RegisterController extends ControllerBase {
 		if ((playsIn != null) && (!playsIn.isEmpty())) {
 			model.addAttribute("message", "band.saved");
 		}
-
+		
         return "register/role";
 	}
 
