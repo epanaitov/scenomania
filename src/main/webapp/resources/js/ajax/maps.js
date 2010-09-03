@@ -34,6 +34,7 @@ dojo.declare("GoogleMap", null, {
 dojo.declare("CitiesMap", [GoogleMap], {
 	cities: null,
 	markerCluster: null,
+	infowindow: null,
 	emptyImage: new google.maps.MarkerImage('',  new google.maps.Size(0, 0)),
 	ajaxURL: '',
 	
@@ -43,6 +44,10 @@ dojo.declare("CitiesMap", [GoogleMap], {
 	          maxZoom: null,
 	          gridSize: null,
 	          styles: null
+	    });
+		this.infowindow = new google.maps.InfoWindow({
+	        content: "",
+	        maxWidth: 300
 	    });
 	},
 	
@@ -65,7 +70,6 @@ dojo.declare("CitiesMap", [GoogleMap], {
 			return;
 		}
 		
-		this.cities.push(city);
 		var _this = this;
 		
 		var marker = new google.maps.Marker({
@@ -93,8 +97,8 @@ dojo.declare("CitiesMap", [GoogleMap], {
 			}
 		});
 		
-		
-		
+		city.marker = marker;
+		this.cities.push(city);
 		this.markerCluster.addMarker(marker);
 	},
 
@@ -127,5 +131,9 @@ dojo.declare("CitiesMap", [GoogleMap], {
 		//alert(xhrArgs.url);
 		dojo.xhrGet(xhrArgs);
 		
+	},
+	openPopup: function (city, text){
+		this.infowindow.setContent(text);
+		this.infowindow.open(this.map, city.marker);
 	}
 });

@@ -15,6 +15,7 @@
     <h:outputScript name="markerclusterer.js" library="js" target="body"/>
 		
 	    <script type="text/javascript">
+	    /*<![CDATA[*/
 		    function initialize() {
 			    var latlng = new google.maps.LatLng(55.8536111, 38.4411111);
 			    var myOptions = {
@@ -22,13 +23,18 @@
 			      center: latlng,
 			      mapTypeId: google.maps.MapTypeId.ROADMAP
 			    };
+			    var contextPath = "#{facesContext.externalContext.requestContextPath}";
 				var map = new CitiesMap("map_canvas", myOptions);
-				map.ajaxURL = '#{facesContext.externalContext.requestContextPath}/ajax/map/cities/';
+				map.ajaxURL = contextPath + '/ajax/map/cities/';
 				map.onCityClick = function (city, mouseEvent){
-					alert("Clicked at " + city.name + " " + city.id);
+					var text = city.name
+					 + " <a href=\""+ contextPath + "/city/"+ city.id +"\"\>Подробнее</a\>";
+					this.openPopup(city, text);
+					
 				};
 			}
 			dojo.addOnLoad(initialize);
+		/*]]>*/
 		</script>
 		<div id="map_canvas" style="width: 600px; height: 400px;"></div>
 		<div id="debug"></div>
