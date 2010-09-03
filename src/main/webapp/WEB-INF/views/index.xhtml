@@ -26,7 +26,7 @@
 		</div>
 		</ui:remove>
 		<br />
-		<h:outputFormat value="#{msg['index.text']}" escape="false"></h:outputFormat>
+		<h:outputFormat value="#{msg['index.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
 
 		<ui:remove>
 		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
