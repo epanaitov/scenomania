@@ -47,20 +47,25 @@
 				<prop key="hibernate.connection.useUnicode">true</prop>
 				<prop key="hibernate.connection.characterEncoding">utf8</prop>
 				<prop key="hibernate.connection.characterSetResults">utf8</prop>
+				<!-- C3p0 -->
 				<prop key="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</prop>
-				<prop key="hibernate.c3p0.min_size">5</prop>
-				<prop key="hibernate.c3p0.max_size">10</prop>
-				<prop key="hibernate.c3p0.timeout">100</prop>
+				<prop key="hibernate.c3p0.acquire_increment">10</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+				<prop key="hibernate.c3p0.timeout">120</prop>
+				<prop key="hibernate.c3p0.min_size">1</prop>
+				<prop key="hibernate.c3p0.max_size">25</prop>
+				<prop key="hibernate.c3p0.max_statement">0</prop>
+				<prop key="hibernate.c3p0.preferredTestQuery">SELECT 1</prop>
+				<!--
 				<prop key="hibernate.c3p0.acquireRetryAttempts">30</prop>
-				<prop key="hibernate.c3p0.acquireIncrement">10</prop>
 				<prop key="hibernate.c3p0.idleConnectionTestPeriod">100</prop>
 				<prop key="hibernate.c3p0.initialPoolSize">20</prop>
 				<prop key="hibernate.c3p0.maxPoolSize">100</prop>
 				<prop key="hibernate.c3p0.maxIdleTime">300</prop>
 				<prop key="hibernate.c3p0.maxStatements">50</prop>
 				<prop key="hibernate.c3p0.minPoolSize">10</prop>
-				<prop key="hibernate.c3p0.preferredTestQuery">SELECT 1</prop>
 				<prop key="hibernate.c3p0.testConnectionOnCheckout">true</prop>
+				-->
             </props>
         </property>
     </bean>
