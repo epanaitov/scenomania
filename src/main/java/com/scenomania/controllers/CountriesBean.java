@@ -11,7 +11,9 @@ import java.util.Map;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -31,10 +33,14 @@ public class CountriesBean {
 	@Autowired(required=true)
 	CountryService countryService;
 
-	private LinkedHashMap<String, Integer> all;
+	@Autowired(required=true)
+	@Qualifier(value="messageSource")
+	private ResourceBundleMessageSource messageSource;
 
-	@Autowired
+	@Autowired(required=true)
 	private HttpServletRequest request;
+
+	private LinkedHashMap<String, Integer> all;
 
 	public LinkedHashMap<String, Integer> getAll() {
 
@@ -43,7 +49,7 @@ public class CountriesBean {
 		List<Country> countries = countryService.fetchAll(locale.getLanguage());
 
 		LinkedHashMap<String, Integer> result = new LinkedHashMap();
-		result.put("-------------", 0);
+		result.put(messageSource.getMessage("select.country", null, locale), 0);
 		Iterator<Country> cit = countries.iterator();
 
 		while (cit.hasNext()) {

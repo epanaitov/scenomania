@@ -10,10 +10,13 @@
     <ui:define name="content">
     	
 	    <script type="text/javascript">
-	    	function addRequireDecor(id, prompt){
+	    	function addRequireDecor(id, prompt, fieldType){
+
+				if (!fieldType) fieldType =  "dijit.form.ValidationTextBox";
+
 	    		Spring.addDecoration(new Spring.ElementDecoration({
 					 elementId : id,
-					 widgetType : "dijit.form.ValidationTextBox",
+					 widgetType : fieldType,
 					 widgetAttrs : {
 					 promptMessage: prompt,
 					 required : true}}));
@@ -25,7 +28,7 @@
 						 event:'onclick'}));
 	    	}
 			function addDecors(){
-				addRequireDecor("nickname", "Enter Nickname");
+				addRequireDecor("nickname", "#{msg['error.nickname.empty']}");
 				addRequireDecor("email", "Enter Email");
 				addRequireDecor("password", "Password is required");
 				addRequireDecor("password_confirm", "Confirm the password");
@@ -73,42 +76,85 @@
 				</td>
 				<td>
 
-					<script language="javascript">
-						function pick_country() {
-
-							var countrySelect = dojo.byId("country_select");
-							var code = countrySelect.options[countrySelect.selectedIndex].value;
-
-							dojo.xhrGet({
-								url:"#{facesContext.externalContext.requestContextPath}/ajax/countries/get_areas/?id="+code,
-								handleAs:"text",
-								load: function(data){
-									dojo.byId("area_select").innerHTML = data;
-								}
-							});
-						}
-
-						function pick_area() {
-
-							var areaSelect = dojo.byId("area_select");
-							var ac = areaSelect.options[areaSelect.selectedIndex].value;
-
-							dojo.xhrGet({
-								url:"#{facesContext.externalContext.requestContextPath}/ajax/countries/get_cities/?area="+ac,
-								load: function(data) {
-									dojo.byId("city_select").innerHTML = data;
-								}
-							});
-
-						}
-
+					<script type="text/javascript">
+						dojo.require("dijit.form.FilteringSelect");
+						dojo.require("dojo.data.ItemFileReadStore");
 					</script>
 
-					<h:selectOneMenu id="country_select" value="" onchange="pick_country();">
+					<h:selectOneMenu id="country_select" value="">
 						<f:selectItems value="#{countries.all}"/>
-					</h:selectOneMenu><br />
-					<h:selectOneMenu id="area_select" value="" onchange="pick_area()"></h:selectOneMenu><br />
-					<h:selectOneMenu id="city_select" value=""></h:selectOneMenu>
+					</h:selectOneMenu>
+					<br />
+
+					<h:selectOneMenu id="area_select" value="">
+						
+					</h:selectOneMenu>
+					<br />
+
+					<h:selectOneMenu id="city_select" value="">
+
+					</h:selectOneMenu>
+
+					<script type="text/javascript">
+						/* <![CDATA[ */
+						var areaStore = new dojo.data.ItemFileReadStore({
+							url: "#{facesContext.externalContext.requestContextPath}/ajax/countries/get_areas/?id=62",
+							clearOnClose: true,
+							urlPreventCache: true
+						});
+
+						var cityStore = new dojo.data.ItemFileReadStore({
+							url: "#{facesContext.externalContext.requestContextPath}/ajax/countries/get_cities/?area=62",
+							clearOnClose: true,
+							urlPreventCache: true
+						});
+
+						dojo.addOnLoad(function() {
+
+							var citySelect = new dijit.form.FilteringSelect({
+								id: "city_select",
+								store: cityStore,
+								searchAttr: "label",
+								onFocus: function() {
+									if (dijit.byId(this.id).value == '') {
+										dijit.byId(this.id).setDisplayedValue('');
+									}
+								}
+							}, "city_select");
+
+							var areaSelect = new dijit.form.FilteringSelect({
+								id: "area_select",
+								store: areaStore,
+								searchAttr: "label",
+								onFocus: function() {
+									if (dijit.byId(this.id).value == '') {
+										dijit.byId(this.id).setDisplayedValue('');
+									}
+								},
+								onChange: function(areaId) {
+									if (areaId && (parseInt(areaId) > 0)) {
+										cityStore.close();
+										cityStore._jsonFileUrl = "#{facesContext.externalContext.requestContextPath}/ajax/countries/get_cities/?area="+areaId;
+										cityStore.fetch();
+										dijit.byId("city_select").setDisplayedValue("#{msg['select.city']}");
+									}
+								}
+							}, "area_select");
+
+							var countrySelect = new dijit.form.FilteringSelect({
+								id: "country_select",
+								onChange: function(countryId) {
+									areaStore.close();
+									areaStore._jsonFileUrl = "#{facesContext.externalContext.requestContextPath}/ajax/countries/get_areas/?id="+countryId;
+									areaStore.fetch();
+									dijit.byId("area_select").setDisplayedValue("#{msg['select.area']}");
+								}
+							}, "country_select");
+
+						});
+						/* ]]> */
+					</script>
+
 				</td>
 				<td><ui:repeat value="#{userErrors['homecity']}" var="err">
 						<h:outputText value="#{msg[err]}" />

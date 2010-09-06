@@ -299,6 +299,12 @@ form.register label {
 	padding-right: 10px;
 }
 
+form.register select {
+	border: 1px solid #B3B3B3;
+	background-color: white;
+	width: 340px;
+}
+
 div.roles {
 	background-image: url(images/role_back.png);
 	background-position: left top;
