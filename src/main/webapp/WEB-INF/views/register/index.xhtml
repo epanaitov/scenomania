@@ -10,7 +10,10 @@
     <ui:define name="content">
     	
 	    <script type="text/javascript">
-	    	function addRequireDecor(id, prompt, fieldType){
+
+			
+
+	    	function addRequireDecor(id, prompt, fieldType, regExp){
 
 				if (!fieldType) fieldType =  "dijit.form.ValidationTextBox";
 
@@ -18,8 +21,10 @@
 					 elementId : id,
 					 widgetType : fieldType,
 					 widgetAttrs : {
-					 promptMessage: prompt,
-					 required : true}}));
+						promptMessage: prompt,
+						required : true
+					}
+				}));
 	    	}
 	    	function addProceedDecor(id){
 	    		Spring.addDecoration(
@@ -34,10 +39,11 @@
 				addRequireDecor("password_confirm", "Confirm the password");
 				addProceedDecor("proceed");
 			}
-			dojo.addOnLoad(addDecors);
+			//dojo.addOnLoad(addDecors);
+
 		</script>
 			
-		<form id="user" class="register" action="#{facesContext.externalContext.requestContextPath}/register" method="post">
+		<form id="user" dojoType="dijit.form.Form" class="register" action="#{facesContext.externalContext.requestContextPath}/register" method="post">
 		<table>
 			<tr>
 				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel></td>
@@ -76,11 +82,6 @@
 				</td>
 				<td>
 
-					<script type="text/javascript">
-						dojo.require("dijit.form.FilteringSelect");
-						dojo.require("dojo.data.ItemFileReadStore");
-					</script>
-
 					<h:selectOneMenu id="country_select" value="">
 						<f:selectItems value="#{countries.all}"/>
 					</h:selectOneMenu>
@@ -97,6 +98,12 @@
 
 					<script type="text/javascript">
 						/* <![CDATA[ */
+
+						dojo.require("dijit.form.Form");
+						dojo.require("dijit.form.FilteringSelect");
+						dojo.require("dojo.data.ItemFileReadStore");
+						dojo.require("dijit.form.ValidationTextBox");
+
 						var areaStore = new dojo.data.ItemFileReadStore({
 							url: "#{facesContext.externalContext.requestContextPath}/ajax/countries/get_areas/?id=62",
 							clearOnClose: true,
@@ -110,11 +117,35 @@
 						});
 
 						dojo.addOnLoad(function() {
+							
+							new dijit.form.ValidationTextBox({
+								id: "email",
+								required: true,
+								trim: true,
+								regExp: "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+							}, "email");
+							
+							new dijit.form.ValidationTextBox({
+								id: "nickname",
+								required: true,
+								trim: true
+							}, "nickname");
+
+							new dijit.form.ValidationTextBox({
+								id: "password",
+								required: true
+							}, "password");
+
+							new dijit.form.ValidationTextBox({
+								id: "password_confirm",
+								required: true
+							}, "password_confirm");
 
 							var citySelect = new dijit.form.FilteringSelect({
 								id: "city_select",
 								store: cityStore,
 								searchAttr: "label",
+								required: true,
 								onFocus: function() {
 									if (dijit.byId(this.id).value == '') {
 										dijit.byId(this.id).setDisplayedValue('');
@@ -126,6 +157,7 @@
 								id: "area_select",
 								store: areaStore,
 								searchAttr: "label",
+								required: true,
 								onFocus: function() {
 									if (dijit.byId(this.id).value == '') {
 										dijit.byId(this.id).setDisplayedValue('');
@@ -143,15 +175,61 @@
 
 							var countrySelect = new dijit.form.FilteringSelect({
 								id: "country_select",
+								required: true,
 								onChange: function(countryId) {
 									areaStore.close();
 									areaStore._jsonFileUrl = "#{facesContext.externalContext.requestContextPath}/ajax/countries/get_areas/?id="+countryId;
 									areaStore.fetch();
 									dijit.byId("area_select").setDisplayedValue("#{msg['select.area']}");
-								}
+								},
+								displayedValue: "#{msg['select.country']}"
 							}, "country_select");
 
+							function validateFilteringSelect(id) {
+								var select = dijit.byId(id);
+								if (!select.value) {
+									select.displayMessage('Empty');
+									return false;
+								}
+								return true;
+							}
+
+							dijit.byId("user").onSubmit = function() {
+
+								var valid = true;
+								
+								var pass1 = dijit.byId('password');
+								var pass2 = dijit.byId('password_confirm');
+
+								if (pass1.value != pass2.value) {
+									pass2.displayMessage("#{msg['error.password.not_equal']}");
+									valid = false;
+									return false;
+								}
+
+								if (!validateFilteringSelect("country_select")) return false;
+								if (!validateFilteringSelect("area_select")) return false;
+								if (!validateFilteringSelect("city_select")) return false;
+
+								if (!dijit.byId("user").validate()) {
+									valid = false;
+								}
+								
+								if (valid) {
+									dojo.forEach(dijit.byId("user").getDescendants(), function(widget) {
+										var field  = dojo.doc.createElement("input");
+										field.type = 'hidden';
+										field.name = widget.id;
+										field.value = widget.value;
+										dojo.byId("user").appendChild(field);
+									});
+								}
+								
+								return valid;
+							}
+
 						});
+
 						/* ]]> */
 					</script>
 

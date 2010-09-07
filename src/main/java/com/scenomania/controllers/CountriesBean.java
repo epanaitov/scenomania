@@ -49,7 +49,7 @@ public class CountriesBean {
 		List<Country> countries = countryService.fetchAll(locale.getLanguage());
 
 		LinkedHashMap<String, Integer> result = new LinkedHashMap();
-		result.put(messageSource.getMessage("select.country", null, locale), 0);
+		//result.put(messageSource.getMessage("select.country", null, locale), 0);
 		Iterator<Country> cit = countries.iterator();
 
 		while (cit.hasNext()) {

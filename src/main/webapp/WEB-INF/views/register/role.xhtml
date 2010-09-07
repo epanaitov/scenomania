@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:h="http://java.sun.com/jsf/html"
-	  xmlns:c="http://java.sun.com/jstl/core"
 	  xmlns:ezcomp="http://java.sun.com/jsf/composite/ezcomp">
     
     <body class="tundra">
@@ -38,8 +37,10 @@
 					}
 
 				</script>
+				<ui:remove>
 				<h:graphicImage styleClass="band" name="images/btn_band.png" onclick="popup_band();" />
 				<h:graphicImage styleClass="promoter" name="images/btn_promoter.png" onclick="popup_promoter();" />
+				</ui:remove>
 				<div class="clear"></div>
 				<div id="band-form" style="display: none">
 					<form id="band" action="#{facesContext.externalContext.requestContextPath}/register/role" method="post">
