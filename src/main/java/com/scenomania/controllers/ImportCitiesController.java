@@ -26,6 +26,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Hibernate;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +39,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ImportCitiesController {
+
+	@Autowired(required=true)
+	protected SessionFactory sessionFactory;
 
 	@Autowired(required=true)
 	private CountryService countryService;
@@ -349,7 +355,9 @@ public class ImportCitiesController {
 
 		while (cit.hasNext()) {
 			City city = cit.next();
+			if (city.getArea() != null) continue;
 			Area area = areaService.getByCodes(city.getAreaCode(), city.getCountryCode());
+			if (area == null) continue;
 			try {
 				city.setAreaId(area.getId());
 				cityService.saveCity(city);
@@ -373,7 +381,7 @@ public class ImportCitiesController {
 
 		// bandUser();
 		//indexCities();
-
+		/*
 		Iterator <Area> ait = areaService.fetchAll().iterator();
 
 		while (ait.hasNext()) {
@@ -382,6 +390,34 @@ public class ImportCitiesController {
 			Country country = countryService.getByCode(area.getCountryCode());
 			area.setCountryId(country.getId());
 			areaService.saveArea(area);
+
+		}
+		*/
+
+		List<City> cities = cityService.fetchAll();
+
+		Iterator<City> cit = cities.iterator();
+
+		while (cit.hasNext()) {
+			City city = cit.next();
+			if (city.getArea() != null) continue;
+			Query q = this.sessionFactory.getCurrentSession().createSQLQuery("select id from areas a where code = ? and country_code = ?").addScalar("id", Hibernate.INTEGER).setString(0, city.getAreaCode()).setString(1, city.getCountryCode());
+			List rows = q.list();
+			if (rows.isEmpty()) continue;
+
+			Integer area_id = (Integer) rows.get(0);
+
+			if (area_id == null) continue;
+			if (area_id < 1) continue;
+			
+			try {
+				//city.setAreaId(area_id);
+				//cityService.saveCity(city);
+				q = this.sessionFactory.getCurrentSession().createSQLQuery("UPDATE cities set area_id = ? where id = ?").setInteger(0, area_id).setInteger(1, city.getId());
+				q.executeUpdate();
+			} catch (Exception e) {
+				System.out.print(e);
+			}
 
 		}
 

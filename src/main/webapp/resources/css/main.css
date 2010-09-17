@@ -305,7 +305,7 @@ form.register select {
 	width: 340px;
 }
 
-div.roles {
+table.roles {
 	background-image: url(images/role_back.png);
 	background-position: left top;
 	background-repeat: no-repeat;
@@ -315,16 +315,16 @@ div.roles {
 	height: 275px;
 }
 
-div.roles p {
+table.roles p {
 	text-align: center;
 }
 
-div.roles img {
+table.roles img {
 	float: left;
 	display: block;
 	padding: 40px 20px;
 }
 
-div.roles img.band {
+table.roles img.band {
 	margin: -2px 0px 0px 10px;
 }

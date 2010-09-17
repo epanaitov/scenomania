@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+ <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -14,11 +14,19 @@
             </ui:define>
 
             <ui:define name="content">
-				<div class="roles">
-                <p>
+
+				<p>
 					<h:outputText value="#{msg['register.roles.user_registered']}"/>
 				</p>
-				<h:panelGroup rendered="#{message != null}">
+
+				<h:panelGrid rendered="#{playin}" columns="3" styleClass="roles">
+
+					
+
+				</h:panelGrid>
+
+				<div class="roles">
+				<h:panelGroup rendered="#{message}">
 					<h:outputText value="#{msg[message]}"/>
 				</h:panelGroup>
 				<h:panelGroup rendered="#{message == null}">

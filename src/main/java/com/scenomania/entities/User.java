@@ -43,7 +43,7 @@ public class User extends EntityBase {
 	private Map<BandPosition, Band> bands = new HashMap<BandPosition, Band>();
 	*/
 
-	@OneToMany(mappedBy="user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},  fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},  fetch=FetchType.LAZY)
 	private Set<BandPosition> playingIn;
 
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)

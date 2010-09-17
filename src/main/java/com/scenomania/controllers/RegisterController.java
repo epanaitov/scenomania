@@ -4,6 +4,7 @@ import com.scenomania.dao.UserDao;
 import com.scenomania.entities.Band;
 import com.scenomania.entities.BandPosition;
 import com.scenomania.entities.City;
+import com.scenomania.entities.PromoterPosition;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -44,6 +45,11 @@ public class RegisterController extends ControllerBase {
 	@Autowired(required=true)
 	private UserDao userDao;
 
+	@Autowired(required=true)
+	private HttpServletRequest request;
+
+	@Autowired(required=true)
+	private HttpSession httpSession;
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String index(Model model) {
@@ -58,7 +64,6 @@ public class RegisterController extends ControllerBase {
 	public String index(@ModelAttribute("user") @Valid User user, 
 			BindingResult result,
 			Model model,
-			HttpServletRequest request,
 			HttpSession httpSession) {
 		
 		String passwordConfirm = request.getParameter("password_confirm");
@@ -89,19 +94,40 @@ public class RegisterController extends ControllerBase {
 			model.addAttribute("userErrors", hashErrors(result.getFieldErrors()));
 			return "register/index";
 		}
-		
+		/*
+		if (request.getParameter("playin").equals("on")) {
+			BandPosition playin = new BandPosition();
+			playin.setUser(user);
+			user.setPlayingIn(new HashSet<BandPosition>());
+			user.getPlayingIn().add(playin);
+		}
+
+		if (request.getParameter("promotin").equals("on")) {
+			PromoterPosition promotin = new PromoterPosition();
+			promotin.setUser(user);
+			user.setPromotingIn(new HashSet<PromoterPosition>());
+			user.getPromotingIn().add(promotin);
+		}
+		*/
 		user = userService.createUser(user);
 		httpSession.setAttribute("loggedin", user);
+		if (request.getParameter("playin").equals("on")) httpSession.setAttribute("playin", 1);
+		if (request.getParameter("promotin").equals("on")) httpSession.setAttribute("promotin", 1);
 		return "redirect:/register/role";
 	}
 
 	@RequestMapping(value="/register/role", method=RequestMethod.GET)
-	public String role(Model model, HttpSession httpSession) {
+	public String role(Model model) {
 
 		User loggedin = (User) httpSession.getAttribute("loggedin");
 		
-		if (loggedin == null) return "redirect:/register";
+		//if (loggedin == null) return "redirect:/register";
 
+		//if (httpSession.getAttribute("playin") != null)
+			model.addAttribute("playin", true);
+		//if (httpSession.getAttribute("promotin") != null)
+			model.addAttribute("promotin", true);
+		/*
 		loggedin = userDao.refresh(loggedin);
 
 		Set<BandPosition> playsIn = loggedin.getPlayingIn();
@@ -109,7 +135,7 @@ public class RegisterController extends ControllerBase {
 		if ((playsIn != null) && (!playsIn.isEmpty())) {
 			model.addAttribute("message", "band.saved");
 		}
-		
+		*/
         return "register/role";
 	}
 

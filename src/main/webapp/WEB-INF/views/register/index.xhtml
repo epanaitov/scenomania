@@ -241,6 +241,24 @@
 			</tr>
 			<tr>
 				<td></td>
+				<td colspan="2">
+					<h:selectBooleanCheckbox id="playin" />
+					<h:outputLabel for="playin" style="display: inline; text-align: left; width: auto;">
+						<h:outputText value="#{msg['register.index.also_playin']}" />
+					</h:outputLabel>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2">
+					<h:selectBooleanCheckbox id="promotin" />
+					<h:outputLabel for="promotin" style="display: inline; text-align: left; width: auto;">
+						<h:outputText value="#{msg['register.index.also_promotin']}" />
+					</h:outputLabel>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
 				<td colspan="2"><br /><h:commandButton id="proceed" value="#{msg['register.index.submit']}" image="/resources/resources/images/btn_send.png" /></td>
 			</tr>
 		</table>

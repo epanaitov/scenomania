@@ -52,8 +52,8 @@ public class HibernateCityDao implements CityDao {
 	}
 
 	public List<City> fetchAll() {
-		Query q = this.sessionFactory.getCurrentSession().createQuery("from City where area_id is null");
-		q.setMaxResults(250000);
+		Query q = this.sessionFactory.getCurrentSession().createQuery("from City cities where area_id is null and country_code = 'US'");
+		//q.setMaxResults(250000);
 		return (List<City>) q.list();
 	}
 	
