@@ -63,6 +63,21 @@
 			</div>
 
 			<div id="content" class="center_content">
+
+				<h:panelGroup style="display: block; width: 728px; margin: 0 auto 10px;" rendered="#{facesContext.externalContext.requestPathInfo != '/about'}">
+				<script type="text/javascript"><!--
+				google_ad_client = "pub-8894525512785939";
+				/* 728x90, created 9/17/10 */
+				google_ad_slot = "3366119372";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//-->
+				</script>
+				<script type="text/javascript"
+				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+				</script>
+				</h:panelGroup>
+
 				<ui:insert name="content">Content</ui:insert>
 			</div>
 

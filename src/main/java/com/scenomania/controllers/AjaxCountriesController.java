@@ -63,9 +63,7 @@ public class AjaxCountriesController {
 
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
-
 		Gson gson = new Gson();
-
 		return new ResponseEntity<String>(gson.toJson(dataSource, DojoDataSource.class), responseHeaders, HttpStatus.CREATED);
 	}
 

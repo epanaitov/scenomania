@@ -310,21 +310,33 @@ table.roles {
 	background-position: left top;
 	background-repeat: no-repeat;
 	margin: 0 auto;
-	width: 490px;
+	width: 530px;
 	padding: 20px;
-	height: 275px;
+	height: 310px;
 }
 
-table.roles p {
+table .label {
+	width: 30%;
+}
+
+table .field {
+	width: 40%;
+}
+
+div.message {
+	margin: 5px 5px 20px;
+	padding: 20px;
 	text-align: center;
+	border: 1px solid #FECE19;
+	background-color: #FFEFB2;
+	color: #666666;
 }
 
-table.roles img {
-	float: left;
-	display: block;
-	padding: 40px 20px;
-}
-
-table.roles img.band {
-	margin: -2px 0px 0px 10px;
+div.error {
+	margin: 5px 5px 20px;
+	padding: 20px;
+	text-align: center;
+	border: 1px solid #f89414;
+	background-color: #f8e7d2;
+	color: red;
 }

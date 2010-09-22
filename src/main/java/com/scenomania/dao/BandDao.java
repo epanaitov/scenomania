@@ -13,4 +13,5 @@ public interface BandDao {
 	public Band save(Band band);
 	public List<Band> suggest(HashMap params);
 	public Band getWhere(HashMap params);
+	public List<Band> fetchAll();
 }

@@ -46,7 +46,7 @@
 		<form id="user" dojoType="dijit.form.Form" class="register" action="#{facesContext.externalContext.requestContextPath}/register" method="post">
 		<table>
 			<tr>
-				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}"/></h:outputLabel></td>
+				<td><h:outputLabel for="nickname"><h:outputText value="#{msg['register.index.nickname']}" /></h:outputLabel></td>
 				<td><h:inputText  id="nickname" value="#{user.nickname}" required="true"/></td>
 				<td><ui:repeat value="#{userErrors['nickname']}" var="err">
 						<h:outputText value="#{msg[err]}" />
@@ -259,7 +259,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td colspan="2"><br /><h:commandButton id="proceed" value="#{msg['register.index.submit']}" image="/resources/resources/images/btn_send.png" /></td>
+				<td colspan="2"><br /><h:commandButton id="proceed" value="#{msg['register.index.submit']}" image="/resources/resources/images/btn_next.png" /></td>
 			</tr>
 		</table>
 		</form>

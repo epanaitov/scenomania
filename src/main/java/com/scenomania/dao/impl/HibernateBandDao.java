@@ -59,4 +59,8 @@ public class HibernateBandDao implements BandDao {
 
 		return (Band) criteria.uniqueResult();
 	}
+
+	public List<Band> fetchAll() {
+		return sessionFactory.getCurrentSession().createQuery("from Band").list();
+	}
 }

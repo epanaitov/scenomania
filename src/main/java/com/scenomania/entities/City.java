@@ -53,7 +53,7 @@ public class City extends EntityBase {
 	@OneToMany(mappedBy="homecity")
 	private Set<User> users;
 
-	@OneToMany(mappedBy="homecity")
+	@OneToMany(mappedBy="homecity", fetch=FetchType.LAZY)
 	private Set<Band> bands;
 
 	@OneToMany(mappedBy="homecity", fetch=FetchType.LAZY)

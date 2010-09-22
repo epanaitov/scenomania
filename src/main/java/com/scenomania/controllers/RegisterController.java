@@ -1,9 +1,11 @@
 package com.scenomania.controllers;
 
+import com.scenomania.dao.PromoterDao;
 import com.scenomania.dao.UserDao;
 import com.scenomania.entities.Band;
 import com.scenomania.entities.BandPosition;
 import com.scenomania.entities.City;
+import com.scenomania.entities.Promoter;
 import com.scenomania.entities.PromoterPosition;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -19,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.scenomania.entities.User;
 import com.scenomania.services.BandService;
 import com.scenomania.services.CityService;
+import com.scenomania.services.PromoterService;
 import com.scenomania.services.UserService;
 import com.scenomania.utils.PlainErrorsHashMap;
 import java.util.HashSet;
-import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -50,6 +52,12 @@ public class RegisterController extends ControllerBase {
 
 	@Autowired(required=true)
 	private HttpSession httpSession;
+
+	@Autowired(required=true)
+	private PromoterService promoterService;
+
+	@Autowired(required=true)
+	private PromoterDao promoterDao;
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String index(Model model) {
@@ -94,21 +102,7 @@ public class RegisterController extends ControllerBase {
 			model.addAttribute("userErrors", hashErrors(result.getFieldErrors()));
 			return "register/index";
 		}
-		/*
-		if (request.getParameter("playin").equals("on")) {
-			BandPosition playin = new BandPosition();
-			playin.setUser(user);
-			user.setPlayingIn(new HashSet<BandPosition>());
-			user.getPlayingIn().add(playin);
-		}
-
-		if (request.getParameter("promotin").equals("on")) {
-			PromoterPosition promotin = new PromoterPosition();
-			promotin.setUser(user);
-			user.setPromotingIn(new HashSet<PromoterPosition>());
-			user.getPromotingIn().add(promotin);
-		}
-		*/
+		
 		user = userService.createUser(user);
 		httpSession.setAttribute("loggedin", user);
 		if (request.getParameter("playin").equals("on")) httpSession.setAttribute("playin", 1);
@@ -119,77 +113,123 @@ public class RegisterController extends ControllerBase {
 	@RequestMapping(value="/register/role", method=RequestMethod.GET)
 	public String role(Model model) {
 
-		User loggedin = (User) httpSession.getAttribute("loggedin");
-		
-		//if (loggedin == null) return "redirect:/register";
+		if (httpSession.getAttribute("loggedin") == null) return "redirect:/register";
 
-		//if (httpSession.getAttribute("playin") != null)
+		if (httpSession.getAttribute("playin") != null)
 			model.addAttribute("playin", true);
-		//if (httpSession.getAttribute("promotin") != null)
+		if (httpSession.getAttribute("promotin") != null)
 			model.addAttribute("promotin", true);
-		/*
-		loggedin = userDao.refresh(loggedin);
 
-		Set<BandPosition> playsIn = loggedin.getPlayingIn();
+		String message = "register.roles.user_registered";
+		if (httpSession.getAttribute("message") != null) message = httpSession.getAttribute("message").toString();
+		model.addAttribute("message", message);
 
-		if ((playsIn != null) && (!playsIn.isEmpty())) {
-			model.addAttribute("message", "band.saved");
-		}
-		*/
         return "register/role";
 	}
 
 	@RequestMapping(value="/register/role", method=RequestMethod.POST)
-	public String role(Model model,
-			HttpServletRequest request,
-			HttpSession httpSession) {
+	public String rolePOST(Model model, HttpServletRequest request) {
 
 		User loggedin = (User) httpSession.getAttribute("loggedin");
 		if (loggedin == null) return "redirect:/register";
 
-		String role = request.getParameter("role");
 
-		if (role.equals("band")) {
+		PlainErrorsHashMap bandErrors = new PlainErrorsHashMap();
+		PlainErrorsHashMap promoterErrors = new PlainErrorsHashMap();
 
-			//Map<String, LinkedList> errorsHash = new HashMap<String, LinkedList>();
-			PlainErrorsHashMap errorsHash = new PlainErrorsHashMap();
+		Boolean doBand = (request.getParameter("band_check") != null);
+		Boolean doPromoter = (request.getParameter("promoter_check") != null);
 
-			String name = request.getParameter("band-name");
-			if ((name == null) || (name.isEmpty())) errorsHash.addError("band-name", "band.name.empty");
+		String bandName = "";
+		String bandPosition = "";
 
-			String position = request.getParameter("band-position");
-			if ((position == null) || (position.isEmpty())) errorsHash.addError("band-position", "band.position.empty");
+		if (doBand) {
 
-			if (!errorsHash.isEmpty()) {
-				model.addAttribute("bandErrors", errorsHash);
-				return "register/role";
-			}
+			bandName = request.getParameter("band[name]");
+			if ((bandName == null) || (bandName.isEmpty())) bandErrors.addError("name", "band.name.empty");
 
-			Band band = bandService.find(name, loggedin.getHomecity());
+			bandPosition = request.getParameter("band[role]");
+			if ((bandPosition == null) || (bandPosition.isEmpty())) bandErrors.addError("position", "band.position.empty");
+		}
+
+		String promoterName = "";
+		String promoterPosition = "";
+		
+		if (doPromoter) {
+			promoterName = request.getParameter("promoter[name]");
+			if ((promoterName == null) || (promoterName.isEmpty())) promoterErrors.addError("name", "promoter.name.empty");
+
+			promoterPosition = request.getParameter("promoter[role]");
+			if ((promoterPosition == null) || (promoterPosition.isEmpty())) promoterErrors.addError("position", "promoter.position.empty");
+		}
+
+		if (!bandErrors.isEmpty() || !promoterErrors.isEmpty()) {
+			model.addAttribute("bandErrors", bandErrors);
+			model.addAttribute("promoterErrors", promoterErrors);
+
+			//if (httpSession.getAttribute("playin") != null)
+			model.addAttribute("playin", true);
+			//if (httpSession.getAttribute("promotin") != null)
+			model.addAttribute("promotin", true);
+
+			model.addAttribute("error", "register.roles.error_occured");
+
+			return "register/role";
+		}
+
+		if (doBand) {
+
+			Band band = bandService.find(bandName, loggedin.getHomecity());
 
 			if (band == null) {
 				band = new Band();
 				band.setHomecity(loggedin.getHomecity());
-				band.setName(name);
-				band.setDescription(request.getParameter("band-description"));
+				band.setName(bandName);
+				band.setDescription(request.getParameter("band[description]"));
 				band.setMembers(new HashSet<BandPosition>());
 				band = bandService.save(band);
 			}
 
-			BandPosition bandPosition = new BandPosition();
-			bandPosition.setBand(band);
-			bandPosition.setUser(loggedin);
-			bandPosition.setPosition(position);
-			band.getMembers().add(bandPosition);
+			BandPosition bandRole = new BandPosition();
+			bandRole.setBand(band);
+			bandRole.setUser(loggedin);
+			bandRole.setPosition(bandPosition);
+			band.getMembers().add(bandRole);
 			band = bandService.save(band);
 
-			return "redirect:/register/role";
 		}
 
-		if (role.equals("promoter")) {
-			
+		if (doPromoter) {
+
+			Promoter promoter = promoterService.find(promoterName, loggedin.getHomecity());
+
+			if (promoter == null) {
+				promoter = new Promoter();
+				promoter.setHomecity(loggedin.getHomecity());
+				promoter.setName(promoterName);
+				promoter.setStaff(new HashSet<PromoterPosition>());
+				promoter = promoterDao.save(promoter);
+			}
+
+			PromoterPosition promoterRole = new PromoterPosition();
+			promoterRole.setPosition(promoterPosition);
+			promoterRole.setUser(loggedin);
+			promoterRole.setPromoter(promoter);
+			promoter.getStaff().add(promoterRole);
+			promoter = promoterService.save(promoter);
+
 		}
 
- 		return "register/role";
+		httpSession.removeAttribute("playin");
+		httpSession.removeAttribute("promotin");
+
+		String message = "";
+		if (doBand) message = "register.roles.band_saved";
+		if (doPromoter) message = "register.roles.promoter_saved";
+		if (doBand && doPromoter) message = "register.roles.band_promoter_saved";
+		
+		httpSession.setAttribute("message", message);
+
+		return "redirect:/register/role";
 	}
 }

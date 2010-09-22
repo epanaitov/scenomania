@@ -1,4 +1,4 @@
- <?xml version='1.0' encoding='UTF-8' ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -9,135 +9,146 @@
         
         <ui:composition template="./../../layouts/landing.xhtml">
             
-            <ui:define name="top">
-                top
-            </ui:define>
-
             <ui:define name="content">
 
-				<p>
-					<h:outputText value="#{msg['register.roles.user_registered']}"/>
-				</p>
+				<h:panelGroup styleClass="message" layout="block" rendered="#{message != null}"><h:outputText value="#{msg[message]}" /></h:panelGroup>
+				<h:panelGroup styleClass="error" layout="block" rendered="#{error != null}"><h:outputText value="#{msg[error]}" /></h:panelGroup>
 
-				<h:panelGrid rendered="#{playin}" columns="3" styleClass="roles">
+				<form id="roles" dojoType="dijit.form.Form" action="#{facesContext.externalContext.requestContextPath}/register/role" method="post">
 
+				<h:panelGrid rendered="#{playin}" columns="3" styleClass="roles" columnClasses="label,field,message">
+					<h:panelGroup>
+						<h:inputHidden id="band_check" value="1" />
+						<h:outputLabel for="band_name"><h:outputText value="#{msg['band.name']}" /></h:outputLabel>
+					</h:panelGroup>
 					
+					<h:inputText id="band_name" required="true" />
+					<ui:repeat value="#{bandErrors['name']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+
+					<h:outputLabel for="band_description"><h:outputText value="#{msg['band.description']}" /></h:outputLabel>
+					<h:inputTextarea id="band_description" required="true" />
+					<ui:repeat value="#{bandErrors['description']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+
+					<h:outputLabel for="band_role"><h:outputText value="#{msg['band.position']}" /></h:outputLabel>
+					<h:inputText id="band_role" required="true" />
+					<ui:repeat value="#{bandErrors['position']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
 
 				</h:panelGrid>
 
-				<div class="roles">
-				<h:panelGroup rendered="#{message}">
-					<h:outputText value="#{msg[message]}"/>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{message == null}">
-				<script language="javascript">
-					dojo.require("dijit.Dialog");
-					var bandForm = '';
+				<h:panelGrid rendered="#{promotin}" columns="3" styleClass="roles" columnClasses="label,field,message">
 
-					function popup_band() {
-						var dialog = new dijit.Dialog({ title: "Я играю в группе!", content: bandForm });
-						dialog.show();
-					}
+					<h:panelGroup>
+						<h:inputHidden id="promoter_check" value="1" />
+						<h:outputLabel for="promoter_name"><h:outputText value="#{msg['promoter.name']}" /></h:outputLabel>
+					</h:panelGroup>
+					
+					<h:inputText id="promoter_name" required="true" />
+					<ui:repeat value="#{promoterErrors['name']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
 
-					function popup_promoter() {
-						var dialog = new dijit.Dialog({ title: "Я организую концерты", content: dojo.byId('promoter-form').innerHTML });
-						dialog.show();
-					}
+					<h:outputLabel for="promoter_role"><h:outputText value="#{msg['promoter.position']}" /></h:outputLabel>
+					<h:inputText id="promoter_role" required="true" />
+					<ui:repeat value="#{promoterErrors['position']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
 
-				</script>
-				<ui:remove>
-				<h:graphicImage styleClass="band" name="images/btn_band.png" onclick="popup_band();" />
-				<h:graphicImage styleClass="promoter" name="images/btn_promoter.png" onclick="popup_promoter();" />
-				</ui:remove>
-				<div class="clear"></div>
-				<div id="band-form" style="display: none">
-					<form id="band" action="#{facesContext.externalContext.requestContextPath}/register/role" method="post">
-						<h:inputHidden	id="role" value="band" />
-					<h:panelGrid columns="2">
-						<h:outputLabel for="band-name"><h:outputText value="#{msg['band.name']}" /></h:outputLabel>
+				</h:panelGrid>
 
-						<h:panelGroup>
+					<div align="center"><h:commandButton id="proceed" rendered="#{playin || promotin}" value="#{msg['register.roles.submit']}" image="/resources/resources/images/btn_send.png" /></div>
 
-							<script language="javascript">
+					<script type="text/javascript">
+					/* <![CDATA[ */
 
-							function suggest_field(sender) {
+						dojo.require("dijit.form.Form");
+						dojo.require("dojo.data.ItemFileReadStore");
+						dojo.require("dijit.form.ValidationTextBox");
+						dojo.require("dijit.form.ComboBox");
+						dojo.require("dijit.form.Textarea");
 
-								
 
-								dojo.xhrGet({
-									url:"#{facesContext.externalContext.requestContextPath}/ajax/bands/suggest/?query="+sender.value,
-									load: function(data) {
-										//dojo.byId("band-name-suggest").innerHTML = data;
-										dojo.byId("band-name-suggest").innerHTML = 'xyu';
-										alert(dojo.byId("band-name-suggest").innerHTML);
-									}
-								});
+						var bandStore = new dojo.data.ItemFileReadStore({
+							url: "#{facesContext.externalContext.requestContextPath}/ajax/bands/suggest/",
+							clearOnClose: true,
+							urlPreventCache: true
+						});
+
+						var promoterStore = new dojo.data.ItemFileReadStore({
+							url: "#{facesContext.externalContext.requestContextPath}/ajax/promoter/suggest/",
+							clearOnClose: true,
+							urlPreventCache: true
+						});
+
+						dojo.addOnLoad(function() {
+							
+							new dijit.form.ComboBox({
+								id: "band[name]",
+								name: "band_name",
+								store: bandStore,
+								required: true,
+								trim: true,
+								searchAttr: "label"
+							},
+							"band_name");
+
+							new dijit.form.Textarea({
+								id: "band[description]",
+								style: "width:175px; height: 175px;"
+							},
+							"band_description");
+
+							new dijit.form.ValidationTextBox({
+								id: "band[role]",
+								required: true,
+								trim: true
+							}, "band_role");
+
+							new dijit.form.ComboBox({
+								id: "promoter[name]",
+								name: "promoter_name",
+								store: promoterStore,
+								required: true,
+								trim: true,
+								searchAttr: "label"
+							},
+							"promoter_name");
+
+							new dijit.form.ValidationTextBox({
+								id: "promoter[role]",
+								required: true,
+								trim: true
+							}, "promoter_role");
+
+							dijit.byId("roles").onSubmit = function() {
+
+								if (dijit.byId("roles").validate()) {
+
+									dojo.forEach(dijit.byId("roles").getDescendants(), function(widget) {
+										var field  = dojo.doc.createElement("input");
+										field.type = 'hidden';
+										field.name = widget.id;
+										field.value = widget.value;
+										dojo.byId("roles").appendChild(field);
+									});
+									
+									return true;
+								} else return false;
 							}
 
-							</script>
+						});
+						
 
-							<h:inputText autocomplete="off" id="band-name" onkeypress="suggest_field(this);" required="true" requiredMessage="#{msg['band.name.empty']}"/>
-							<div id="band-name-suggest">ffffffffff</div>
-						</h:panelGroup>
+					/* ]]> */
+					</script>
 
-						<h:outputLabel for="band-description"><h:outputText value="#{msg['band.description']}" /></h:outputLabel>
-						<h:inputTextarea id="band-description" required="true" requiredMessage="#{msg['band.description.empty']}"></h:inputTextarea>
-
-						<h:outputLabel for="band-position"><h:outputText value="#{msg['band.position']}" /></h:outputLabel>
-						<h:inputText id="band-position" />
-					</h:panelGrid>
-						<h:commandButton id="proceed" value="#{msg['band.save']}" />
-					</form>
-				</div>
-
-				<script language="javascript">
-					bandForm = dojo.byId('band-form').innerHTML;
-					dojo.byId('band-form').innerHTML = '';
-				</script>
-
-				<div id="promoter-form" style="display: none">
-					<form id="promoter" action="#{facesContext.externalContext.requestContextPath}/register/role" method="post">
-						<h:inputHidden	id="role" value="promoter" />
-					<h:panelGrid columns="2">
-						<h:outputLabel for="promoter-name"><h:outputText value="#{msg['promoter.name']}" /></h:outputLabel>
-
-						<h:panelGroup>
-
-							<script language="javascript">
-
-							function suggest_field(sender) {
-
-
-
-								dojo.xhrGet({
-									url:"#{facesContext.externalContext.requestContextPath}/ajax/promoters/suggest/?query="+sender.value,
-									load: function(data) {
-										dojo.byId("promoter-name-suggest").innerHTML = data;
-									}
-								});
-							}
-
-							</script>
-
-							<h:inputText autocomplete="off" id="promoter-name" onkeypress="suggest_field(this);" required="true" requiredMessage="#{msg['promoter.name.empty']}"/>
-							<div id="promoter-name-suggest"></div>
-						</h:panelGroup>
-
-						<h:outputLabel for="promoter-description"><h:outputText value="#{msg['promoter.description']}" /></h:outputLabel>
-						<h:inputTextarea id="promoter-description" required="true" requiredMessage="#{msg['promoter.description.empty']}"></h:inputTextarea>
-
-						<h:outputLabel for="promoter-position"><h:outputText value="#{msg['promoter.position']}" /></h:outputLabel>
-						<h:inputText id="promoter-position" />
-					</h:panelGrid>
-						<h:commandButton id="proceed" value="#{msg['promoter.save']}" />
-					</form>
-				</div>
-				</h:panelGroup>
-				</div>
-            </ui:define>
-
-            <ui:define name="bottom">
-                bottom
+				</form>
+				
             </ui:define>
 
         </ui:composition>

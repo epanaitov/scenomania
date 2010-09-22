@@ -1,9 +1,10 @@
 package com.scenomania.entities;
 
-import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -19,13 +20,13 @@ import javax.persistence.Table;
 public class Promoter extends EntityBase {
 
 	@ManyToOne
-	@JoinColumn(name="homecity_id", insertable=false, updatable=false)
+	@JoinColumn(name="homecity_id")
 	private City homecity;
 
 	@Column
 	private String name;
 
-	@OneToMany(mappedBy="promoter")
+	@OneToMany(mappedBy="promoter", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private Set<PromoterPosition> staff;
 
 	public City getHomecity() {
