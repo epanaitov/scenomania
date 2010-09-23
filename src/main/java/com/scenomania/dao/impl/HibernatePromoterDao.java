@@ -3,6 +3,7 @@ package com.scenomania.dao.impl;
 import com.scenomania.dao.PromoterDao;
 import com.scenomania.entities.City;
 import com.scenomania.entities.Promoter;
+import java.util.List;
 import java.util.Locale;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -32,5 +33,9 @@ public class HibernatePromoterDao implements PromoterDao {
 
 	public Promoter save(Promoter promoter) {
 		return (Promoter) this.sessionFactory.getCurrentSession().merge(promoter);
+	}
+
+	public List<Promoter> fetchAll() {
+		return (List<Promoter>) sessionFactory.getCurrentSession().createQuery("from Promoter").list();
 	}
 }

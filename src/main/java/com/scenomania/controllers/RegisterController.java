@@ -105,8 +105,8 @@ public class RegisterController extends ControllerBase {
 		
 		user = userService.createUser(user);
 		httpSession.setAttribute("loggedin", user);
-		if (request.getParameter("playin").equals("on")) httpSession.setAttribute("playin", 1);
-		if (request.getParameter("promotin").equals("on")) httpSession.setAttribute("promotin", 1);
+		if (request.getParameter("playin") != null) httpSession.setAttribute("playin", 1);
+		if (request.getParameter("promotin") != null) httpSession.setAttribute("promotin", 1);
 		return "redirect:/register/role";
 	}
 
