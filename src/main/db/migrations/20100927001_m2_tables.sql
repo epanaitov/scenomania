@@ -1,3 +1,4 @@
+drop tables stages;
 create table stages (
 	id int unsigned not null auto_increment primary key,
 	city_id int unsigned not null,
@@ -48,6 +49,7 @@ create table comments (
 	index using btree (user_id)
 ) character set utf8;
 
+drop tables tags;
 create table tags (
 	id int unsigned not null auto_increment primary key,
 	name varchar(50),
