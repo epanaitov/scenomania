@@ -22,27 +22,6 @@ import javax.validation.constraints.Size;
 @Table(name="users", uniqueConstraints = { @UniqueConstraint(columnNames={"email"}) })
 public class User extends EntityBase {
 	
-	/*
-	@ManyToMany(
-		targetEntity=Band.class,
-		fetch=FetchType.EAGER,
-		cascade = CascadeType.ALL
-	)
-	@JoinTable(
-		name="bands_users",
-		joinColumns=@JoinColumn(name="user_id"),
-		inverseJoinColumns=@JoinColumn(name="band_id")
-	)
-	@AttributeOverrides({
-		//@AttributeOverride(name="bandId", column = @Column(name="band_id") ),
-        //@AttributeOverride(name="userId", column = @Column(name="user_id") ),
-		@AttributeOverride(name="position", column = @Column(name="position") )
-	})
-	
-	@MapKeyClass(BandPosition.class)
-	private Map<BandPosition, Band> bands = new HashMap<BandPosition, Band>();
-	*/
-
 	@OneToMany(mappedBy="user", cascade = {CascadeType.MERGE, CascadeType.PERSIST},  fetch=FetchType.LAZY)
 	private Set<BandPosition> playingIn;
 

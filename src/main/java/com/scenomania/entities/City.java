@@ -1,6 +1,5 @@
 package com.scenomania.entities;
 
-import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -59,12 +58,31 @@ public class City extends EntityBase {
 	@OneToMany(mappedBy="homecity", fetch=FetchType.LAZY)
 	private Set<Promoter> promoters;
 
+	@OneToMany(mappedBy="city", fetch=FetchType.LAZY)
+	private Set<Stage> stages;
+
 	@ManyToOne
 	@JoinColumn(name="area_id", insertable=false, updatable=false)
 	private Area area;
 
 	public Set<Band> getBands() {
 		return bands;
+	}
+
+	public Set<Promoter> getPromoters() {
+		return promoters;
+	}
+
+	public void setPromoters(Set<Promoter> promoters) {
+		this.promoters = promoters;
+	}
+
+	public Set<Stage> getStages() {
+		return stages;
+	}
+
+	public void setStages(Set<Stage> stages) {
+		this.stages = stages;
 	}
 
 	public void setBands(Set<Band> bands) {
