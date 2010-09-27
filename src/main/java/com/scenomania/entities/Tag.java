@@ -14,6 +14,6 @@ import javax.persistence.Table;
 public class Tag extends EntityBase {
 
 	@Column
-	private String name;
+	private String name;	
 
 }

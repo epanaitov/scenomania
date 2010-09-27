@@ -36,7 +36,7 @@ public class Tour extends EntityBase {
 	@JoinColumn(name="band_id")
 	private Band band;
 
-	@OneToMany(mappedBy="performance", fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="tour", fetch=FetchType.LAZY)
 	private Set<Performance> performances;
 
 	public Set<Performance> getPerformances() {
