@@ -48,21 +48,22 @@ body {
 }
 
 #centered_container {
-	margin: 50px auto 0px;
+	margin: 0px auto 0px;
 	background-image: url(images/centered.png);
 	background-position: left top;
 	background-repeat: repeat-y;
 	width: 843px;
+	position: relative;
+	min-height: 100%;
 }
 
 #header {
-	background-image: url(images/header2.png);
+	background-image: url(images/header3.png);
 	width: 843px;
-	/*background-position: top left;*/
-	background-position: 3px -5px ;
+	background-position: -4px 0px ;
 	background-repeat: no-repeat;
 	position: relative;
-	top: -20px;
+	top: 0px;
 	height: 282px;
 }
 
@@ -139,17 +140,24 @@ a#logo {
 	height: 113px;
 	display: block;
 	position: relative;
-	top: 35px;
-	left: 30px;
+	top: 15px;
+	left: 20px;
 }
 
 #footer {
-	background-image: url(images/footer2.png);
 	background-color: #E5E5E6;
 	height: 100px;
-	background-repeat: no-repeat;
-	background-position: 1px -138px;
+	margin: 0 auto;
+	position: relative;
+	margin-top: -20px;
 	width: 843px;
+}
+
+#footer .footer_container {
+	background-image: url(images/footer3.png);
+	background-repeat: repeat-x;
+	background-position: left top;
+	margin: 0px 9px 0 10px;
 }
 
 #footer .menus {
@@ -182,7 +190,7 @@ a#logo {
 
 #content {
 	padding: 0px 30px;
-	background-image: url("images/content.png");
+	/*background-image: url("images/content.png");*/
 	background-position: 1px bottom;
 	background-repeat: no-repeat;
 	padding-bottom: 20px;

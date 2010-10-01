@@ -19,7 +19,7 @@ public class IndexController {
 	@Autowired(required=true)
 	private UserService userService;
 
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    @RequestMapping(value="/")
     public String indexAction(Model model) {
 		
         return "index";
