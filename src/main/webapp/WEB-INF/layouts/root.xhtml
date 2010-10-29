@@ -11,8 +11,18 @@
 	
 <html>
 	<h:head>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<h:outputScript name="dojo1.5.js" library="js" target="body"/>
+		<meta name="copyright" content="Copyright ©#{DateTime.year}" />
+		<meta name="copyright" content="Copyright ©2010" />        
+	    <meta name="robots" content="index,follow" />
+		<meta name="robots" content="NOODP" />
+		<link rel="canonical" href="#{facesContext.externalContext.requestPathInfo}" />
+		<title><h:outputText value="#{SeoMeta.title}" /></title>
+		<meta name="keywords" content="#{SeoMeta.keywords}" />
+		<meta name="description" content="#{SeoMeta.description}" />
+		
+		<h:outputScript name="dojo1.5.js" library="js" target="head"/>
 		<h:outputStylesheet library="css"  name="dojo1.5.css"  />
 		<h:outputStylesheet library="css"  name="tundra1.5.css"  />
 		<h:outputStylesheet library="css"  name="main.css"  />
@@ -38,13 +48,25 @@
 		<div id="centered_container">
 
 			<div id="header">
+				<h1><h:outputText value="#{SeoMeta.h1}" /></h1>
 				<a id="logo" href="#{facesContext.externalContext.requestContextPath}/"><h:graphicImage name="images/logo.png" /></a>
-				<ez:menus />
+				
+				<ez:top_menus />
 			</div>
 
 			<div id="content" class="center_content">
 
-				<h:panelGroup style="display: block; width: 728px; margin: 0 auto 10px;">
+				<div class="panel">
+					<div class="block orange">
+						<a href="#{facesContext.externalContext.requestContextPath}/register">
+							<h:graphicImage name="images/register-button.png" />
+						</a>
+					</div>
+				</div>
+				
+				<div class="main">
+					
+					<h:panelGroup style="display: block; width: 728px; margin: 0; padding: 10px 0;">
 				<script type="text/javascript"><!--
 				google_ad_client = "pub-8894525512785939";
 				/* 728x90, created 9/17/10 */
@@ -57,15 +79,16 @@
 				src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 				</script>
 				</h:panelGroup>
-
-				<ui:insert name="content"></ui:insert>
+					
+					<ui:insert name="content"></ui:insert>
+				</div>
 			</div>
 
 		</div>
 		
 		<div id="footer">
 			<div class="footer_container">
-			<ez:menus />
+			<ui:remove><ez:top_menus /></ui:remove>
 			<div id="copyright"><h:outputText value="#{msg['copyright']}" escape="false" /></div>
 			</div>
 		</div>

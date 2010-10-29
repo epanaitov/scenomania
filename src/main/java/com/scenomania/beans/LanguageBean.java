@@ -1,4 +1,4 @@
-package com.scenomania.controllers;
+package com.scenomania.beans;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

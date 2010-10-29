@@ -10,7 +10,9 @@
                     <value>true</value>
                 </property>
             </activation>
-            <properties></properties>
+            <properties>
+                <netbeans.deployment.server.id>tomcat60:home=/usr/local/tomcat</netbeans.deployment.server.id>
+            </properties>
         </profile>
     </profiles>
 </profilesXml>

@@ -5,22 +5,20 @@
 
 package com.scenomania.controllers;
 
+import com.scenomania.beans.SeoMetaBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.scenomania.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class IndexController {
-
-	@Autowired(required=true)
-	private UserService userService;
+public class IndexController extends ControllerBase {
 
     @RequestMapping(value="/")
-    public String indexAction(Model model) {
+    public String indexAction(Model model, SeoMetaBean meta) {
+		
+		//model.addAttribute("meta", this.messageSource.getMessage("meta.index", args, locale))
+		//meta.setTitle("xyuxyu!!!");
 		
         return "index";
     }

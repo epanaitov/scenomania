@@ -1,4 +1,4 @@
-package com.scenomania.controllers;
+package com.scenomania.beans;
 
 import com.scenomania.entities.Country;
 import com.scenomania.services.CountryService;
@@ -22,12 +22,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  * @author eugene
  */
 @Component(value="countries")
-/**
- * we can consider some global scope and store all countries list in server memory
- * will work much faster than asking database each time
- * is there application sc
- */
-@Scope("request") // albeit for now
+@Scope("singleton") 
 public class CountriesBean {
 	
 	@Autowired(required=true)

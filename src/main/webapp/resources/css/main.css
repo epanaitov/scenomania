@@ -50,98 +50,71 @@ body {
 #centered_container {
 	margin: 0px auto 0px;
 	background-image: url(images/centered.png);
-	background-position: left top;
+	background-position: -1px top;
 	background-repeat: repeat-y;
-	width: 843px;
+	width: 1005px;
 	position: relative;
 	min-height: 100%;
 }
 
 #header {
-	background-image: url(images/header3.png);
-	width: 843px;
-	background-position: -4px 0px ;
+	background-image: url(images/header4.png);
+	width: 1005px;
+	background-position: 1px 0px ;
 	background-repeat: no-repeat;
 	position: relative;
 	top: 0px;
-	height: 282px;
+	height: 202px;
 }
 
-#header .menus {
-	top: 115px;
-	position: relative;
+#header h1 {
+	background-image: url(images/orange-transparent.png);
+	background-repeat: repeat;
+	margin: 0px 18px 0px 0px;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: right;
+	border-bottom: 1px solid #999999;
+	border-left: 1px solid #999999;
+	padding: 0px 5px;
+	color: #333333;
+	line-height: 20px;
+	float: right;
 }
 
-#header .menus a {
-	color: #666666;
-	font-size: 17px;
+#top_menus {
+	padding-top: 48px;
+	margin-left: 381px;
+	height: 42px;
+}
+
+#top_menus a {
+	color: #555555;
+	font-size: 18px;
 	display: block;
-	padding-top: 9px;
-	height: 35px;
+	line-height: 38px;
+	height: 42px;
 	float: left;
-	background-position: top left;
-	background-repeat: no-repeat;
-	text-align: center;
+	padding: 0 50px;
+	border-right: 1px solid #eeeeee;
 }
 
-#header .menus a:hover,
-#header .menus a:active
+#top_menus a:hover,
+#top_menus a:active
 {
 	color: white;
 	text-decoration: none;
-}
-
-#header .menus a.home {
-	margin-left: 37px;
-	width: 126px;
-}
-
-#header .menus a.home:hover,
-#header .menus a.home:active
-{
-	background-image: url(images/menus-first.png);	
-}
-
-#header .menus a.register {
-	margin-left: 0px;
-	width: 138px;
-}
-
-#header .menus a.register:hover,
-#header .menus a.register:active
-{
-	background-image: url(images/menus-second.png);
-}
-
-#header .menus a.team {
-	margin-left: 0px;
-	width: 174px;	
-}
-
-#header .menus a.team:hover,
-#header .menus a.team:active
-{
-	background-image: url(images/menus-third.png);
-}
-
-#header .menus a.contacts {
-	margin-left: 0px;
-	width: 185px;	
-}
-
-#header .menus a.contacts:hover,
-#header .menus a.contacts:active
-{
-	background-image: url(images/menus-forth.png);
+	background-image: url(images/orange-transparent.png);
+	background-repeat: repeat;
 }
 
 a#logo {
 	width: 264px;
 	height: 113px;
 	display: block;
-	position: relative;
-	top: 15px;
-	left: 20px;
+	float: left;
+	margin-top: 15px;
+	margin-left: 35px;
 }
 
 #footer {
@@ -150,7 +123,7 @@ a#logo {
 	margin: 0 auto;
 	position: relative;
 	margin-top: -20px;
-	width: 843px;
+	width: 986px;
 }
 
 #footer .footer_container {
@@ -196,74 +169,29 @@ a#logo {
 	padding-bottom: 20px;
 }
 
+#content .main {
+	width: 738px;
+	padding-right: 10px;
+}
+
 #copyright {
 	text-align: center;
 	position: relative;
 	top: 37px;
 }
 
-/* team */
-.team1 {
-	width: 656px;
-	height: 204px;
-	background: url("images/team1.png") no-repeat;
-}
-.team1 img, .team2 img {
-	position: relative;
-	left: 25px;
-	top: 25px;
-	border: 1px solid #CCCCCC;
-	padding: 1px;
-}
-.team2 {
-	width: 656px;
-	height: 203px;
-	background: url("images/team2.png") no-repeat;
-}
-.team1, .team2 {
-	margin-bottom: 25px;
-	margin-left: auto;
-	margin-right: auto;
-}
-.team_text {
-	position: relative;
-	left: 50px;
-	top: 25px;
-	width: 570px;
-	
-}
-*:first-child+html .team_text {
-	width: 420px;
+#content .panel {
+	float: right;
+	width: 210px;
 }
 
-.team_text h5 {
-	display: block;
-	color: #f89616;
-	font-weight: bold;
-	margin-left: 155px;
-	text-align: center;
-	width: 420px;
+#content .panel .block {
+	border: 1px solid #999999;
+	padding: 5px;
 }
 
-*:first-child+html .team_text h5,
-*:first-child+html .team_text h6 {
-	margin-left: 0;	
-}
-
-*:first-child+html .team_text h5 {
-	margin-top: 0px;
-}
-
-.team_text h6 {
-	margin-left: 155px;
-	text-align: center;
-	margin-top: 15px;
-	width: 420px;
-}
-
-.team_text p {
-	margin: 5px 0 0;
-	line-height: 115%;
+#content .panel .orange {
+	background-color: #feb600;
 }
 
 form.feedback {

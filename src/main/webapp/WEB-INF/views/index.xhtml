@@ -6,18 +6,40 @@
 				xmlns:h="http://java.sun.com/jsf/html">
 
     <ui:define name="content">
+		
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <h:outputScript name="ajax/maps.js" library="js" target="body"/>
+    <h:outputScript name="markerclusterer.js" library="js" target="body"/>
+	
+	<p style="text-align: justify; padding: 0px 15px;"><h:outputFormat value="#{msg['index.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat></p>
+		
+	    <script type="text/javascript">
+	    /*<![CDATA[*/
+		    function initialize() {
+			    var latlng = new google.maps.LatLng(55.8536111, 38.4411111);
+			    var myOptions = {
+			      zoom: 9,
+			      center: latlng,
+			      mapTypeId: google.maps.MapTypeId.ROADMAP
+			    };
+			    var contextPath = "#{facesContext.externalContext.requestContextPath}";
+				var map = new CitiesMap("map_canvas", myOptions);
+				map.ajaxURL = contextPath + '/ajax/map/cities/';
+				map.onCityClick = function (city, mouseEvent){
+					var text = city.name
+					 + " <a href=\""+ contextPath + "/city/"+ city.id +"\"\>Подробнее</a\>";
+					this.openPopup(city, text);
+					
+				};
+			}
+			dojo.addOnLoad(initialize);
+		/*]]>*/
+		</script>
+		<div id="map_canvas" style="width: 728px; height: 400px;"></div>
+		<div id="debug"></div>
+		
 
-		<div align="center"><h:graphicImage name="images/splash2.jpg" /></div>
-
-		<br /><br />
-
-		<div align="center">
-			<a href="#{facesContext.externalContext.requestContextPath}/register">
-				<h:graphicImage name="images/register.png" />
-			</a>
-		</div>
-
-		<ui:remove>
+s		<ui:remove>
 		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
 			<a href="#{facesContext.externalContext.requestContextPath}/register"><img src="http://www.up2date.co.nz/site/up2date/images/Graphic_Designer/up2date-register-button.gif" width="200" align="right" alt="" /></a>
 			Модуль регистрации<br />
@@ -25,7 +47,7 @@
 			<div style="clear: both" />
 		</div>
 		</ui:remove>
-		<p style="text-align: justify; padding: 0px 15px;"><h:outputFormat value="#{msg['index.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat></p>
+		
 
 		<ui:remove>
 		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
