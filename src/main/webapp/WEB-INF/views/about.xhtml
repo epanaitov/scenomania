@@ -2,7 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 				xmlns:h="http://java.sun.com/jsf/html"
-                template="./../layouts/landing.xhtml">
+                template="./../layouts/root.xhtml">
     
     <ui:define name="content">
         <h:graphicImage name="images/logo.png" style="float: left; border: 1px solid #CCCCCC; padding: 1px; margin: 0 10px 5px 0;" />
@@ -20,6 +20,60 @@
 			Now scenomania.ru is a solid team  of promoters, developers, photographers and musicians. 
 			Our goal is making a great fun of all concerting process and sharing that fun with everyone, who is fond of music, who plays music and who does gigs all over the world.
 		</p>
+		
+		<script type="text/javascript">
+	    	function addRequireDecor(id, prompt){
+	    		Spring.addDecoration(new Spring.ElementDecoration({
+					 elementId : id,
+					 widgetType : "dijit.form.ValidationTextBox",
+					 widgetAttrs : {
+					 promptMessage: prompt,
+					 required : true}}));
+	    	}
+	    	
+	    	function addProceedDecor(id){
+	    		Spring.addDecoration(
+						 new Spring.ValidateAllDecoration({
+						 elementId: id,
+						 event:'onclick'}));
+	    	}
+	    	<h:panelGroup rendered="#{empty success}">
+			function addDecors(){
+				addRequireDecor("email", "Enter Email");
+				addProceedDecor("proceed");
+			}
+			dojo.addOnLoad(addDecors);
+			</h:panelGroup>
+		</script>
+		
+		<h:panelGroup rendered="#{empty success}">
+			
+		<form id="user" class="feedback" action="#{url.get['feedback.html']}" method="post">
+		<table>
+			<tr>
+				<td><h:outputLabel for="email"><h:outputText value="#{msg['email']}"/></h:outputLabel></td>
+				<td><h:inputText  id="email" value="#{feedbackMail.email}" required="true"/></td>
+				<td><ui:repeat value="#{mailErrors['email']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+				</td>
+			</tr>
+			<tr>
+				<td><h:outputLabel for="text"><h:outputText value="#{msg['text']}"/></h:outputLabel></td>
+				<td><h:inputTextarea id="text" cols="50" rows="7" value="#{feedbackMail.text}" required="true"/></td>
+				<td><ui:repeat value="#{mailErrors['text']}" var="err">
+						<h:outputText value="#{msg[err]}" />
+					</ui:repeat>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td colspan="2"><h:commandButton id="proceed" image="/resources/resources/images/btn_send.png" value="#{msg['send']}" /></td>
+			</tr>
+		</table>
+		</form>
+	</h:panelGroup>
+	<h:panelGroup rendered="#{success}"><h:outputText value="#{msg['feedback.email.sent']}"/></h:panelGroup>
 		<div class="clear"></div>
     </ui:define>
 
