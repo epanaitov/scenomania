@@ -188,6 +188,8 @@ a#logo {
 #content .panel .block {
 	border: 1px solid #999999;
 	padding: 5px;
+	margin-bottom: 10px;
+	text-align: center;
 }
 
 #content .panel .orange {
