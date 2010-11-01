@@ -21,9 +21,17 @@
 		<meta name="keywords" content="#{SeoMeta.keywords}" />
 		<meta name="description" content="#{SeoMeta.description}" />
 		
-		<h:outputScript name="dojo1.5.js" library="js" target="head"/>
-		<h:outputStylesheet library="css"  name="dojo1.5.css"  />
-		<h:outputStylesheet library="css"  name="tundra1.5.css"  />
+		<script djconfig="parseOnLoad: true"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/dojo/dojo.js" type="text/javascript"></script>
+		<script type="text/javascript"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring.js"> </script>
+		<script type="text/javascript"
+		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring-Dojo.js"></script>
+			<script type="text/javascript">dojo.require("dojo.parser");</script>
+		
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/dojo/resources/dojo.css" />
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/dijit/themes/nihilo/nihilo.css" />
+		
 		<h:outputStylesheet library="css"  name="main.css"  />
 
 <script type="text/javascript">
@@ -42,7 +50,7 @@
 
 	</h:head>
     
-	<h:body styleClass="tundra">
+	<h:body styleClass="nihilo">
 
 		<div id="centered_container">
 
