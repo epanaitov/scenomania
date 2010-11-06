@@ -1,5 +1,6 @@
 package com.scenomania.controllers;
 
+import com.scenomania.beans.SeoMetaBean;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,13 @@ public class AboutController extends ControllerBase {
 	private HttpServletRequest request;
 	
 	@RequestMapping(value="/about", method=RequestMethod.GET)
-	public String index(Model model){
+	public String index(Model model, SeoMetaBean meta){
 		model.addAttribute("feedbackMail", new FeedbackMail());
+		
+		meta.setH1("Что мы и обратная связь");
+		meta.setDescription("Что такое Сценомания. Связаться с разработчиками.");
+		meta.setTitle("О нас, обратная связь");
+		
 		return "about";
 	}
 	
