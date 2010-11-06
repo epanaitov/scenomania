@@ -1,5 +1,6 @@
 package com.scenomania.controllers;
 
+import com.scenomania.beans.SeoMetaBean;
 import com.scenomania.dao.PromoterDao;
 import com.scenomania.dao.UserDao;
 import com.scenomania.entities.Band;
@@ -60,10 +61,12 @@ public class RegisterController extends ControllerBase {
 	private PromoterDao promoterDao;
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
-	public String index(Model model) {
+	public String index(Model model, SeoMetaBean meta) {
 
 		User user = new User();
 		model.addAttribute("user", user);
+		
+		meta.setH1("Регистрация");
 		
         return "register/index";
 	}

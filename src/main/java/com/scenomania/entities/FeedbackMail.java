@@ -1,15 +1,16 @@
 package com.scenomania.entities;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class FeedbackMail {
 	
-
+	@NotNull
 	@Pattern(regexp="(?i)[A-Z0-9._%+-]+@(?i)[A-Z0-9.-]+\\.(?i)[A-Z]{2,4}", message="email.invalid")
 	private String email;
 	
-	
+	@NotNull
 	@Size.List({ @Size(min=5, message="feedback.text.short"), @Size(max=32768,  message="feedback.text.long") })
 	private String text;
 	

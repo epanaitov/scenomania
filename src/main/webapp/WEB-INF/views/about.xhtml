@@ -5,7 +5,17 @@
                 template="./../layouts/root.xhtml">
     
     <ui:define name="content">
+		<ui:remove>
         <h:graphicImage name="images/logo.png" style="float: left; border: 1px solid #CCCCCC; padding: 1px; margin: 0 10px 5px 0;" />
+		</ui:remove>
+		
+		<h2><h:outputText value="#{msg['feedback.goals.h']}" /></h2>
+		<h:outputText value="#{msg['feedback.goals.text']}" escape="false"/>
+		
+		<h2><h:outputText value="#{msg['feedback.contacts.h']}" /></h2>
+		<h:outputText value="#{msg['feedback.contacts.text']}" escape="false"/>
+		
+		<ui:remove>
 		<p>
 			The history of the project started in far 2000 when a musician Gleb founded his band and a small sound recording studio called Metalhearts.
 			Very soon Gleb with his partner started organizing concerts and promoting different young local groups.
@@ -20,39 +30,15 @@
 			Now scenomania.ru is a solid team  of promoters, developers, photographers and musicians. 
 			Our goal is making a great fun of all concerting process and sharing that fun with everyone, who is fond of music, who plays music and who does gigs all over the world.
 		</p>
-		
-		<script type="text/javascript">
-	    	function addRequireDecor(id, prompt){
-	    		Spring.addDecoration(new Spring.ElementDecoration({
-					 elementId : id,
-					 widgetType : "dijit.form.ValidationTextBox",
-					 widgetAttrs : {
-					 promptMessage: prompt,
-					 required : true}}));
-	    	}
-	    	
-	    	function addProceedDecor(id){
-	    		Spring.addDecoration(
-						 new Spring.ValidateAllDecoration({
-						 elementId: id,
-						 event:'onclick'}));
-	    	}
-	    	<h:panelGroup rendered="#{empty success}">
-			function addDecors(){
-				addRequireDecor("email", "Enter Email");
-				addProceedDecor("proceed");
-			}
-			dojo.addOnLoad(addDecors);
-			</h:panelGroup>
-		</script>
+		</ui:remove>
 		
 		<h:panelGroup rendered="#{empty success}">
 			
-		<form id="user" class="feedback" action="#{url.get['feedback.html']}" method="post">
+		<form id="feedback"  dojoType="dijit.form.Form" class="feedback" action="#{facesContext.externalContext.requestContextPath}/about" method="post">
 		<table>
 			<tr>
 				<td><h:outputLabel for="email"><h:outputText value="#{msg['email']}"/></h:outputLabel></td>
-				<td><h:inputText  id="email" value="#{feedbackMail.email}" required="true"/></td>
+				<td><h:inputText  id="email" value="#{feedbackMail.email}" required="true" /></td>
 				<td><ui:repeat value="#{mailErrors['email']}" var="err">
 						<h:outputText value="#{msg[err]}" />
 					</ui:repeat>
@@ -72,6 +58,65 @@
 			</tr>
 		</table>
 		</form>
+			
+		<script type="text/javascript">
+		/* <![CDATA[ */
+		
+			dojo.require("dijit.form.Form");
+			dojo.require("dijit.form.ValidationTextBox");
+			dojo.require("dijit.form.SimpleTextarea");
+
+		
+			dojo.addOnLoad(function() {
+				
+				new dijit.form.ValidationTextBox({
+					id: "email",
+					required: true,
+					value: dojo.byId("email").value,
+					trim: true,
+					regExp: "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}",
+					style: "width: 300px;"
+				}, "email");
+				
+				new dijit.form.SimpleTextarea({
+					name: "text",
+					trim: true,
+					style: "width: 300px;"
+				}, "text");
+				
+				dijit.byId("feedback").onSubmit = function() {
+					var form = dijit.byId("feedback");
+					var valid = true;
+					var textarea = dijit.byId("text");
+					
+					if (!textarea.value) {
+						textarea.set("style", textarea.get("style") + " background-color: #F9F7BA");
+						valid = false;
+					}
+					
+					if (!form.validate()) {
+						valid = false;
+					}
+					
+					if (valid) {
+						
+						dojo.forEach(form.getDescendants(), function(widget) {
+										if (widget.)
+										dojo.create("input", {
+											type : 'hidden',
+											name : widget.id,
+											value : widget.value
+										}, form.id);
+									});
+						
+						return true;
+					} else return false;
+				}
+				
+			});
+		/* ]]> */
+		</script>
+			
 	</h:panelGroup>
 	<h:panelGroup rendered="#{success}"><h:outputText value="#{msg['feedback.email.sent']}"/></h:panelGroup>
 		<div class="clear"></div>

@@ -4,38 +4,13 @@
 				xmlns:h="http://java.sun.com/jsf/html"
 				xmlns:f="http://java.sun.com/jsf/core"
 				xmlns:c="http://java.sun.com/jstl/core"
-                template="/WEB-INF/layouts/landing.xhtml"
+                template="/WEB-INF/layouts/root.xhtml"
 				>
     <ui:define name="content">
     	
-	    <script type="text/javascript">
-	    	function addRequireDecor(id, prompt){
-	    		Spring.addDecoration(new Spring.ElementDecoration({
-					 elementId : id,
-					 widgetType : "dijit.form.ValidationTextBox",
-					 widgetAttrs : {
-					 promptMessage: prompt,
-					 required : true}}));
-	    	}
-	    	
-	    	function addProceedDecor(id){
-	    		Spring.addDecoration(
-						 new Spring.ValidateAllDecoration({
-						 elementId: id,
-						 event:'onclick'}));
-	    	}
-	    	<h:panelGroup rendered="#{empty success}">
-			function addDecors(){
-				addRequireDecor("email", "Enter Email");
-				addProceedDecor("proceed");
-			}
-			dojo.addOnLoad(addDecors);
-			</h:panelGroup>
-		</script>
-		
 		<h:panelGroup rendered="#{empty success}">
 			
-		<form id="user" class="feedback" action="#{url.get['feedback.html']}" method="post">
+		<form id="user" dojoType="dijit.form.Form" class="feedback" action="#{url.get['feedback.html']}" method="post">
 		<table>
 			<tr>
 				<td><h:outputLabel for="email"><h:outputText value="#{msg['email']}"/></h:outputLabel></td>
@@ -63,8 +38,4 @@
 	<h:panelGroup rendered="#{success}"><h:outputText value="#{msg['feedback.email.sent']}"/></h:panelGroup>
     </ui:define>
     
-    <ui:define name="bottom">
-        bottom
-    </ui:define>
-
 </ui:composition>

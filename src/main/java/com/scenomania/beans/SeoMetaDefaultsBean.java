@@ -58,4 +58,14 @@ public class SeoMetaDefaultsBean {
 		return h1;
 	}
 	
+	public String getRobots() {
+		if (meta == null) return "index, follow";
+		StringBuilder robots = new StringBuilder();
+		if ((meta.getIndex() == null) || meta.getIndex()) robots.append("index");
+		else robots.append("noindex");
+		if ((meta.getFollow() == null) || meta.getFollow()) robots.append(",").append("follow");
+		else robots.append(",").append("nofollow");
+		return robots.toString();
+	}
+	
 }

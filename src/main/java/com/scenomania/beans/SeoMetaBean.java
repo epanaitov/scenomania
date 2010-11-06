@@ -11,6 +11,8 @@ public class SeoMetaBean {
 	private String keywords;
 	private String description;
 	private String h1;
+	private Boolean index;
+	private Boolean follow;
 
 	public String getTitle() {
 		return title;
@@ -42,6 +44,22 @@ public class SeoMetaBean {
 
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
+	}
+
+	public Boolean getFollow() {
+		return follow;
+	}
+
+	public void setFollow(Boolean follow) {
+		this.follow = follow;
+	}
+
+	public Boolean getIndex() {
+		return index;
+	}
+
+	public void setIndex(Boolean index) {
+		this.index = index;
 	}
 	
 }
