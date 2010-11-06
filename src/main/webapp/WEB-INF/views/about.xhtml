@@ -79,7 +79,8 @@
 				}, "email");
 				
 				new dijit.form.SimpleTextarea({
-					name: "text",
+					id: "text",
+					name: "textarea",
 					trim: true,
 					style: "width: 300px;"
 				}, "text");
@@ -101,12 +102,13 @@
 					if (valid) {
 						
 						dojo.forEach(form.getDescendants(), function(widget) {
-										if (widget.)
-										dojo.create("input", {
-											type : 'hidden',
-											name : widget.id,
-											value : widget.value
-										}, form.id);
+										
+											dojo.create("input", {
+												type : 'hidden',
+												name : widget.id,
+												value : widget.value
+											}, form.id);
+										
 									});
 						
 						return true;
