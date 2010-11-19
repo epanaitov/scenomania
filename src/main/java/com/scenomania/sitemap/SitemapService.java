@@ -5,8 +5,10 @@ import com.scenomania.entities.City;
 import com.scenomania.utils.UrlHelper;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.xml.transform.stream.StreamResult;
 import org.hibernate.criterion.Restrictions;
@@ -54,7 +56,17 @@ public class SitemapService {
 	
 	public void process() {
 		
+		this.filecount = 0;
+		
 		marshaller.setSuppressXsiType(true);
+		marshaller.setSuppressNamespaces(false);
+		
+		Map<String, String> namespaces = new HashMap<String, String>();
+		namespaces.put("", "http://www.sitemaps.org/schemas/sitemap/0.9");
+		namespaces.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		namespaces.put("schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
+		
+		marshaller.setNamespaceMappings(namespaces);
 		
 		List<City> cities = cityDao.fetchWhere(Restrictions.gt("population", 10000));
 		Iterator<City> cit = cities.iterator();

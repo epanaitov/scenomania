@@ -16,7 +16,7 @@
 	</class>
 	
 	<class name="com.scenomania.sitemap.UrlSet">
-		<map-to xml="urlset" ns-uri="http://www.sitemaps.org/schemas/sitemap/0.9" />
+		<map-to xml="urlset" />
 		
 		<field name="urls" collection="arraylist">
 			<bind-xml name="url" node="element" />
