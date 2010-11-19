@@ -209,6 +209,11 @@
                         <updatePolicy>never</updatePolicy> 
                     </snapshots> 
                 </pluginRepository> 
+				
+				<pluginRepository>
+					<id>Codehaus Snapshots</id>
+					<url>https://nexus.codehaus.org/content/repositories/codehaus-snapshots</url>
+				  </pluginRepository>
  
 	</pluginRepositories> 
  
