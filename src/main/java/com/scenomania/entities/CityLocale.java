@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="city_locale")
-public class CityLocale extends EntityBase {
+public class CityLocale extends EntityBase implements EntityLocale {
 	
 	@Column
 	private String name;

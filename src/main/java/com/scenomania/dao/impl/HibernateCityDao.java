@@ -2,12 +2,15 @@ package com.scenomania.dao.impl;
 
 import com.scenomania.dao.CityDao;
 import com.scenomania.entities.City;
-import com.scenomania.entities.Country;
+import com.scenomania.entities.City;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,8 +55,8 @@ public class HibernateCityDao implements CityDao {
 	}
 
 	public List<City> fetchAll() {
-		Query q = this.sessionFactory.getCurrentSession().createQuery("from City cities where area_id is null and country_code = 'US'");
-		//q.setMaxResults(250000);
+		Query q = this.sessionFactory.getCurrentSession().createQuery("from City cities");
+		q.setMaxResults(250000);
 		return (List<City>) q.list();
 	}
 	
@@ -99,5 +102,14 @@ public class HibernateCityDao implements CityDao {
 				.setDouble(4, endLng);
 
 		return (List<City>) q.list();
+	}
+	
+	public List<City> fetchWhere(Criterion where) {
+		
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(City.class);
+		
+		criteria.add(where);
+		
+		return (List<City>) criteria.list();
 	}
 }

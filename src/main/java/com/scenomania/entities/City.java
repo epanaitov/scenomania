@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cities")
-public class City extends EntityBase {
+public class City extends EntityBase implements Localized {
 
 	@Column
 	private String name;
@@ -45,6 +45,9 @@ public class City extends EntityBase {
 
 	@Column(name="area_code", columnDefinition = "char")
 	private String areaCode;
+	
+	@Column
+	private String slug;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="city", fetch=FetchType.LAZY)
 	private Set<CityLocale> locales;
@@ -183,5 +186,13 @@ public class City extends EntityBase {
 
 	public void setArea(Area area) {
 		this.area = area;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 }

@@ -19,7 +19,7 @@ import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="areas")
-public class Area extends EntityBase {
+public class Area extends EntityBase implements Localized {
 
 	@Column
 	private String name;

@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="countries", uniqueConstraints = { @UniqueConstraint(columnNames={"code"}) })
-public class Country extends EntityBase {
+public class Country extends EntityBase implements Localized {
 
 	@NotNull
 	private String name;
@@ -29,6 +29,9 @@ public class Country extends EntityBase {
 	@Length(min=2,max=2)
 	@Column(columnDefinition = "char")
 	private String code;
+	
+	@Column
+	private String slug;
 
 	@OneToMany(mappedBy="country", cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	@Cascade(org.hibernate.annotations.CascadeType.REPLICATE)
@@ -69,4 +72,12 @@ public class Country extends EntityBase {
 		this.areas = areas;
 	}
 
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
+	
 }

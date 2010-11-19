@@ -14,6 +14,7 @@ import com.scenomania.services.BandService;
 import com.scenomania.services.CityService;
 import com.scenomania.services.CountryService;
 import com.scenomania.services.UserService;
+import com.scenomania.utils.UrlHelper;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -32,6 +33,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -367,7 +369,39 @@ public class ImportCitiesController {
 		}
 	}
 	
-	@RequestMapping("/cities")
+	private void doSlugs(String table) {
+		Query q = this.sessionFactory.getCurrentSession()
+					.createSQLQuery("SELECT id, name, slug from " + table + " where slug is null") // do not use that mindless
+					.addScalar("id", Hibernate.INTEGER)
+					.addScalar("name", Hibernate.STRING)
+					.addScalar("slug", Hibernate.STRING)
+					;
+		
+		Iterator<Object[]> rit = q.list().iterator();
+		
+		while (rit.hasNext()) {
+			Object[] row = rit.next();
+			
+			Integer id = (Integer) row[0];
+			String name = (String) row[1];
+			String slug = (String) row[2];
+			
+			if (StringUtils.isNotEmpty(slug)) continue;
+			if (StringUtils.isEmpty(name)) continue;
+			
+			slug = UrlHelper.getSlug(name);
+			
+			try {
+				q = this.sessionFactory.getCurrentSession().createSQLQuery("UPDATE " + table + " set slug = ? where id = ?").setString(0, slug).setInteger(1, id);
+				q.executeUpdate();
+				//System.out.println();
+			} catch (Exception e) {
+				System.out.print(e);
+			}
+		}
+	}
+	
+	@RequestMapping("/database")
 	public String index() {
 
 		//importCities();
@@ -381,46 +415,11 @@ public class ImportCitiesController {
 
 		// bandUser();
 		//indexCities();
-		/*
-		Iterator <Area> ait = areaService.fetchAll().iterator();
-
-		while (ait.hasNext()) {
-			Area area = ait.next();
-
-			Country country = countryService.getByCode(area.getCountryCode());
-			area.setCountryId(country.getId());
-			areaService.saveArea(area);
-
-		}
-		*/
-
-		List<City> cities = cityService.fetchAll();
-
-		Iterator<City> cit = cities.iterator();
-
-		while (cit.hasNext()) {
-			City city = cit.next();
-			if (city.getArea() != null) continue;
-			Query q = this.sessionFactory.getCurrentSession().createSQLQuery("select id from areas a where code = ? and country_code = ?").addScalar("id", Hibernate.INTEGER).setString(0, city.getAreaCode()).setString(1, city.getCountryCode());
-			List rows = q.list();
-			if (rows.isEmpty()) continue;
-
-			Integer area_id = (Integer) rows.get(0);
-
-			if (area_id == null) continue;
-			if (area_id < 1) continue;
-			
-			try {
-				//city.setAreaId(area_id);
-				//cityService.saveCity(city);
-				q = this.sessionFactory.getCurrentSession().createSQLQuery("UPDATE cities set area_id = ? where id = ?").setInteger(0, area_id).setInteger(1, city.getId());
-				q.executeUpdate();
-			} catch (Exception e) {
-				System.out.print(e);
-			}
-
-		}
-
+		
+		doSlugs("cities");
+		doSlugs("countries");
+		
 		return "";
+		
 	}
 }

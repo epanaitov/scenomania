@@ -2,6 +2,7 @@ package com.scenomania.dao;
 
 import com.scenomania.entities.City;
 import java.util.List;
+import org.hibernate.criterion.Criterion;
 
 /**
  *
@@ -16,4 +17,5 @@ public interface CityDao {
 	public List<City> fetchAll(String locale);
 	public List<City> fetchByArea(Integer areaId, String locale);
 	public List<City> fetchAll(String locale, Double startLat, Double endLat, Double startLng, Double endLng);
+	public List<City> fetchWhere(Criterion where);
 }

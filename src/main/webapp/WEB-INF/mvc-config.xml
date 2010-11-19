@@ -30,9 +30,6 @@
 		</property>
 	</bean>
 	
-	<!--bean id="messageBuilder" class="org.springframework.binding.message.MessageBuilder">
-	</bean-->
-
 	<!-- Maps requests to @Controllers based on @RequestMapping("path") annotation values
 		 If no annotation-based path mapping is found, Spring MVC proceeds to the next HandlerMapping (order=2 below). -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
@@ -52,11 +49,6 @@
 	<!-- Creates the JSR-303 Validator -->
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
-	<!-- Tiles. maybe later -->
-	<!--bean id="tilesViewResolver" class="org.springframework.js.ajax.AjaxUrlBasedViewResolver">
-		<property name="viewClass" value="org.springframework.webflow.mvc.view.FlowAjaxTilesView"/>
-	</bean-->
-
 	<!-- Maps logical view names to Facelet templates in /WEB-INF (e.g. 'search' to '/WEB-INF/search.xhtml' -->
 	<bean id="faceletsViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.faces.mvc.JsfView"/>
@@ -66,26 +58,9 @@
 
 	<!-- Dispatches requests mapped to org.springframework.web.servlet.mvc.Controller implementations -->
 	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
-
-	<!-- Mail -->
-	<!--bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-	  <property name="host" value="localhost"/>
-	  <property name="port" value="25"/>
-	  <property name="defaultEncoding" value="utf-8" />
-	</bean>
-
-	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
-	  <property name="from" value="mailer@tourageo.us"/>
-	</bean>
 	
-	<bean id="feedbackService" class="com.scenomania.services.impl.FeedbackServiceImpl">
-	  <property name="mailSender" ref="mailSender"/>
-	  <property name="templateMessage" ref="templateMessage"/>
+	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
+		<property name="mappingLocation" value="/WEB-INF/castor-mapping.xml" />
 	</bean>
-
-	<bean id="mailService" class="com.scenomania.services.impl.MailServiceImpl">
-	  <property name="mailSender" ref="mailSender"/>
-	  <property name="templateMessage" ref="templateMessage"/>
-	</bean-->
 	
 </beans>
