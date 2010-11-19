@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Mapping DTD Version 1.0//EN"
+                         "http://castor.org/mapping.dtd">
+
+<mapping>
+	<description>Description of the mapping</description>
+	
+	<class name="com.scenomania.sitemap.SitemapIndex">
+		<map-to xml="sitemapindex" ns-uri="http://www.sitemaps.org/schemas/sitemap/0.9" />
+		
+		<field name="sitemaps" collection="arraylist">
+			<bind-xml name="sitemap" node="element" />
+		</field>
+		
+	</class>
+	
+	<class name="com.scenomania.sitemap.UrlSet">
+		<map-to xml="urlset" ns-uri="http://www.sitemaps.org/schemas/sitemap/0.9" />
+		
+		<field name="urls" collection="arraylist">
+			<bind-xml name="url" node="element" />
+		</field>
+		
+	</class>
+	
+	<class name="com.scenomania.sitemap.Sitemap">
+		<map-to xml="sitemap" />
+		
+		<field name="loc" type="string"><bind-xml name="loc" node="element" /></field>
+		
+	</class>
+	
+	<class name="com.scenomania.sitemap.Url">
+		<map-to xml="url" />
+		
+		<field name="loc" type="string"><bind-xml name="loc" node="element" /></field>
+		<field name="changefreq" type="string"><bind-xml name="changefreq" node="element" /></field>
+		<field name="priority" type="string"><bind-xml name="priority" node="element" /></field>
+		
+	</class>
+	
+</mapping>
+	
