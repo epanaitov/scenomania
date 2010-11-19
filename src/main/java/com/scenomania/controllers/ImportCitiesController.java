@@ -371,7 +371,7 @@ public class ImportCitiesController {
 	
 	private void doSlugs(String table) {
 		Query q = this.sessionFactory.getCurrentSession()
-					.createSQLQuery("SELECT id, name, slug from " + table + " where slug is null") // do not use that mindless
+					.createSQLQuery("SELECT id, name, slug from " + table + " where slug is null limit 350000") // do not use that mindless
 					.addScalar("id", Hibernate.INTEGER)
 					.addScalar("name", Hibernate.STRING)
 					.addScalar("slug", Hibernate.STRING)
