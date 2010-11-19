@@ -7,7 +7,7 @@
 	<description>Description of the mapping</description>
 	
 	<class name="com.scenomania.sitemap.SitemapIndex">
-		<map-to xml="sitemapindex" ns-uri="http://www.sitemaps.org/schemas/sitemap/0.9" />
+		<map-to xml="sitemapindex" />
 		
 		<field name="sitemaps" collection="arraylist">
 			<bind-xml name="sitemap" node="element" />
