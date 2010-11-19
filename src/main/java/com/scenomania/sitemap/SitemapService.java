@@ -59,12 +59,12 @@ public class SitemapService {
 		this.filecount = 0;
 		
 		marshaller.setSuppressXsiType(true);
-		marshaller.setSuppressNamespaces(false);
+		//marshaller.setSuppressNamespaces(true);
 		
 		Map<String, String> namespaces = new HashMap<String, String>();
-		namespaces.put("", "http://www.sitemaps.org/schemas/sitemap/0.9");
-		namespaces.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-		namespaces.put("schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
+		//namespaces.put("", "http://www.sitemaps.org/schemas/sitemap/0.9");
+		//namespaces.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		//namespaces.put("schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
 		
 		marshaller.setNamespaceMappings(namespaces);
 		
