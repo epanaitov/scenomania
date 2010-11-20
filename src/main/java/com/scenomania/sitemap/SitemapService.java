@@ -74,6 +74,27 @@ public class SitemapService {
 		Integer urlcount = 0;
 		this.sitemap = new UrlSet();
 		
+		com.scenomania.sitemap.Url page = new Url();
+		try {
+			page.setLoc("http://scenomania.ru/");
+		} catch (Exception e) {}
+		sitemap.add(page);
+		urlcount++;
+		
+		page = new Url();
+		try {
+			page.setLoc("http://scenomania.ru/register/");
+		} catch (Exception e) {}
+		sitemap.add(page);
+		urlcount++;
+		
+		page = new Url();
+		try {
+			page.setLoc("http://scenomania.ru/about/");
+		} catch (Exception e) {}
+		sitemap.add(page);
+		urlcount++;
+		
 		while (cit.hasNext()) {
 			City city = cit.next();
 			

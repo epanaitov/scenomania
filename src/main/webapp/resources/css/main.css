@@ -39,7 +39,7 @@ html, body {
 
 body {
 	background-color: #E5E5E6;
-	color: #999999;
+	color: #666666;
 	font-family: Verdana, Tahoma;
 	font-size: 12px;
 	background-image: url(images/body.png);
@@ -166,12 +166,13 @@ a#logo {
 	/*background-image: url("images/content.png");*/
 	background-position: 1px bottom;
 	background-repeat: no-repeat;
-	padding-bottom: 20px;
+	padding-bottom: 40px;
 }
 
 #content .main {
-	width: 738px;
+	width: 728px;
 	padding-right: 10px;
+	text-align: justify;
 }
 
 #copyright {
@@ -188,7 +189,7 @@ a#logo {
 
 #content .panel .block {
 	border: 1px solid #999999;
-	padding: 5px 0;
+	padding: 5px 0 0;
 	margin-bottom: 10px;
 	text-align: center;
 }

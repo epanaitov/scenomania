@@ -1,6 +1,7 @@
 package com.scenomania.controllers;
 
 
+import com.google.gson.Gson;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -19,6 +20,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.scenomania.entities.City;
 import com.scenomania.services.CityService;
+import com.scenomania.utils.CityOnMap;
+import java.util.ArrayList;
 
 @Controller
 public class AjaxMapCitiesController {
@@ -40,34 +43,37 @@ public class AjaxMapCitiesController {
 		List<City> cities = cityService.fetchAll(locale.getLanguage(), south, north, west, east);
 		Iterator<City> it = cities.iterator();
 		
-		html.append("{\"cities\":[");
-		boolean f = true; 
+		//html.append("{\"cities\":[");
+		//boolean f = true; 
+		
+		List<CityOnMap> list = new ArrayList<CityOnMap>();
+		
 		while (it.hasNext()){
-			City city = it.next();
-			if (f){
-				f = false;
-			} else {
-				html.append(",");
-			}
-			html.append(
-					"{"
-					+ "\"id\":" + city.getId()
-					+ ",\"lat\":" + city.getLatitude()
-					+ ",\"lng\":" + city.getLongitude()
-					+ ",\"pop\":" + city.getPopulation()
-					+ ",\"name\":\"" + city.getName().replace("\"", "\\\"") + "\""
-					+ "}"
 			
-			);
+			City city = it.next();
+			
+			if (city.getArea() == null) continue;
+			if (city.getArea().getCountry() == null) continue;
+			
+			CityOnMap com = new CityOnMap();
+			com.id = city.getId();
+			com.name = city.getName();
+			com.lat = city.getLatitude();
+			com.lng = city.getLongitude();
+			com.countrySlug = city.getArea().getCountry().getSlug();
+			com.areaCode = city.getArea().getCode();
+			com.pop = city.getPopulation();
+			com.slug = city.getSlug();
+			
+			list.add(com);
 			
 		}
-		html.append("]}");
 		
 		
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/plain; charset=utf-8");
-		
-		return new ResponseEntity<String>(html.toString(), responseHeaders, HttpStatus.CREATED);
+		Gson gson = new Gson();
+		return new ResponseEntity<String>(gson.toJson(list), responseHeaders, HttpStatus.CREATED);
 	}
 }

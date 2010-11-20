@@ -11,7 +11,9 @@
     <h:outputScript name="ajax/maps.js" library="js" target="body"/>
     <h:outputScript name="markerclusterer.js" library="js" target="body"/>
 	
-	<p style="text-align: justify; padding: 0px 15px;"><h:outputFormat value="#{msg['index.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat></p>
+	<h:outputFormat value="#{msg['index.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
+	<br /><br />
+	<h:outputText value="#{msg['index.maptext']}" escape="false" />
 		
 	    <script type="text/javascript">
 	    /*<![CDATA[*/
@@ -27,7 +29,7 @@
 				map.ajaxURL = contextPath + '/ajax/map/cities/';
 				map.onCityClick = function (city, mouseEvent){
 					var text = city.name
-					 + " <a href=\""+ contextPath + "/city/"+ city.id +"\"\>Подробнее</a\>";
+					 + " <a href=\""+ contextPath + "/"+city.countrySlug+"/"+city.areaCode+"/"+city.slug+"-"+ city.id +"/\"\>Подробнее</a\>";
 					this.openPopup(city, text);
 					
 				};
@@ -35,27 +37,12 @@
 			dojo.addOnLoad(initialize);
 		/*]]>*/
 		</script>
+	
 		<div id="map_canvas" style="width: 728px; height: 400px;"></div>
 		<div id="debug"></div>
 		
-
-		<ui:remove>
-		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
-			<a href="#{facesContext.externalContext.requestContextPath}/register"><img src="http://www.up2date.co.nz/site/up2date/images/Graphic_Designer/up2date-register-button.gif" width="200" align="right" alt="" /></a>
-			Модуль регистрации<br />
-			<h:outputFormat value="#{msg['index.register.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
-			<div style="clear: both" />
-		</div>
-		</ui:remove>
 		
-
-		<ui:remove>
-		<div style="padding: 10px; margin: 10px; background-color: white; border: 1px solid #999999;">
-			Модуль новостей<br />
-			<h:outputFormat value="#{msg['index.news']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
-		</div>
-		</ui:remove>
-		
+		<div style="clear: left;"></div>
     </ui:define>
 
 </ui:composition>

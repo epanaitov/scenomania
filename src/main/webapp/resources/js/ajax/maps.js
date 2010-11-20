@@ -120,7 +120,7 @@ dojo.declare("CitiesMap", [GoogleMap], {
 				preventCache: true,
 				load: function (data, ioargs){
 					var cities = dojo.fromJson(data);
-					dojo.forEach(cities.cities, function (city, i){
+					dojo.forEach(cities, function (city, i){
 							_this.addCity(city);
 					});
 				},
