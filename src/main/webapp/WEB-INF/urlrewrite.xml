@@ -18,6 +18,10 @@
 		<to>/sitemap/$1</to>
 	</rule>
 	<rule>
+		<from>/robots.txt</from>
+		<to>/public/robots.txt</to>
+	</rule>
+	<rule>
 		<from>/resources/**</from>
 		<to>/resources/$1</to>
 	</rule>

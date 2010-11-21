@@ -114,6 +114,10 @@ dojo.declare("CitiesMap", [GoogleMap], {
 		for (b in borders){
 			req.push(b + '=' + borders[b]);
 		}
+		
+		var request_count = 0;
+		var last_error = "";
+		
 		var xhrArgs = {
 				url: _this.ajaxURL + '?' + req.join('&'),
 				handleAs: "text",
@@ -123,13 +127,23 @@ dojo.declare("CitiesMap", [GoogleMap], {
 					dojo.forEach(cities, function (city, i){
 							_this.addCity(city);
 					});
+					request_count = 0;
 				},
 				error: function(error, ioargs){
-					alert('request died: '+error);
+					//alert('request died: '+error);
+					last_error = error;
+					request_count++;
 				}
 		}; //xhrArgs
 		//alert(xhrArgs.url);
-		dojo.xhrGet(xhrArgs);
+		do {
+			dojo.xhrGet(xhrArgs);
+			if (request_count == 5) {
+				alert('request died after '+request_count+' attempts with message: '+last_error);
+				request_count = 0;
+				break;
+			}
+		} while (request_count > 0);
 		
 	},
 	openPopup: function (city, text){
