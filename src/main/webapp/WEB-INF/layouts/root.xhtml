@@ -21,13 +21,12 @@
 		<meta name="keywords" content="#{SeoMeta.keywords}" />
 		<meta name="description" content="#{SeoMeta.description}" />
 		
-		<script djconfig="parseOnLoad: true"
-		 src="#{facesContext.externalContext.requestContextPath}/resources/dojo/dojo.js" type="text/javascript"></script>
-		<script type="text/javascript"
-		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring.js"> </script>
-		<script type="text/javascript"
-		 src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring-Dojo.js"></script>
-			<script type="text/javascript">dojo.require("dojo.parser");</script>
+		<h:outputScript library="js" name="global.js" target="head" />
+		
+		<script djconfig="parseOnLoad: true" src="#{facesContext.externalContext.requestContextPath}/resources/dojo/dojo.js" type="text/javascript"></script>
+		<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring.js"> </script>
+		<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/spring/Spring-Dojo.js"></script>
+		<script type="text/javascript">dojo.require("dojo.parser");</script>
 		
 		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/dojo/resources/dojo.css" />
 		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/dijit/themes/nihilo/nihilo.css" />

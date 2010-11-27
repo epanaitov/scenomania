@@ -31,11 +31,16 @@ public class AjaxMapCitiesController {
 	
 	@RequestMapping(value="/ajax/map/cities/", method=RequestMethod.GET)
 	public ResponseEntity<String> getCities(
-											@RequestParam Double north,
-											@RequestParam Double east,
-											@RequestParam Double south,
-											@RequestParam Double west,
+											@RequestParam(defaultValue="0.0") Double north,
+											@RequestParam(defaultValue="0.0") Double east,
+											@RequestParam(defaultValue="0.0") Double south,
+											@RequestParam(defaultValue="0.0") Double west,
 											HttpServletRequest request){
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/plain; charset=utf-8");
+		
+		if ((Double.compare(west, east) == 0) || (Double.compare(west, west) == 0)) return new ResponseEntity<String>("[]", responseHeaders, HttpStatus.CREATED);
 		
 		Locale locale      = RequestContextUtils.getLocale(request);
 		StringBuilder html = new StringBuilder();
@@ -71,8 +76,6 @@ public class AjaxMapCitiesController {
 		
 		
 		
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/plain; charset=utf-8");
 		Gson gson = new Gson();
 		return new ResponseEntity<String>(gson.toJson(list), responseHeaders, HttpStatus.CREATED);
 	}

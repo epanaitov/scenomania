@@ -25,7 +25,7 @@
 	<task:executor id="taskExecutor" pool-size="10" />
 	
 	<task:scheduled-tasks scheduler="taskScheduler">
-	<task:scheduled ref="sitemapService" method="process" cron="0 0 2 * * ?" />
+	<task:scheduled ref="sitemapService" method="process" cron="0 */3 * * * ?" />
 	</task:scheduled-tasks>
 	
 	<task:annotation-driven executor="taskExecutor" scheduler="taskScheduler"/>

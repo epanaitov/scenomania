@@ -48,6 +48,11 @@ public class AjaxCountriesController {
 
 	@RequestMapping(value="/ajax/countries/get_areas/", method=RequestMethod.GET)
 	public ResponseEntity<String> getAareas(@RequestParam Integer id, HttpServletRequest request) {
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+		
+		if ((id == null) || (id == 0)) return new ResponseEntity<String>("", responseHeaders, HttpStatus.CREATED);
 
 		Locale locale = RequestContextUtils.getLocale(request);
 
@@ -61,14 +66,19 @@ public class AjaxCountriesController {
 			dataSource.addItem(Integer.toString(area.getId()), area.getName());
 		}
 
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "application/json; charset=utf-8");
+		
 		Gson gson = new Gson();
 		return new ResponseEntity<String>(gson.toJson(dataSource, DojoDataSource.class), responseHeaders, HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value="/ajax/countries/get_cities/", method=RequestMethod.GET)
 	public ResponseEntity<String> getCities(@RequestParam Integer area, HttpServletRequest request) {
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		if ((area == null) || (area == 0)) return new ResponseEntity<String>("", responseHeaders, HttpStatus.CREATED);
+		
 		String html = "";
 
 		Locale locale = RequestContextUtils.getLocale(request);
@@ -83,8 +93,7 @@ public class AjaxCountriesController {
 			dataSource.addItem(Integer.toString(city.getId()), city.getName());
 		}
 
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
 		Gson gson = new Gson();
 		return new ResponseEntity<String>(gson.toJson(dataSource, DojoDataSource.class), responseHeaders, HttpStatus.CREATED);
 	}
