@@ -5,6 +5,7 @@ import com.scenomania.entities.City;
 import com.scenomania.utils.UrlHelper;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,7 +15,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.castor.CastorMarshaller;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -54,6 +57,7 @@ public class SitemapService {
 		
 	}
 	
+	@Transactional
 	public void process() {
 		
 		this.filecount = 0;
@@ -68,30 +72,31 @@ public class SitemapService {
 		
 		marshaller.setNamespaceMappings(namespaces);
 		
-		List<City> cities = cityDao.fetchWhere(Restrictions.gt("population", 10000));
+		List<City> cities = new ArrayList<City>();
+		
+		try {
+			cities = cityDao.fetchWhere(Restrictions.gt("population", 10000));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 		Iterator<City> cit = cities.iterator();
 		
 		Integer urlcount = 0;
 		this.sitemap = new UrlSet();
 		
 		com.scenomania.sitemap.Url page = new Url();
-		try {
-			page.setLoc("http://scenomania.ru/");
-		} catch (Exception e) {}
+		page.setLoc("http://scenomania.ru/");
 		sitemap.add(page);
 		urlcount++;
 		
 		page = new Url();
-		try {
-			page.setLoc("http://scenomania.ru/register/");
-		} catch (Exception e) {}
+		page.setLoc("http://scenomania.ru/register/");
 		sitemap.add(page);
 		urlcount++;
 		
 		page = new Url();
-		try {
-			page.setLoc("http://scenomania.ru/about/");
-		} catch (Exception e) {}
+		page.setLoc("http://scenomania.ru/about/");
 		sitemap.add(page);
 		urlcount++;
 		
@@ -131,7 +136,6 @@ public class SitemapService {
 			marshaller.marshal(index, new StreamResult(os));
 			os.close();
 		} catch (Exception e) {
-			e.printStackTrace();
 		} 
 		
 	}
