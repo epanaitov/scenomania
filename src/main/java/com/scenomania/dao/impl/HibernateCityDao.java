@@ -72,6 +72,7 @@ public class HibernateCityDao implements CityDao {
 		return (List<City>)q.list();
 	}
 
+	@Override
 	public List<City> fetchByArea(Integer areaId, String locale) {
 		Query q = this.sessionFactory.getCurrentSession().createSQLQuery(
 				"SELECT "
@@ -85,6 +86,7 @@ public class HibernateCityDao implements CityDao {
 		return (List<City>) q.list();
 	}
 	
+	@Override
 	public List<City> fetchAll(String locale, Double startLat, Double endLat, Double startLng, Double endLng){
 		Query q = this.sessionFactory.getCurrentSession().createSQLQuery(
 				"SELECT "
@@ -104,6 +106,7 @@ public class HibernateCityDao implements CityDao {
 		return (List<City>) q.list();
 	}
 	
+	@Override
 	public List<City> fetchWhere(Criterion where) {
 		
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(City.class);

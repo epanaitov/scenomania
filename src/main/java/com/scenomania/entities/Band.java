@@ -33,6 +33,9 @@ public class Band extends EntityBase {
 
 	@Column
 	private String name;
+	
+	@Column
+	private String slug;
 
 	@Column(columnDefinition = "mediumtext")
 	private String description;
@@ -67,6 +70,14 @@ public class Band extends EntityBase {
 
 	public void setMembers(Set<BandPosition> members) {
 		this.members = members;
+	}
+
+	public String getSlug() {
+		return slug;
+	}
+
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 }

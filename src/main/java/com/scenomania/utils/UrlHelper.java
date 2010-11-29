@@ -1,4 +1,5 @@
 package com.scenomania.utils;
+import com.scenomania.entities.Band;
 import com.scenomania.entities.City;
 import org.apache.commons.lang.StringUtils;
 
@@ -28,5 +29,13 @@ public class UrlHelper {
 		if (city.getArea().getCountry() == null) throw new InsufficientDataException("city's country is null");
 		
 		return String.format("/%s/%s/%s-%d/", city.getArea().getCountry().getSlug(), city.getArea().getCode(), city.getSlug(), city.getId());
+	}
+	
+	public static String getUrl(Band band) throws InsufficientDataException {
+		if (StringUtils.isBlank(band.getName())) throw new InsufficientDataException("band's name is blank");
+		String slug = "";
+		if (StringUtils.isBlank(band.getSlug())) slug = getSlug(band.getName());
+		else slug = band.getSlug();
+		return String.format("http://%s.tourageo.us", slug);
 	}
 }

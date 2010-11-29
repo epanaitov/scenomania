@@ -81,6 +81,9 @@ public class CitiesController extends ControllerBase {
 		model.addAttribute("area_name", area_name);
 		model.addAttribute("country_name", country_name);
 		
+		model.addAttribute("bands", city.getBands());
+		model.addAttribute("promoters", city.getPromoters());
+		
 		return "city";
 	}
 			
