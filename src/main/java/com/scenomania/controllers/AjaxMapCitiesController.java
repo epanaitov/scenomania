@@ -40,7 +40,7 @@ public class AjaxMapCitiesController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/plain; charset=utf-8");
 		
-		if ((Double.compare(west, east) == 0) || (Double.compare(west, west) == 0)) return new ResponseEntity<String>("[]", responseHeaders, HttpStatus.CREATED);
+		if ((Double.compare(west, east) == 0) || (Double.compare(south, north) == 0)) return new ResponseEntity<String>("[]", responseHeaders, HttpStatus.CREATED);
 		
 		Locale locale      = RequestContextUtils.getLocale(request);
 		StringBuilder html = new StringBuilder();
