@@ -33,7 +33,7 @@ public class IndexController extends ControllerBase {
 		//meta.setTitle("xyuxyu!!!");
 		
 		String host = request.getServerName();
-		host = "consume-me-after-breakfast.tourageo.us";
+		//host = "consume-me-after-breakfast.tourageo.us";
 		
 		Pattern p = Pattern.compile("([a-z\\-]+)\\.[a-z]+\\.[a-z]+");
 		Matcher m = p.matcher(StringUtils.lowerCase(host));
