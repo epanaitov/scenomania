@@ -25,6 +25,7 @@ import com.scenomania.services.CityService;
 import com.scenomania.services.PromoterService;
 import com.scenomania.services.UserService;
 import com.scenomania.utils.PlainErrorsHashMap;
+import com.scenomania.utils.UrlHelper;
 import java.util.HashSet;
 import javax.servlet.http.HttpSession;
 
@@ -77,12 +78,7 @@ public class RegisterController extends ControllerBase {
 			Model model,
 			HttpSession httpSession) {
 		
-		String passwordConfirm = request.getParameter("password_confirm");
-		if (passwordConfirm == null || !user.getPassword().equals(passwordConfirm)){
-			result.rejectValue("password", "password.confirm_error", "user.password.confirm_error");
-		}
-		
-		if (userService.getUserByEmail(user.getEmail()) != null){
+		if (userService.getUserByEmail(user.getEmail()) != null) {
 			result.rejectValue("email", "email.user_exists", "user.email.user_exists");
 		}
 
@@ -188,6 +184,7 @@ public class RegisterController extends ControllerBase {
 				band = new Band();
 				band.setHomecity(loggedin.getHomecity());
 				band.setName(bandName);
+				band.setSlug(UrlHelper.getSlug(bandName));
 				band.setDescription(request.getParameter("band[description]"));
 				band.setMembers(new HashSet<BandPosition>());
 				band = bandService.save(band);

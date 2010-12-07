@@ -78,11 +78,6 @@
 				</td>
 			</tr>
 			<tr>
-				<td><h:outputLabel for="password_confirm"><h:outputText value="#{msg['register.index.password_confirm']}"/></h:outputLabel></td>
-				<td><h:inputSecret redisplay="false" id="password_confirm" value="" required="true"/></td>
-				<td></td>
-			</tr>
-			<tr>
 				<td>
 					<h:outputLabel for="select_country">
 						<h:outputText value="#{msg['register.index.location']}" />
@@ -144,11 +139,6 @@
 								required: true
 							}, "password");
 
-							new dijit.form.ValidationTextBox({
-								id: "password_confirm",
-								required: true
-							}, "password_confirm");
-
 							var citySelect = new dijit.form.FilteringSelect({
 								id: "city_select",
 								store: cityStore,
@@ -206,15 +196,6 @@
 
 								var valid = true;
 								
-								var pass1 = dijit.byId('password');
-								var pass2 = dijit.byId('password_confirm');
-
-								if (pass1.value != pass2.value) {
-									pass2.displayMessage("#{msg['error.password.not_equal']}");
-									valid = false;
-									return false;
-								}
-
 								if (!validateFilteringSelect("country_select")) return false;
 								if (!validateFilteringSelect("area_select")) return false;
 								if (!validateFilteringSelect("city_select")) return false;

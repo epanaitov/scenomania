@@ -26,8 +26,12 @@ public class HibernateBandDao implements BandDao {
 	@Autowired
 	protected SessionFactory sessionFactory;
 
-	public Band findById(Integer id) {
+	public Band findById(Integer id) { // oh fuck, hello php ??
 		return (Band) this.sessionFactory.getCurrentSession().get(Band.class, id);
+	}
+	
+	public Band find(String slug) {
+		return (Band) sessionFactory.getCurrentSession().createQuery("from Band bands WHERE slug = ?").setString(0, slug).uniqueResult();
 	}
 
 	public Band save(Band band) {

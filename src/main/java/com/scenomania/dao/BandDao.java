@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface BandDao {
 	public Band findById(Integer id);
+	public Band find(String slug);
 	public Band save(Band band);
 	public List<Band> suggest(HashMap params);
 	public Band getWhere(HashMap params);

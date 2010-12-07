@@ -76,6 +76,13 @@
 	</build> 
  
 	<repositories> 
+	
+	<!--repository>
+		<id>com.ibm.icu</id>
+		<name>ICU4J</name>
+		<url>http://mirrors.ibiblio.org/pub/mirrors/maven2/</url>
+	</repository-->
+	
     <repository> 
         <id>maven2-repository.dev.java.net</id> 
         <name>Java.net Repository for Maven</name> 
@@ -336,16 +343,6 @@
             <version>2.0.2</version> 
         </dependency>
 
-		<!--dependency>
-		  <groupId>org.apache.myfaces.core</groupId>
-		  <artifactId>myfaces-api</artifactId>
-		  <version>2.0.0</version>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.myfaces.core</groupId>
-		  <artifactId>myfaces-impl</artifactId>
-		  <version>2.0.0</version>
-		</dependency-->
 
 		<dependency>
 		  <groupId>javax.servlet</groupId>
@@ -379,11 +376,6 @@
 	  <version>3.5.6-Final</version>
 	 </dependency> 
  
-	<!--dependency>
-		<groupId>org.hibernate</groupId> 
-		<artifactId>ejb3-persistence</artifactId> 
-		<version>3.3.2.Beta1</version>
-	</dependency-->
  
 	 <dependency> 
       <groupId>org.hibernate</groupId> 
@@ -517,7 +509,7 @@
 		    <version>1.4.3</version>
 	    </dependency>
 	    
-	    <!-- Spring framework -->
+	    <!-- Spring framework -->	
 		<dependency> 
 			<groupId>org.springframework</groupId> 
 			<artifactId>org.springframework.context.support</artifactId> 
@@ -546,7 +538,14 @@
          <version>1.0.3</version>
          <scope>runtime</scope>
       </dependency>
-
+	  
+	  <dependency>
+		  <groupId>com.ibm.icu</groupId>
+		  <artifactId>icu4j</artifactId>
+		  <version>4.0.1</version>
+	  </dependency>
+	  
+	  
 	  <!--  Gson: Java to Json conversion -->
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -554,7 +553,6 @@
       <version>1.4</version>
       <scope>compile</scope>
     </dependency>
-
 	</dependencies> 
     <properties>
         <netbeans.hint.deploy.server>Tomcat60</netbeans.hint.deploy.server>

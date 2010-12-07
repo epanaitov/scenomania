@@ -101,6 +101,8 @@
 				</script>
 				</h:panelGroup>
 					
+					<h:panelGroup layout="block" rendered="#{error != null}" styleClass="error"><h:outputText escape="false" value="#{error}" /></h:panelGroup>
+					
 					<ui:insert name="content"></ui:insert>
 				</div>
 				

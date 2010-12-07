@@ -1,0 +1,1 @@
+alter table bands add index band_slug (slug);

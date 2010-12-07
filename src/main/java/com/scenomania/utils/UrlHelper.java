@@ -2,6 +2,8 @@ package com.scenomania.utils;
 import com.scenomania.entities.Band;
 import com.scenomania.entities.City;
 import org.apache.commons.lang.StringUtils;
+import com.ibm.icu.text.Transliterator;
+import org.apache.commons.lang.WordUtils;
 
 /**
  *
@@ -17,11 +19,24 @@ public class UrlHelper {
 	
 	}
 	
+	public static String normalize(String source) {
+		Transliterator t = Transliterator.getInstance("en");
+		source = t.transliterate(source);
+		return source;
+	}
+	
 	public static String getSlug(String source) {
 		source = StringUtils.trim(source);
 		source = StringUtils.lowerCase(source);
+		source = normalize(source);
 		source = source.replaceAll("[^0-9a-z]", "-");
 		return source;
+	}
+	
+	public static String unSlug(String slug) {
+		slug = slug.replaceAll("-", " ");
+		slug = WordUtils.capitalizeFully(slug);
+		return slug;
 	}
 	
 	public static String getUrl(City city) throws InsufficientDataException {
