@@ -40,6 +40,12 @@ public class IndexController extends ControllerBase {
 			model.addAttribute("error", "Группа "+UrlHelper.unSlug(bandSlug)+" у нас не зарегистрирована.<br /><a href=\"register\">Но это моя группа!</a>");
 		}
 		
+		meta.setH1(found.getName());
+		meta.setTitle(found.getName());
+		meta.setKeywords(found.getName());
+		meta.setDescription(found.getName());
+		model.addAttribute("band", found);
+		
 		return "band";
 	}
 
@@ -47,7 +53,7 @@ public class IndexController extends ControllerBase {
     public String indexAction(Model model, SeoMetaBean meta) {
 		
 		String host = request.getServerName();
-		host = "xyu-xyu.tourageo.us";
+		//host = "xyu-xyu.tourageo.us";
 		
 		Pattern p = Pattern.compile("([a-z\\-]+)\\.[a-z]+\\.[a-z]+");
 		Matcher m = p.matcher(StringUtils.lowerCase(host));

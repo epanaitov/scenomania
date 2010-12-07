@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./../layouts/root.xhtml">
+                template="./../layouts/root.xhtml"
+				xmlns:h="http://java.sun.com/jsf/html">
     
     <ui:define name="content">
-        content
+        <h2><h:outputText value="#{band.name}" /></h2>
+		<h:outputText value="#{band.description}" escape="true" />
     </ui:define>
 
 </ui:composition>
