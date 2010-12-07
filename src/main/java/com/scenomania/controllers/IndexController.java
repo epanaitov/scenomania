@@ -38,6 +38,7 @@ public class IndexController extends ControllerBase {
 			meta.setH1("Нет такой группы");
 			meta.setTitle("Нет такой группы");
 			model.addAttribute("error", "Группа "+UrlHelper.unSlug(bandSlug)+" у нас не зарегистрирована.<br /><a href=\"register\">Но это моя группа!</a>");
+			return "band";
 		}
 		
 		meta.setH1(found.getName());
