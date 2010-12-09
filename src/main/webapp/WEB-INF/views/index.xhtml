@@ -28,8 +28,13 @@
 				var map = new CitiesMap("map_canvas", myOptions);
 				map.ajaxURL = contextPath + '/ajax/map/cities/';
 				map.onCityClick = function (city, mouseEvent){
-					var text = city.name
-					 + " <a href=\""+ contextPath + "/"+city.countrySlug+"/"+city.areaCode+"/"+city.slug+"-"+ city.id +"/\"\>Подробнее</a\>";
+					var text = city.name;
+					text+= "<h3>Группы<h3>"
+					dojo.forEach(city.bands, function(band, i) {
+						if (band) text+= "<a href=\""+band.url+"\">"+band.name+"</a><br />";
+					});
+					text+= "...<br />"
+					text+= " <a href=\""+ contextPath + "/"+city.countrySlug+"/"+city.areaCode+"/"+city.slug+"-"+ city.id +"/\"\>Подробнее</a\>";
 					this.openPopup(city, text);
 					
 				};

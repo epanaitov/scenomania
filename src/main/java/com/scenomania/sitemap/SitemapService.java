@@ -1,6 +1,8 @@
 package com.scenomania.sitemap;
 
+import com.scenomania.dao.BandDao;
 import com.scenomania.dao.CityDao;
+import com.scenomania.entities.Band;
 import com.scenomania.entities.City;
 import com.scenomania.utils.UrlHelper;
 import java.io.File;
@@ -15,7 +17,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.castor.CastorMarshaller;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,6 +36,9 @@ public class SitemapService {
 	
 	@Autowired 
 	private CityDao cityDao;
+	
+	@Autowired 
+	private BandDao bandDao;
 	
 	private Integer filecount = 0;
 	
@@ -106,6 +110,28 @@ public class SitemapService {
 			com.scenomania.sitemap.Url url = new Url();
 			try {
 				url.setLoc("http://scenomania.ru" + UrlHelper.getUrl(city));
+			} catch (Exception e) {
+				continue;
+			}
+			
+			sitemap.add(url);
+			urlcount++;
+			
+			if (urlcount > 49990) {
+				urlcount = 0;
+				this.writeXML();
+				this.sitemap = new UrlSet();
+			}
+		}
+		
+		Iterator<Band> bit = bandDao.fetchAll().iterator();
+		
+		while (bit.hasNext()) {
+			Band band = bit.next();
+			
+			com.scenomania.sitemap.Url url = new Url();
+			try {
+				url.setLoc(UrlHelper.getUrl(band));
 			} catch (Exception e) {
 				continue;
 			}

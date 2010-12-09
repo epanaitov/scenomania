@@ -60,15 +60,7 @@ public class AjaxMapCitiesController {
 			if (city.getArea() == null) continue;
 			if (city.getArea().getCountry() == null) continue;
 			
-			CityOnMap com = new CityOnMap();
-			com.id = city.getId();
-			com.name = city.getName();
-			com.lat = city.getLatitude();
-			com.lng = city.getLongitude();
-			com.countrySlug = city.getArea().getCountry().getSlug();
-			com.areaCode = city.getArea().getCode();
-			com.pop = city.getPopulation();
-			com.slug = city.getSlug();
+			CityOnMap com = new CityOnMap(city);
 			
 			list.add(com);
 			
