@@ -27,6 +27,8 @@ import com.scenomania.services.UserService;
 import com.scenomania.utils.PlainErrorsHashMap;
 import com.scenomania.utils.UrlHelper;
 import java.util.HashSet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -51,6 +53,9 @@ public class RegisterController extends ControllerBase {
 
 	@Autowired(required=true)
 	private HttpServletRequest request;
+	
+	@Autowired(required=true)
+	private HttpServletResponse response;
 
 	@Autowired(required=true)
 	private HttpSession httpSession;
@@ -104,6 +109,10 @@ public class RegisterController extends ControllerBase {
 		
 		user = userService.createUser(user);
 		httpSession.setAttribute("loggedin", user);
+		
+		Cookie userCookie = new Cookie("user", Integer.toString(user.getId()));
+		response.addCookie(userCookie);
+		
 		if (request.getParameter("playin") != null) httpSession.setAttribute("playin", 1);
 		if (request.getParameter("promotin") != null) httpSession.setAttribute("promotin", 1);
 		return "redirect:/register/role";
