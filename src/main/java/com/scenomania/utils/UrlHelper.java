@@ -51,6 +51,6 @@ public class UrlHelper {
 		String slug = "";
 		if (StringUtils.isBlank(band.getSlug())) slug = getSlug(band.getName());
 		else slug = band.getSlug();
-		return String.format("http://%s.tourageo.us", slug);
+		return String.format("http://%s.scenomania.ru", slug);
 	}
 }

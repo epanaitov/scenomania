@@ -11,4 +11,7 @@ public interface UserDao {
 
 	public User findByEmail(String email); // refactor to find(String email);
 	public User refresh(User user);
+	
+	public Boolean ownsThisComputer(Integer userId, String machineHash);
+	public void assignThisComputer(Integer userId, String machineHash);
 }

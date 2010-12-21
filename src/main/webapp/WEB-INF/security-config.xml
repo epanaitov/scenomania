@@ -1,0 +1,60 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+
+ 
+	<!--global-method-security secured-annotations="enabled"></global-method-security-->
+ 
+    <http auto-config="false">
+        <intercept-url pattern="/**" access="ROLE_ANONYMOUS, ROLE_USER" />
+		<anonymous enabled = "false" />
+		<custom-filter ref = "myFilter" position = "ANONYMOUS_FILTER" />
+		<form-login />
+    </http>
+ 
+	<authentication-manager>
+		<authentication-provider>
+			<!--   
+			 ref="AuthenticationProviderService"
+			-->
+			<user-service>
+				 <user name="bob" password="pop" authorities="ROLE_USER" />
+				 <user name="anon" password="anon" authorities="ROLE_ANONYMOUS" />
+			</user-service>
+			
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!--
+	<beans:bean id="AuthenticationProviderService" class="com.scenomania.auth.AuthenticationProviderService"></beans:bean>
+	
+	<beans:bean id="authFilter" class="com.scenomania.auth.AuthenticationFilter"></beans:bean>
+	
+	<beans:bean id="anonymousAuthFilter" class="org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
+		<beans:property name="key" value="foobar"/>
+		<beans:property name="userAttribute" value="anonymousUser,ROLE_ANONYMOUS"/>
+	</beans:bean>
+
+	<beans:bean id="anonymousAuthenticationProvider" class="org.springframework.security.authentication.AnonymousAuthenticationProvider">
+		<beans:property name="key" value="foobar"/>
+	</beans:bean>
+	-->
+	
+	<!--beans:bean id = "myFilter" class = "org.springframework.security.web.authentication.AnonymousAuthenticationFilter">
+		<beans:property name="key" value="anonymousKey" />
+		<beans:property name = "userAttribute" ref="myAttributes" />
+		beans:property name = "userAttribute" value="anonymousUser,ROLE_ANONYMOUS" />
+	</beans:bean-->
+	
+	<beans:bean id = "myFilter" class = "com.scenomania.auth.AuthenticationFilter">
+		<beans:property name="key" value="anonymousKey" />
+		<beans:property name = "userAttribute" value="anonymousUser,ROLE_ANONYMOUS" />
+	</beans:bean>
+	
+	<beans:bean id="myAttributes" class="com.scenomania.auth.AnonymousUserAttribute" ></beans:bean>
+	
+</beans:beans>

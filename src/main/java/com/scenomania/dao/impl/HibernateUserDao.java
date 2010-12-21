@@ -35,4 +35,14 @@ public class HibernateUserDao implements UserDao {
 		sessionFactory.getCurrentSession().refresh(user);
 		return user;
 	}
+	
+	public Boolean ownsThisComputer(Integer userId, String machineHash) {
+		Query q = sessionFactory.getCurrentSession().createSQLQuery("select id from user_machines where user_id = ? and machine_hash = ?").setParameter(0, userId).setParameter(1, machineHash);
+		return q.uniqueResult() != null;
+	}
+	
+	public void assignThisComputer(Integer userId, String machineHash) {
+		Query q = sessionFactory.getCurrentSession().createSQLQuery("insert ignore into user_machines (user_id, machine_hash) values (?, ?)").setParameter(0, userId).setParameter(1, machineHash);
+		q.executeUpdate();
+	}
 }

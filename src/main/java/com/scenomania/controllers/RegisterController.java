@@ -26,10 +26,17 @@ import com.scenomania.services.PromoterService;
 import com.scenomania.services.UserService;
 import com.scenomania.utils.PlainErrorsHashMap;
 import com.scenomania.utils.UrlHelper;
+import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashSet;
-import javax.servlet.http.Cookie;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -55,9 +62,6 @@ public class RegisterController extends ControllerBase {
 	private HttpServletRequest request;
 	
 	@Autowired(required=true)
-	private HttpServletResponse response;
-
-	@Autowired(required=true)
 	private HttpSession httpSession;
 
 	@Autowired(required=true)
@@ -81,7 +85,8 @@ public class RegisterController extends ControllerBase {
 	public String index(@ModelAttribute("user") @Valid User user, 
 			BindingResult result,
 			Model model,
-			HttpSession httpSession) {
+			HttpSession httpSession,
+			HttpServletResponse response) {
 		
 		if (userService.getUserByEmail(user.getEmail()) != null) {
 			result.rejectValue("email", "email.user_exists", "user.email.user_exists");
@@ -108,10 +113,9 @@ public class RegisterController extends ControllerBase {
 		}
 		
 		user = userService.createUser(user);
-		httpSession.setAttribute("loggedin", user);
+		userService.logIn(user, request, response);
 		
-		Cookie userCookie = new Cookie("user", Integer.toString(user.getId()));
-		response.addCookie(userCookie);
+		httpSession.setAttribute("loggedin", user);
 		
 		if (request.getParameter("playin") != null) httpSession.setAttribute("playin", 1);
 		if (request.getParameter("promotin") != null) httpSession.setAttribute("promotin", 1);

@@ -19,9 +19,7 @@
 
 	<import resource="hibernate-config.xml" />
 	<import resource="mvc-config.xml" />
-	
-	<http auto-config='true'>
-	</http>
+	<import resource="security-config.xml" />
 	
 	<task:scheduler id="taskScheduler" pool-size="10" />
 	<task:executor id="taskExecutor" pool-size="10" />

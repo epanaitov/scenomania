@@ -1,5 +1,7 @@
 package com.scenomania.beans;
 
+import com.scenomania.entities.User;
+import com.scenomania.services.UserService;
 import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class SeoMetaDefaultsBean {
 	
 	@Autowired(required=true)
 	private SeoMetaBean meta;
+	
+	@Autowired(required=true)
+	private UserService userService;
 	
 	private ResourceBundle getBundle() {
 		return ResourceBundle.getBundle("messages.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
@@ -50,7 +55,8 @@ public class SeoMetaDefaultsBean {
 	}
 	
 	public String getH1() {
-		
+		User user = userService.getLogged();
+		if (user != null) return "Привет, "+user.getNickname();
 		String h1 = "";
 		if (StringUtils.isEmpty(meta.getH1())) {
 			h1 = this.getBundle().getString("seo.meta.h1.default");
