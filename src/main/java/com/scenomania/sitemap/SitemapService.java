@@ -135,7 +135,7 @@ public class SitemapService {
 			sitemap.add(url);
 			urlcount++;
 			
-			if (urlcount > 20000) {
+			if (urlcount > 25000) {
 				urlcount = 0;
 				this.writeXML();
 				this.sitemap = new UrlSet();
