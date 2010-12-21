@@ -67,12 +67,8 @@ public class SitemapService {
 		this.filecount = 0;
 		
 		marshaller.setSuppressXsiType(true);
-		//marshaller.setSuppressNamespaces(true);
 		
 		Map<String, String> namespaces = new HashMap<String, String>();
-		//namespaces.put("", "http://www.sitemaps.org/schemas/sitemap/0.9");
-		//namespaces.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-		//namespaces.put("schemaLocation", "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
 		
 		marshaller.setNamespaceMappings(namespaces);
 		
@@ -139,7 +135,7 @@ public class SitemapService {
 			sitemap.add(url);
 			urlcount++;
 			
-			if (urlcount > 49990) {
+			if (urlcount > 20000) {
 				urlcount = 0;
 				this.writeXML();
 				this.sitemap = new UrlSet();
