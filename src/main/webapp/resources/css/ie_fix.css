@@ -1,3 +1,7 @@
 #top_menus {
 	padding-top: 33px;
 }
+
+#header h1 {
+	height: 0;
+}
