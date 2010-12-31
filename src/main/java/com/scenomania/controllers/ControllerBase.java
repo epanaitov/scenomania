@@ -5,23 +5,30 @@
 
 package com.scenomania.controllers;
 
+import com.scenomania.beans.SeoPathBean;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.FieldError;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
  *
  * @author eugene
  */
-public class ControllerBase {
+public abstract class ControllerBase {
+	
+	@Autowired(required=true)
+	protected HttpServletRequest request;
+	
+	@Autowired(required=true)
+	protected SeoPathBean path;
+	
+	@Autowired(required=true)
+	protected HttpSession session;
 	
 	protected Map<String, List> hashErrors(List<FieldError> bindingErrors) {
 

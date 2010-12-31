@@ -1,9 +1,14 @@
 package com.scenomania.beans;
 
+import com.scenomania.entities.EntityBase;
+import com.scenomania.entities.EntityLocale;
 import com.scenomania.entities.User;
 import com.scenomania.services.UserService;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -22,6 +27,12 @@ public class SeoMetaDefaultsBean {
 	
 	@Autowired(required=true)
 	private UserService userService;
+	
+	@Autowired(required=true)
+	private SeoPathBean path;
+	
+	@Autowired(required=true)
+	private HttpServletRequest request;
 	
 	private ResourceBundle getBundle() {
 		return ResourceBundle.getBundle("messages.messages", FacesContext.getCurrentInstance().getViewRoot().getLocale());
@@ -74,4 +85,36 @@ public class SeoMetaDefaultsBean {
 		return robots.toString();
 	}
 	
+	public String getPath() {
+		if (path == null) return "";
+		if (path.getLength() == 0) return "";
+		Collection res = new ArrayList();
+		for (int i=0; i < path.getLength(); i++) {
+			Object item = path.getCrumb(i);
+			if (item instanceof EntityBase) {
+				EntityBase entity = (EntityBase) item;
+				try {
+					String url = entity.getUrl();
+					
+					String crumb = "";
+					
+					if (url != null) crumb = "<a href=\""+url+"\">";
+					
+					EntityLocale el = (EntityLocale) entity.getLocale(request);
+					
+					if (el == null) crumb += entity.getName();
+					else crumb += el.getName();
+					
+					if (url != null) crumb += "</a>";
+					res.add(crumb);
+				} catch (Exception e) {
+				}
+				
+			}
+			if (item instanceof String) {
+				res.add(item);
+			}
+		}
+		return StringUtils.join(res, " &gt; ");
+	}
 }

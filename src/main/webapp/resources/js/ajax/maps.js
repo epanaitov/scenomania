@@ -81,7 +81,12 @@ dojo.declare("CitiesMap", [GoogleMap], {
 		var circle = new google.maps.Circle({
 			map: null,
 			radius: ((city.pop/10265307))*9000 + 1000*Math.exp(city.pop/10265307-.5),
-			center: new google.maps.LatLng(city.lat, city.lng)
+			center: new google.maps.LatLng(city.lat, city.lng),
+			fillOpacity: 0.4,
+			fillColor: '#EB6F1C',
+			strokeColor: '#EB6F1C',
+			strokeOpacity: 0.8,
+			strokeWeight: 3.0
 		});
 		
 		

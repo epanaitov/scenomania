@@ -60,6 +60,8 @@ public class IndexController extends ControllerBase {
 		Matcher m = p.matcher(StringUtils.lowerCase(host));
 		if (m.find()) return bandAction(m.group(1), model, meta);
 		
+		path.setLength(0);
+		
         return "index";
     }
 

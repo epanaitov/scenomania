@@ -8,20 +8,33 @@
     <ui:define name="content">
 		
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-    <h:outputScript name="ajax/maps.js" library="js" target="body"/>
-    <h:outputScript name="markerclusterer.js" library="js" target="body"/>
-	
-	<h:outputFormat value="#{msg['index.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
-	<br /><br />
-	<h:outputText value="#{msg['index.maptext']}" escape="false" />
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 		
+		<h:outputScript name="ajax/maps.js" library="js" target="body"/>
+		<h:outputScript name="markerclusterer.js" library="js" target="body"/>
+
+		<h:panelGroup rendered="#{!UserBean.logged}" >
+		<h:outputFormat value="#{msg['index.text']}" escape="false"><f:param value="#{facesContext.externalContext.requestContextPath}" /></h:outputFormat>
+		<br /><br />
+		<h:outputText value="#{msg['index.maptext']}" escape="false" />
+		</h:panelGroup>
+	
 	    <script type="text/javascript">
 	    /*<![CDATA[*/
 		    function initialize() {
-			    var latlng = new google.maps.LatLng(55.8536111, 38.4411111);
+				
+				var center_lat = 55.8536111;
+				var center_lon = 38.4411111;
+				
+				var glcl = google.loader.ClientLocation;
+				if (glcl && glcl.latitude && glcl.longitude) {
+					center_lat = google.loader.ClientLocation.latitude;
+					center_lon = google.loader.ClientLocation.longitude;
+				}
+				
 			    var myOptions = {
 			      zoom: 9,
-			      center: latlng,
+			      center: new google.maps.LatLng(center_lat, center_lon),
 			      mapTypeId: google.maps.MapTypeId.ROADMAP
 			    };
 			    var contextPath = "#{facesContext.externalContext.requestContextPath}";
@@ -43,7 +56,7 @@
 		/*]]>*/
 		</script>
 	
-		<div id="map_canvas" style="width: 728px; height: 400px;"></div>
+		<div id="map_canvas" style="width: 728px; height: 550px;"></div>
 		<div id="debug"></div>
 		
 		

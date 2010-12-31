@@ -2,8 +2,63 @@
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
+        <Node id="dojox/form/resources/PasswordValidator.html" x="900" y="1050" zoom="true"/>
+        <Node id="dojox/io/proxy/xip_server.html" x="900" y="450" zoom="true"/>
+        <Node id="dojox/image/resources/Gallery.html" x="2150" y="150" zoom="true"/>
+        <Node id="dojox/widget/Wizard/Wizard.html" x="650" y="450" zoom="true"/>
+        <Node id="dojox/widget/FilePicker/_FileInfoPane.html" x="150" y="450" zoom="true"/>
+        <Node id="dojox/form/resources/CheckedMultiSelect.html" x="400" y="900" zoom="true"/>
+        <Node id="dojox/av/widget/resources/PlayButton.html" x="1150" y="600" zoom="true"/>
+        <Node id="dojox/grid/resources/View.html" x="400" y="1350" zoom="true"/>
+        <Node id="dojox/image/resources/Lightbox.html" x="150" y="300" zoom="true"/>
+        <Node id="dojox/widget/Dialog/Dialog.html" x="1900" y="450" zoom="true"/>
+        <Node id="dojox/layout/resources/ScrollPane.html" x="2650" y="150" zoom="true"/>
+        <Node id="dojox/av/widget/resources/Player.html" x="150" y="1350" zoom="true"/>
+        <Node id="dojox/form/resources/FilePickerTextBox.html" x="2400" y="300" zoom="true"/>
+        <Node id="dojox/image/resources/ThumbnailPicker.html" x="1150" y="150" zoom="true"/>
+        <Node id="dojox/widget/ColorPicker/ColorPicker.html" x="1650" y="300" zoom="true"/>
+        <Node id="dojox/av/widget/resources/Status.html" x="150" y="750" zoom="true"/>
+        <Node id="dojox/layout/resources/ExpandoPane.html" x="1650" y="150" zoom="true"/>
+        <Node id="dojox/atom/widget/templates/FeedViewerEntry.html" x="900" y="300" zoom="true"/>
+        <Node id="dojox/atom/widget/templates/FeedEntryEditor.html" x="400" y="450" zoom="true"/>
+        <Node id="dojox/widget/RollingList/RollingList.html" x="400" y="300" zoom="true"/>
+        <Node id="dojox/widget/Pager/Pager.html" x="400" y="1050" zoom="true"/>
+        <Node id="dojox/form/resources/FileInputAuto.html" x="650" y="150" zoom="true"/>
+        <Node id="dojox/gfx/resources/gfxSvgProxyFrame.html" x="650" y="1200" zoom="true"/>
+        <Node id="dojox/form/resources/VerticalRangeSlider.html" x="400" y="1200" zoom="true"/>
         <Node id="resources/ezcomp/top_menus.xhtml" x="400" y="150" zoom="true"/>
+        <Node id="dojox/widget/SortList/SortList.html" x="650" y="900" zoom="true"/>
+        <Node id="dojox/widget/gauge/_Gauge.html" x="1400" y="300" zoom="true"/>
+        <Node id="dojox/atom/widget/templates/FeedViewer.html" x="1150" y="900" zoom="true"/>
+        <Node id="dojox/image/resources/SlideShow.html" x="1900" y="300" zoom="true"/>
+        <Node id="dojox/grid/resources/_Grid.html" x="1400" y="450" zoom="true"/>
+        <Node id="dojox/widget/Calendar/CalendarYear.html" x="1900" y="150" zoom="true"/>
+        <Node id="dojox/form/resources/HorizontalRangeSlider.html" x="1150" y="450" zoom="true"/>
+        <Node id="dojox/widget/UpgradeBar/UpgradeBar.html" x="900" y="750" zoom="true"/>
+        <Node id="dojox/atom/widget/templates/FeedEntryViewer.html" x="150" y="1050" zoom="true"/>
+        <Node id="dojox/form/resources/FileInput.html" x="650" y="750" zoom="true"/>
+        <Node id="dojox/widget/gauge/_Indicator.html" x="2400" y="150" zoom="true"/>
+        <Node id="dojox/layout/resources/GridContainer.html" x="900" y="600" zoom="true"/>
+        <Node id="dojox/editor/plugins/resources/modifyTable.html" x="150" y="600" zoom="true"/>
+        <Node id="dojox/form/resources/_CheckedMultiSelectItem.html" x="1400" y="600" zoom="true"/>
+        <Node id="dojox/av/widget/resources/VolumeButton.html" x="1650" y="450" zoom="true"/>
+        <Node id="dojox/layout/resources/FloatingPane.html" x="1650" y="600" zoom="true"/>
+        <Node id="dojox/widget/DocTester/DocTester.html" x="650" y="1050" zoom="true"/>
+        <Node id="dojox/atom/widget/templates/FeedViewerGrouping.html" x="150" y="1200" zoom="true"/>
+        <Node id="dojox/xmpp/widget/templates/ChatSession.html" x="650" y="600" zoom="true"/>
+        <Node id="dojox/editor/plugins/resources/insertTable.html" x="900" y="150" zoom="true"/>
+        <Node id="dojox/io/proxy/xip_client.html" x="150" y="900" zoom="true"/>
+        <Node id="dojox/atom/widget/templates/EntryHeader.html" x="150" y="1500" zoom="true"/>
+        <Node id="dojox/widget/Calendar/CalendarDay.html" x="1400" y="150" zoom="true"/>
+        <Node id="dojox/widget/Calendar/CalendarMonth.html" x="1150" y="300" zoom="true"/>
+        <Node id="dojox/grid/resources/Expando.html" x="1150" y="750" zoom="true"/>
+        <Node id="dojo/resources/iframe_history.html" x="650" y="300" zoom="true"/>
+        <Node id="dojox/widget/Calendar/Calendar.html" x="2150" y="300" zoom="true"/>
+        <Node id="dojox/atom/widget/templates/PeopleEditor.html" x="900" y="900" zoom="true"/>
+        <Node id="dojo/resources/blank.html" x="400" y="750" zoom="true"/>
+        <Node id="dojox/widget/Calendar/CalendarMonthYear.html" x="1400" y="750" zoom="true"/>
         <Node id="resources/ezcomp/xyu.xhtml" x="150" y="150" zoom="true"/>
+        <Node id="dojox/av/widget/resources/ProgressSlider.html" x="400" y="600" zoom="true"/>
     </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>

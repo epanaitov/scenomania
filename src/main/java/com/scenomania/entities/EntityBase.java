@@ -1,18 +1,18 @@
 package com.scenomania.entities;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
-import javax.persistence.PrePersist;
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 @MappedSuperclass
-public abstract class EntityBase {
+public abstract class EntityBase extends Object {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -53,6 +53,34 @@ public abstract class EntityBase {
 
 		}
 		
+	}
+	
+	public String getUrl() throws Exception {
+		return null;
+	}
+	
+	public <T extends EntityLocale> T getLocale(HttpServletRequest request) {
+		
+		if (this instanceof Localized) {
+		
+			Locale locale = RequestContextUtils.getLocale(request);
+			
+			Iterator it = ((Localized) this).getLocales().iterator();
+
+			while (it.hasNext()) {
+				T l = (T) it.next();
+				if (l.getLocale().equals(locale.getLanguage())) {
+					return l;
+				}
+			}
+		
+		}
+		
+		return null;
+	}
+	
+	public String getName() { 
+		return "override me";
 	}
 
 }

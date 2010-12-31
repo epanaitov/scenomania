@@ -1,6 +1,6 @@
 package com.scenomania.entities;
 
-import java.util.List;
+import com.scenomania.utils.UrlHelper;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.tuckey.web.filters.urlrewrite.utils.StringUtils;
 
 /**
  *
@@ -78,6 +79,14 @@ public class Band extends EntityBase {
 
 	public void setSlug(String slug) {
 		this.slug = slug;
+	}
+	
+	public String getUrl() throws Exception {
+		if (StringUtils.isBlank(this.getName())) throw new Exception("band's name is blank");
+		String slug = "";
+		if (StringUtils.isBlank(this.getSlug())) slug = UrlHelper.getSlug(this.getName());
+		else slug = this.getSlug();
+		return String.format("http://%s.scenomania.ru", slug);
 	}
 
 }

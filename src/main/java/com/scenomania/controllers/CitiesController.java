@@ -1,6 +1,7 @@
 package com.scenomania.controllers;
 
 import com.scenomania.beans.SeoMetaBean;
+import com.scenomania.beans.SeoPathBean;
 import com.scenomania.dao.CityDao;
 import com.scenomania.entities.AreaLocale;
 import com.scenomania.entities.City;
@@ -27,9 +28,6 @@ public class CitiesController extends ControllerBase {
 	
 	@Autowired(required=true)
 	private CityDao cityDao;
-	
-	@Autowired(required=true)
-	private HttpServletRequest request;
 	
 	@RequestMapping(method = RequestMethod.GET, value="/{country}/{area}/{city}-{id}/")
 	public String responseGet(
@@ -76,6 +74,11 @@ public class CitiesController extends ControllerBase {
 		meta.setKeywords("группы, концерты, организаторы, туры, сцены, гастроли, "+city_name+", "+country_name);
 		meta.setDescription("Ищешь где выступить в "+city_name+", "+country_name+"? Нужны свежие группы из "+city_name+", "+country_name+"? Интересуешься концертами в "+city_name+", "+country_name+"? Сценомания расскажет о группах, организаторах и концертах в "+city_name+", "+country_name+".");
 		meta.setH1("Группы и сцены в "+city_name+", "+country_name);
+		
+		path.setLength(0);
+		path.addCrumb(city.getArea().getCountry());
+		path.addCrumb(city.getArea());
+		path.addCrumb(city);
 		
 		model.addAttribute("city_name", city_name);
 		model.addAttribute("area_name", area_name);

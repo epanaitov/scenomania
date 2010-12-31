@@ -1,5 +1,7 @@
 package com.scenomania.entities;
 
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
  *
@@ -195,4 +199,14 @@ public class City extends EntityBase implements Localized {
 	public void setSlug(String slug) {
 		this.slug = slug;
 	}
+	
+	
+	@Override
+	public String getUrl() throws Exception {
+		if (this.getArea() == null) throw new Exception("city's area is null");
+		if (this.getArea().getCountry() == null) throw new Exception("city's country is null");
+		
+		return String.format("http://scenomania.ru/%s/%s/%s-%d/", this.getArea().getCountry().getSlug(), this.getArea().getCode(), this.getSlug(), this.getId());
+	}
+	
 }

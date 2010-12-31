@@ -27,16 +27,9 @@ import com.scenomania.services.UserService;
 import com.scenomania.utils.PlainErrorsHashMap;
 import com.scenomania.utils.UrlHelper;
 import java.lang.String;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -62,9 +55,6 @@ public class RegisterController extends ControllerBase {
 	private HttpServletRequest request;
 	
 	@Autowired(required=true)
-	private HttpSession httpSession;
-
-	@Autowired(required=true)
 	private PromoterService promoterService;
 
 	@Autowired(required=true)
@@ -77,6 +67,8 @@ public class RegisterController extends ControllerBase {
 		model.addAttribute("user", user);
 		
 		meta.setH1("Регистрация");
+		path.setLength(0);
+		path.addCrumb("Регистрация");
 		
         return "register/index";
 	}
@@ -124,16 +116,18 @@ public class RegisterController extends ControllerBase {
 
 	@RequestMapping(value="/register/role", method=RequestMethod.GET)
 	public String role(Model model) {
+		
+		path.addCrumb("Роли");
 
-		if (httpSession.getAttribute("loggedin") == null) return "redirect:/register";
+		if (session.getAttribute("loggedin") == null) return "redirect:/register";
 
-		if (httpSession.getAttribute("playin") != null)
+		if (session.getAttribute("playin") != null)
 			model.addAttribute("playin", true);
-		if (httpSession.getAttribute("promotin") != null)
+		if (session.getAttribute("promotin") != null)
 			model.addAttribute("promotin", true);
 
 		String message = "register.roles.user_registered";
-		if (httpSession.getAttribute("message") != null) message = httpSession.getAttribute("message").toString();
+		if (session.getAttribute("message") != null) message = session.getAttribute("message").toString();
 		model.addAttribute("message", message);
 
         return "register/role";
@@ -142,7 +136,7 @@ public class RegisterController extends ControllerBase {
 	@RequestMapping(value="/register/role", method=RequestMethod.POST)
 	public String rolePOST(Model model, HttpServletRequest request) {
 
-		User loggedin = (User) httpSession.getAttribute("loggedin");
+		User loggedin = (User) session.getAttribute("loggedin");
 		if (loggedin == null) return "redirect:/register";
 
 
@@ -233,15 +227,15 @@ public class RegisterController extends ControllerBase {
 
 		}
 
-		httpSession.removeAttribute("playin");
-		httpSession.removeAttribute("promotin");
+		session.removeAttribute("playin");
+		session.removeAttribute("promotin");
 
 		String message = "";
 		if (doBand) message = "register.roles.band_saved";
 		if (doPromoter) message = "register.roles.promoter_saved";
 		if (doBand && doPromoter) message = "register.roles.band_promoter_saved";
 		
-		httpSession.setAttribute("message", message);
+		session.setAttribute("message", message);
 
 		return "redirect:/register/role";
 	}

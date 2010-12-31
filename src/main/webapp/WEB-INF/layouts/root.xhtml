@@ -32,6 +32,12 @@
 		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/dijit/themes/nihilo/nihilo.css" />
 		
 		<h:outputStylesheet library="css"  name="main.css"  />
+		
+		<!--[if IE]>
+		<link type="text/css" rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/resources/css/ie_fix.css" />
+		<![endif]-->
+
+
 
 <script type="text/javascript">
 
@@ -58,16 +64,24 @@
 				<a id="logo" href="#{facesContext.externalContext.requestContextPath}/"><h:graphicImage name="images/logo.png" /></a>
 				
 				<ez:top_menus />
+				
+				<div class="navigation">
+					<h:panelGroup rendered="#{UserBean.logged}">
+						<div class="right"><a href="#{facesContext.externalContext.requestContextPath}/logout">Выйти</a></div>
+					</h:panelGroup>
+					<h2><h:outputText value="#{SeoMeta.path}" escape="false"/></h2>
+				</div>
+				<div class="clear"></div>
 			</div>
 
 			<div id="content" class="center_content">
 
 				<div class="panel">
-					<div class="block orange">
+					<h:panelGroup layout="block" styleClass="block orange" rendered="#{!UserBean.logged}">
 						<a href="#{facesContext.externalContext.requestContextPath}/register">
 							<h:graphicImage name="images/register-button.png" />
 						</a>
-					</div>
+					</h:panelGroup>
 					
 					<div class="block gray">
 						<script type="text/javascript"><!--
